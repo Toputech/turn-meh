@@ -368,7 +368,7 @@ zokou({
         `https://api.heroku.com/apps/${herokuAppName}/builds`,
         {
           source_blob: {
-            url: "https://github.com/Toputech/ALONE-MD-V1/tarball/main",
+            url: "https://github.com/Toputech/turn-meh/tarball/main",
           },
         },
         {
