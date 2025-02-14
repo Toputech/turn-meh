@@ -348,7 +348,7 @@ zokou({
 
   // Check if the command is issued by the owner
   if (!superUser) {
-    return repondre("*This command is restricted to the bot owner or Alone owner 💀*");
+    return repondre("*This command is restricted to the bot owner or Alpha owner 💀*");
   }
 
   // Ensure Heroku app name and API key are set
@@ -505,7 +505,7 @@ zokou({
 })
 
 zokou({
-  nomCom: "wisdom",
+  //nomCom: "advice",
   aliases: ["wisdom", "wise"],
   reaction: "🗨️",
   categorie: "Fun"
