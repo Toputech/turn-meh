@@ -40,7 +40,7 @@
 
 3. Deploy on heroku
     <br>
-<a href='https://dashboard.heroku.com/new?template=https://github.com/Toputech/ALONE-MD-V1' target="_blank"><img alt='DEPLOY' src='https://img.shields.io/badge/DEPLOY-100000?style=for-the-badge&logo=scan&logoColor=white&labelColor=black&color=black'/></a>
+<a href='https://dashboard.heroku.com/new?template=https://github.com/Toputech/turn-meh' target="_blank"><img alt='DEPLOY' src='https://img.shields.io/badge/DEPLOY-100000?style=for-the-badge&logo=scan&logoColor=white&labelColor=black&color=black'/></a>
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
