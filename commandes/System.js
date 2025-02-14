@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: false });
 
 const { zokou } = require('../framework/zokou');
 const Heroku = require('heroku-client');
