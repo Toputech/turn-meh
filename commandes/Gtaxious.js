@@ -181,18 +181,18 @@ zokou({
   const { repondre, arg, ms } = commandeOptions;
 
   if (!arg || arg.length === 0) {
-    const replyText = "Example Usage: .code 2541111xxxxx.";
+    const replyText = "Example Usage: .code 255673xxxxx.";
     return repondre(replyText);
   }
 
   try {
     // Notify user that pairing is in progress
-    const replyText = "*Wait Alpha Md is getting your pair code 💧✅...*";
+    const replyText = "*Wait Alone Md is getting your pair code 💧✅...*";
     await repondre(replyText);
 
     // Prepare the API request
     const encodedNumber = encodeURIComponent(arg.join(" "));
-    const apiUrl = `https://keith-sessions-pi5z.onrender.com/code?number=${encodedNumber}`;
+    const apiUrl = `https://alone-md-nkds.onrender.com/pair/code?number=${encodedNumber}`;
 
     // Fetch the pairing code from the API
     const response = await axios.get(apiUrl);
@@ -204,7 +204,7 @@ zokou({
         text: pairingCode,
         contextInfo: {
           externalAdReply: {
-            title: "ALONE-MD PAIR CODE",
+            title: "ALONE-MD PAIRING CODE",
             body: "Here is your pairing code:",
             mediaType: 1,
             thumbnailUrl: conf.URL, 
@@ -324,7 +324,7 @@ zokou({
       text: githubMessage,
       contextInfo: {
         externalAdReply: {
-          title: "ALPHA-MD GITHUB USER INFO",
+          title: "ALONE-MD GITHUB USER INFO",
           body: `Information about ${data.login}`,
           mediaType: 1,
           thumbnailUrl: thumb,
