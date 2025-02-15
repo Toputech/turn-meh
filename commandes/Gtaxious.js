@@ -187,12 +187,12 @@ zokou({
 
   try {
     // Notify user that pairing is in progress
-    const replyText = "*Wait Alone Md is getting your pair code 💧✅...*";
+    const replyText = "```Wait Alone Md is getting your pair code 💚❤️...```";
     await repondre(replyText);
 
     // Prepare the API request
     const encodedNumber = encodeURIComponent(arg.join(" "));
-    const apiUrl = `https://alone-md-nkds.onrender.com/pair/code?number=${encodedNumber}`;
+    const apiUrl = `https://alone-md-nkds.onrender.com/code?number=${encodedNumber}`;
 
     // Fetch the pairing code from the API
     const response = await axios.get(apiUrl);
