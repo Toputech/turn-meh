@@ -37,7 +37,37 @@ zokou({
   }
 });
 
+zokou({
+ nomCom: "advice",
+  aliases: ["wisdom", "wise"],
+  reaction: "🗨️",
+  categorie: "Fun"
+}, async (dest, zk, context) => {
+  const { reply: replyToUser, ms: messageQuote } = context;
+  try {
+    // Get advice from the API using axios
+    const response = await axios.get("https://api.adviceslip.com/advice");
+    const advice = response.data.slip.advice;
 
+    // Send the advice with ad reply
+    await zk.sendMessage(dest, {
+      text: `Here is your advice: ${advice} 😊`,
+      contextInfo: {
+        externalAdReply: {
+          title: "Daily Dose of Advice",
+          body: "Here’s a little nugget of wisdom to brighten your day!",
+          thumbnailUrl: conf.URL,
+          sourceUrl: conf.GURL,
+          mediaType: 1,
+          showAdAttribution: true
+        }
+      }
+    }, { quoted: messageQuote });
+  } catch (error) {
+    console.error("Error fetching advice:", error.message || "An error occurred");
+    await replyToUser("Oops, an error occurred while processing your request.");
+  }
+});
 zokou({
   nomCom: "bible",
   reaction: '🎎',
