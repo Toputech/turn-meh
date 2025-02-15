@@ -7,6 +7,7 @@ const conf = require(__dirname + "/../set");
 zokou({ nomCom: "repo", catégorie:"Général", reaction: "✨", nomFichier: __filename }, async (dest, zk, commandeOptions) => {
   const githubRepo = 'https://api.github.com/repos/Toputech/ALONE-MD-V1';
   const img = 'https://files.catbox.moe/guk624.jpg';
+  const gurl = 'https://whatsapp.com/channel/0029VaeRrcnADTOKzivM0S1r';
   try {
     const response = await fetch(githubRepo);
     const data = await response.json();
@@ -48,7 +49,7 @@ zokou({ nomCom: "repo", catégorie:"Général", reaction: "✨", nomFichier: __f
 __________________________________
              ❣️ ©Toputech `;
 
-      await zk.sendMessage(dest, { image: { url: img }, caption: gitdata ,sourceUrl: conf.GURL });
+      await zk.sendMessage(dest, { image: { url: img }, caption: gitdata ,sourceUrl: {url:gurl} });
     } else {
       console.log("Could not fetch data");
     }
