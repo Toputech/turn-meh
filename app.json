@@ -97,6 +97,11 @@
       "value": "Toputech",
       "required": false
     },
+    "AUTO_BIO": {
+      "description": "insert yes if you needs an automatic bio",
+      "value": "yes",
+      "required": false
+    },
     "AUTO_READ_MESSAGES": {
       "description": "yes toactivate no to deactivate",
       "value": "yes",
