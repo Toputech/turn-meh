@@ -3,7 +3,6 @@ const { zokou } = require('../framework/zokou');
 const axios = require('axios');
 const wiki = require('wikipedia');
 const conf = require(__dirname + "/../set");
-const { dare, truth, random_question, amount_of_questions } = require('../database/truth-dare.js');
 
 zokou({
   nomCom: "technews",
