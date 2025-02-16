@@ -2,6 +2,8 @@ const { zokou } = require("../framework/zokou");
 const { generateProfilePicture } = require("../framework/dl/Function");
 const { S_WHATSAPP_NET } = require('@whiskeysockets/baileys');
 const fs = require("fs");
+const axios = require('axios');
+const conf = require(__dirname + "/../set");
 
 zokou({
   nomCom: "fullpp",
