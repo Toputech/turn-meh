@@ -4,10 +4,10 @@ const axios = require("axios");
 
 // Define the command with aliases
 zokou({
-  nomCom: "lyrics",
+  nomCom: "lyric",
   aliases: ["mistari", "lyric"],
-  reaction: '⚔️',
-  categorie: "search"
+  reaction: '❣️',
+  categorie: "system"
 }, async (dest, zk, params) => {
   const { repondre: sendResponse, arg: commandArgs, ms } = params;
   const text = commandArgs.join(" ").trim();
