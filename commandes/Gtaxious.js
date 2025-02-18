@@ -124,6 +124,260 @@ zokou({
     });
   }
 });
+
+zokou({
+  nomCom: "hack",
+  aliases: ["malware", "trojan"],
+  reaction: "🪅",
+  categorie: "Fun"
+}, async (dest, zk, commandeOptions) => {
+  try {
+    const { ms } = commandeOptions;
+    const mek = ms; // The message object for quoting
+
+    // Define the steps of the prank
+    const steps = [
+      "```Injecting Malware```",
+      "``` █ 10%```",
+      "```█ █ 20%```",
+      "```█ █ █ 30%```",
+      "``` █ █ █ █ 40%```",
+      "``` █ █ █ █ █ 50%```",
+      "``` █ █ █ █ █ █ 60%```",
+      "``` █ █ █ █ █ █ █ 70%```",
+      "```█ █ █ █ █ █ █ █ 80%```",
+      "```█ █ █ █ █ █ █ █ █ 90%```",
+      "```█ █ █ █ █ █ █ █ █ █ 100%```",
+      "```System hijacking on process..```",
+      "```Connecting to Server error to find 404```",
+      "```Device successfully connected...\nReceiving data...```",
+      "```Data hijacked from device 100% completed\nKilling all evidence, killing all malwares...```",
+      "```HACKING COMPLETED```",
+      "```SENDING LOG DOCUMENTS...```",
+      "```SUCCESSFULLY SENT DATA AND Connection disconnected```",
+      "```BACKLOGS CLEARED```",
+      "```POWERED BY ${conf.BOT}```",
+      "```paralyzed by the mighty ${conf.OWNER_NAME}```"
+    ];
+
+    // Loop through all the steps and send them
+    for (const line of steps) {
+      await zk.sendMessage(dest, { text: line }, { quoted: mek });
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Delay for effect
+    }
+
+  } catch (error) {
+    console.error('Error during prank:', error);
+    // Send a more detailed error message
+    await zk.sendMessage(dest, {
+      text: `❌ *Error!* Something went wrong. Reason: ${error.message}. Please try again later.`
+    });
+  }
+});
+
+
+zokou({
+  nomCom: "happy",
+  categorie: "fun",
+  reaction: "📽️"
+}, async (dest, zk, commandeOptions) => {
+  const { repondre, ms } = commandeOptions;
+  
+  try {
+    const sentMessage = await zk.sendMessage(dest, { text: "✊🏻 *STARTED...* 💦" });
+    const animations =  ['😃', '😄', '😁', '😊', '😎', '🥳', '😸', '😹', '🌞', '🌈', '😃', '😄', '😁', '😊', '😎', '🥳', '😸', '😹', '🌞', '🌈', '😃', '😄', '😁', '😊'];
+    for (const animation of animations) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      await zk.relayMessage(dest, {
+        protocolMessage: {
+          key: sentMessage.key,
+          type: 14, // Protocol message type for edited message
+          editedMessage: {
+            conversation: animation
+          }
+        }
+      }, {});
+    }
+  } catch (error) {
+    console.log(error);
+    repondre("❌ *Error!* " + error.message);
+  }
+});
+zokou({
+  nomCom: "hrt",
+  aliases: ["moyo", "heart"],
+  categorie: "fun",
+  reaction: "📽️"
+}, async (dest, zk, commandeOptions) => {
+  const { repondre, ms } = commandeOptions;
+  
+  try {
+    const sentMessage = await zk.sendMessage(dest, { text: "✊🏻 *STARTED...* 💦" });
+    const animations =  ['💖', '💗', '💕', '❤️', '💛', '💚', '🫀', '💙', '💜', '🖤', '♥️', '🤍', '🤎', '💗', '💞', '💓', '💘', '💝', '♥️', '💟', '🫀', '❤️'];
+    for (const animation of animations) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      await zk.relayMessage(dest, {
+        protocolMessage: {
+          key: sentMessage.key,
+          type: 14, // Protocol message type for edited message
+          editedMessage: {
+            conversation: animation
+          }
+        }
+      }, {});
+    }
+  } catch (error) {
+    console.log(error);
+    repondre("❌ *Error!* " + error.message);
+  }
+});
+zokou({
+  nomCom: "angry1",
+  categorie: "fun",
+  reaction: "📽️"
+}, async (dest, zk, commandeOptions) => {
+  const { repondre, ms } = commandeOptions;
+  
+  try {
+    const sentMessage = await zk.sendMessage(dest, { text: "✊🏻 *STARTED...* 💦" });
+    const animations =   ['😡', '😠', '🤬', '😤', '😾', '😡', '😠', '🤬', '😤', '😾'];
+    for (const animation of animations) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      await zk.relayMessage(dest, {
+        protocolMessage: {
+          key: sentMessage.key,
+          type: 14, // Protocol message type for edited message
+          editedMessage: {
+            conversation: animation
+          }
+        }
+      }, {});
+    }
+  } catch (error) {
+    console.log(error);
+    repondre("❌ *Error!* " + error.message);
+  }
+});
+zokou({
+  nomCom: "heartbroken",
+  aliases: ["heartbroken", "hrtbroken"],
+  categorie: "fun",
+  reaction: "📽️"
+}, async (dest, zk, commandeOptions) => {
+  const { repondre, ms } = commandeOptions;
+  
+  try {
+    const sentMessage = await zk.sendMessage(dest, { text: "✊🏻 *STARTED...* 💦" });
+    const animations =  ['🥺', '😟', '😕', '😖', '😫', '🙁', '😩', '😥', '😓', '😪', '😢', '😔', '😞', '😭', '💔', '😭', '😿'];
+    for (const animation of animations) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      await zk.relayMessage(dest, {
+        protocolMessage: {
+          key: sentMessage.key,
+          type: 14, // Protocol message type for edited message
+          editedMessage: {
+            conversation: animation
+          }
+        }
+      }, {});
+    }
+  } catch (error) {
+    console.log(error);
+    repondre("❌ *Error!* " + error.message);
+  }
+});
+zokou({
+  nomCom: "shy",
+  aliases: ["shyoff", "shyy"],
+  categorie: "fun",
+  reaction: "🥺"
+}, async (dest, zk, commandeOptions) => {
+  const { repondre, ms } = commandeOptions;
+  
+  try {
+    const sentMessage = await zk.sendMessage(dest, { text: "✊🏻 *STARTED...* 💦" });
+    const animations =  ['😳', '😊', '😶', '🙈', '🙊', '😳', '😊', '😶', '🙈', '🙊'];
+    for (const animation of animations) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      await zk.relayMessage(dest, {
+        protocolMessage: {
+          key: sentMessage.key,
+          type: 14, // Protocol message type for edited message
+          editedMessage: {
+            conversation: animation
+          }
+        }
+      }, {});
+    }
+  } catch (error) {
+    console.log(error);
+    repondre("❌ *Error!* " + error.message);
+  }
+});
+zokou({
+  nomCom: "moon",
+  aliases: ["mon", "crescent"],
+  categorie: "fun",
+  reaction: "🙃"
+}, async (dest, zk, commandeOptions) => {
+  const { repondre, ms } = commandeOptions;
+  
+  try {
+    const sentMessage = await zk.sendMessage(dest, { text: "✊🏻 *STARTED...* 💦" });
+    const animations =   ['🌗', '🌘', '🌑', '🌒', '🌓', '🌔', '🌕', '🌖', '🌗', '🌘', '🌑', '🌒', '🌓', '🌔', '🌕', '🌖', '🌗', '🌘', '🌑', '🌒', '🌓', '🌔', '🌕', '🌖', '🌗', '🌘', '🌑', '🌒', '🌓', '🌔', '🌕', "🌚🌝"];
+    for (const animation of animations) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      await zk.relayMessage(dest, {
+        protocolMessage: {
+          key: sentMessage.key,
+          type: 14, // Protocol message type for edited message
+          editedMessage: {
+            conversation: animation
+          }
+        }
+      }, {});
+    }
+  } catch (error) {
+    console.log(error);
+    repondre("❌ *Error!* " + error.message);
+  }
+});
+
+zokou({
+  nomCom: "nikal",
+  categorie: "fun",
+  reaction: "🥱"
+}, async (dest, zk, commandeOptions) => {
+  const { repondre, ms } = commandeOptions;
+  
+  try {
+    const sentMessage = await zk.sendMessage(dest, { text: "✊🏻 *STARTED...* 💦" });
+    const animations = ["   ⣠⣶⡾⠏⠉⠙⠳⢦⡀   ⢠⠞⠉⠙⠲⡀ \n  ⣴⠿⠏          ⢳⡀ ⡏         ⢷\n⢠⣟⣋⡀⢀⣀⣀⡀ ⣀⡀   ⣧ ⢸          ⡇\n⢸⣯⡭⠁⠸⣛⣟⠆⡴⣻⡲     ⣿  ⣸   Nikal   ⡇\n ⣟⣿⡭     ⢱        ⣿  ⢹           ⡇\n  ⠙⢿⣯⠄   __        ⡿  ⡇        ⡼\n   ⠹⣶⠆     ⡴⠃    ⠘⠤⣄⣠⠞ \n    ⢸⣷⡦⢤⡤⢤⣞⣁          \n ⢀⣤⣴⣿⣏⠁  ⠸⣏⢯⣷⣖⣦⡀      \n⢀⣾⣽⣿⣿⣿⣿⠛⢲⣶⣾⢉⡷⣿⣿⠵⣿      \n⣼⣿⠍⠉⣿⡭⠉⠙⢺⣇⣼⡏    ⣄⢸      `", "   ⣠⣶⡾⠏⠉⠙⠳⢦⡀   ⢠⠞⠉⠙⠲⡀ \n  ⣴⠿⠏          ⢳⡀ ⡏         ⢷\n⢠⣟⣋⡀⢀⣀⣀⡀ ⣀⡀   ⣧ ⢸          ⡇\n⢸⣯⡭⠁⠸⣛⣟⠆⡴⣻⡲     ⣿  ⣸   Lavde   ⡇\n ⣟⣿⡭     ⢱        ⣿  ⢹           ⡇\n  ⠙⢿⣯⠄  |__|     ⡿  ⡇        ⡼\n   ⠹⣶⠆     ⡴⠃    ⠘⠤⣄⣠⠞ \n    ⢸⣷⡦⢤⡤⢤⣞⣁          \n ⢀⣤⣴⣿⣏⠁  ⠸⣏⢯⣷⣖⣦⡀      \n⢀⣾⣽⣿⣿⣿⣿⠛⢲⣶⣾⢉⡷⣿⣿⠵⣿      \n⣼⣿⠍⠉⣿⡭⠉⠙⢺⣇⣼⡏    ⣄⢸      `", "   ⣠⣶⡾⠏⠉⠙⠳⢦⡀   ⢠⠞⠉⠙⠲⡀ \n  ⣴⠿⠏           ⢳⡀ ⡏         ⢷\n⢠⣟⣋⡀⢀⣀⣀⡀ ⣀⡀   ⣧ ⢸          ⡇\n⢸⣯⡭⠁⠸⣛⣟⠆⡴⣻⡲    ⣿  ⣸   Pehli   ⡇\n ⣟⣿⡭     ⢱       ⣿  ⢹            ⡇\n  ⠙⢿⣯⠄  (P)       ⡿  ⡇        ⡼\n   ⠹⣶⠆     ⡴⠃    ⠘⠤⣄⣠⠞ \n    ⢸⣷⡦⢤⡤⢤⣞⣁          \n ⢀⣤⣴⣿⣏⠁  ⠸⣏⢯⣷⣖⣦⡀      \n⢀⣾⣽⣿⣿⣿⣿⠛⢲⣶⣾⢉⡷⣿⣿⠵⣿      \n⣼⣿⠍⠉⣿⡭⠉⠙⢺⣇⣼⡏    ⣄⢸      `", "   ⣠⣶⡾⠏⠉⠙⠳⢦⡀   ⢠⠞⠉⠙⠲⡀ \n  ⣴⠿⠏           ⢳⡀ ⡏         ⢷\n⢠⣟⣋⡀⢀⣀⣀⡀ ⣀⡀   ⣧ ⢸          ⡇\n⢸⣯⡭⠁⠸⣛⣟⠆⡴⣻⡲    ⣿  ⣸  Fursat  ⡇\n ⣟⣿⡭     ⢱         ⣿  ⢹           ⡇\n  ⠙⢿⣯⠄   __        ⡿  ⡇        ⡼\n   ⠹⣶⠆     ⡴⠃    ⠘⠤⣄⣠⠞ \n    ⢸⣷⡦⢤⡤⢤⣞⣁          \n ⢀⣤⣴⣿⣏⠁  ⠸⣏⢯⣷⣖⣦⡀      \n⢀⣾⣽⣿⣿⣿⣿⠛⢲⣶⣾⢉⡷⣿⣿⠵⣿      \n⣼⣿⠍⠉⣿⡭⠉⠙⢺⣇⣼⡏    ⣄⢸      `", "   ⣠⣶⡾⠏⠉⠙⠳⢦⡀   ⢠⠞⠉⠙⠲⡀ \n  ⣴⠿⠏           ⢳⡀ ⡏         ⢷\n⢠⣟⣋⡀⢀⣀⣀⡀ ⣀⡀   ⣧ ⢸          ⡇\n⢸⣯⡭⠁⠸⣛⣟⠆⡴⣻⡲    ⣿  ⣸  Meeee   ⡇\n ⣟⣿⡭     ⢱         ⣿  ⢹           ⡇\n  ⠙⢿⣯⠄  |__|      ⡿  ⡇        ⡼\n   ⠹⣶⠆     ⡴⠃    ⠘⠤⣄⣠⠞ \n    ⢸⣷⡦⢤⡤⢤⣞⣁          \n ⢀⣤⣴⣿⣏⠁  ⠸⣏⢯⣷⣖⣦⡀      \n⢀⣾⣽⣿⣿⣿⣿⠛⢲⣶⣾⢉⡷⣿⣿⠵⣿      \n⣼⣿⠍⠉⣿⡭⠉⠙⢺⣇⣼⡏    ⣄⢸      `", "   ⣠⣶⡾⠏⠉⠙⠳⢦⡀   ⢠⠞⠉⠙⠲⡀ \n  ⣴⠿⠏           ⢳⡀ ⡏         ⢷\n⢠⣟⣋⡀⢀⣀⣀⡀ ⣀⡀   ⣧ ⢸           ⡇\n⢸⣯⡭⠁⠸⣛⣟⠆⡴⣻⡲   ⣿  ⣸   Nikal   ⡇\n ⣟⣿⡭     ⢱        ⣿  ⢹            ⡇\n  ⠙⢿⣯⠄  lodu     ⡿  ⡇       ⡼\n   ⠹⣶⠆       ⡴⠃    ⠘⠤⣄⣠⠞ \n    ⢸⣷⡦⢤⡤⢤⣞⣁          \n ⢀⣤⣴⣿⣏⠁  ⠸⣏⢯⣷⣖⣦⡀      \n⢀⣾⣽⣿⣿⣿⣿⠛⢲⣶⣾⢉⡷⣿⣿⠵⣿      \n⣼⣿⠍⠉⣿⡭⠉⠙⢺⣇⣼⡏    ⣄⢸ "];
+
+    for (const animation of animations) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      await zk.relayMessage(dest, {
+        protocolMessage: {
+          key: sentMessage.key,
+          type: 14, // Protocol message type for edited message
+          editedMessage: {
+            conversation: animation
+          }
+        }
+      }, {});
+    }
+  } catch (error) {
+    console.log(error);
+    repondre("❌ *Error!* " + error.message);
+  }
+});
 zokou({
  nomCom: "advice",
   aliases: ["wisdom", "wise"],
