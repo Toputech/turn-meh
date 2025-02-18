@@ -92,7 +92,20 @@ else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
 } 
 else {
     
-    repondre(infoMsg + menuMsg);
+    await zk.sendMessage(dest, {
+      text: infoMsg+menuMsg,
+      contextInfo: {
+        externalAdReply: {
+          title: "ALONE MD",
+          body: " Support by following!",
+          thumbnailUrl: conf.URL,
+          sourceUrl: conf.GURL,
+          mediaType: 1,
+          showAdAttribution: true
+        }
+      }
+    }, { quoted: messageQuote });
+
     
 }
 
