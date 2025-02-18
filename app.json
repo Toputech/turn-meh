@@ -139,6 +139,11 @@
       "required": false
     }
   },
+      "STARTING_BOT_MESSAGE": {
+      "description": "Set 'yes' to display a starting bot message or 'no' to disable it",
+      "value": "yes",
+      "required": true
+      },
   "formation": {
     "worker": {
       "quantity": 1,
