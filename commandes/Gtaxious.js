@@ -156,8 +156,8 @@ zokou({
       "```SENDING LOG DOCUMENTS...```",
       "```SUCCESSFULLY SENT DATA AND Connection disconnected```",
       "```BACKLOGS CLEARED```",
-      "```POWERED BY ${conf.BOT}```",
-      "```paralyzed by the mighty ${conf.OWNER_NAME}```"
+      "```POWERED BY ALONE MD```",
+      "```love it 💚❤️```"
     ];
 
     // Loop through all the steps and send them
