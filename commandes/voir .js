@@ -11,18 +11,18 @@ const {ms,msgRepondu,repondre}=commandeOptions;
 if(!msgRepondu){return repondre("*Mention a view once media* .");}
 
 
-if(msgRepondu.viewOnceMessageV3)
+if(msgRepondu.viewOnceMessage)
 {
-      if(msgRepondu.viewOnceMessageV3.message.imageMessage)
+      if(msgRepondu.viewOnceMessage.message.imageMessage)
        {
-         var image =await zk.downloadAndSaveMediaMessage(msgRepondu.viewOnceMessageV3.message.imageMessage)
-        var texte = msgRepondu.viewOnceMessageV3.message.imageMessage.caption
+         var image =await zk.downloadAndSaveMediaMessage(msgRepondu.viewOnceMessage.message.imageMessage)
+        var texte = msgRepondu.viewOnceMessage.message.imageMessage.caption
     
      await zk.sendMessage(dest,{image:{url:image},caption:texte},{quoted:ms})
-      }else if(msgRepondu.viewOnceMessageV3.message.videoMessage){
+      }else if(msgRepondu.viewOnceMessage.message.videoMessage){
 
-    var video = await zk.downloadAndSaveMediaMessage(msgRepondu.viewOnceMessageV3.message.videoMessage)
-var texte =msgRepondu.viewOnceMessageV3.message.videoMessage.caption
+    var video = await zk.downloadAndSaveMediaMessage(msgRepondu.viewOnceMessage.message.videoMessage)
+var texte =msgRepondu.viewOnceMessage.message.videoMessage.caption
 
 
 await zk.sendMessage(dest,{video:{url:video},caption:texte},{quoted:ms})
