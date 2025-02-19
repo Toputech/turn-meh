@@ -1,7 +1,7 @@
-const {zokou}=require("../framework/zokou")
-const {getContentType}=require("@whiskeysockets/baileys")
+const {zokou}=require("../framework/zokou");
+const {getContentType}=require("@whiskeysockets/baileys");
 
-
+const { downloadAndSaveMediaMessage } = require('@whiskeysockets/baileys');
 
 zokou({nomCom:"vv",categorie:"system",reaction:"🫣"},async(dest,zk,commandeOptions)=>{
 
