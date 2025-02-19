@@ -5,7 +5,7 @@ const util = require('util');
 const fs = require('fs-extra');
 const { format } = require(__dirname + "/../framework/mesfonctions");
 const os = require("os");
-const conf = require("../set.js");
+const conf = require(__dirname + "/../set");
 const path = require("path");
 const {
     generateWAMessageFromContent,
