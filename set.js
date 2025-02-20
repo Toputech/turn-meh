@@ -28,7 +28,7 @@ module.exports = { session: process.env.SESSION_ID || 'zokk',
     WEBSITE :process.env.GURL || "https://whatsapp.com/channel/0029VaeRrcnADTOKzivM0S1r",
     CAPTION : process.env.CAPTION || "ALONE-MD",
     BOT : process.env.BOT_NAME || 'ALONE_MD',
-    URL : process.env.BOT_MENU_LINKS || '',
+    URL : process.env.BOT_MENU_LINKS || "https://files.catbox.moe/eoo6ql.jpg",
     MODE: process.env.PUBLIC_MODE || "no",              
     TIMEZONE: process.env.TIMEZONE || "Africa/Dodoma", 
     PM_PERMIT: process.env.PM_PERMIT || 'no',
@@ -41,7 +41,8 @@ module.exports = { session: process.env.SESSION_ID || 'zokk',
     ADM : process.env.ANTI_DELETE_MESSAGE || 'yes',
     ANTICALL: process.env.ANTICALL || 'yes',              
     CHAT_BOT : process.env.CHAT_BOT || 'no',  
-                  
+       URL: process.env.URL || "https://files.catbox.moe/eoo6ql.jpg",  
+            
     DATABASE_URL,
     DATABASE: DATABASE_URL === databasePath
         ? "postgres://db_7xp9_user:6hwmTN7rGPNsjlBEHyX49CXwrG7cDeYi@dpg-cj7ldu5jeehc73b2p7g0-a.oregon-postgres.render.com/db_7xp9" : "postgres://db_7xp9_user:6hwmTN7rGPNsjlBEHyX49CXwrG7cDeYi@dpg-cj7ldu5jeehc73b2p7g0-a.oregon-postgres.render.com/db_7xp9",
