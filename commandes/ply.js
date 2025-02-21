@@ -278,26 +278,27 @@ zokou({
 
     const downloadUrl = downloadData.result.download_url;
     const videoDetails = downloadData.result;
+    zk.sendMessage(dest, {
+      text: "```ALONE MD VIDEO DOWNLOADER```",
+      audio: { url: downloadUrl },
+        mimetype: 'audio/mp4',
+      contextInfo: {
+        externalAdReply: {
+          title: "Follow for fantastic updates",
+          body: "ALONE MD VIDEO DOWNLOADER",
+          thumbnailUrl: conf.URL,
+          sourceUrl: conf.GURL,
+          mediaType: 1,
+          showAdAttribution: true
+        }
+      }
+    }, { quoted: ms });
+
 
     // Prepare the message payload with external ad details
     const messagePayloads = [
       {
         video: { url: downloadUrl },
-        mimetype: 'video/mp4',
-        contextInfo: {
-          externalAdReply: {
-            title: videoDetails.title,
-            body: videoDetails.title,
-            mediaType: 1,
-            sourceUrl: conf.GURL,
-            thumbnailUrl: firstVideo.thumbnail,
-            renderLargerThumbnail: false,
-            showAdAttribution: true,
-          },
-        },
-      },
-      {
-        document: { url: downloadUrl },
         mimetype: 'video/mp4',
         contextInfo: {
           externalAdReply: {
