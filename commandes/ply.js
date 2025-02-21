@@ -94,37 +94,8 @@ zokou({
             showAdAttribution: true,
           },
         },
-      },
-      {
-        document: { url: downloadUrl },
-        mimetype: 'audio/mpeg',
-        contextInfo: {
-          externalAdReply: {
-            title: videoDetails.title,
-            body: videoDetails.title,
-            mediaType: 1,
-            sourceUrl: conf.GURL,
-            thumbnailUrl: firstVideo.thumbnail,
-            renderLargerThumbnail: false,
-            showAdAttribution: true,
-          },
-        },
-      },
-      {
-        document: { url: downloadUrl },
-        mimetype: 'audio/mp4',
-        contextInfo: {
-          externalAdReply: {
-            title: videoDetails.title,
-            body: videoDetails.title,
-            mediaType: 1,
-            sourceUrl: conf.GURL,
-            thumbnailUrl: firstVideo.thumbnail,
-            renderLargerThumbnail: false,
-            showAdAttribution: true,
-          },
-        },
       }
+
     ];
 
     // Send the download link to the user for each payload
