@@ -91,8 +91,19 @@ else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
     }
 } 
 else {
-    
-    repondre(infoMsg + menuMsg);
+    zk.sendMessage(dest, {
+      text: infoMsg + menuMsg,
+      contextInfo: {
+        externalAdReply: {
+          title: "Enjoy...",
+          body: "❣️ALONE-MD SWEET MENU❣️",
+          thumbnailUrl: conf.URL,
+          sourceUrl: conf.GURL,
+          mediaType: 1,
+          showAdAttribution: true
+        }
+      }
+    }, { quoted: ms });
     
 }
 
