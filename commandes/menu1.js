@@ -28,7 +28,7 @@ zokou({ nomCom: "menu", categorie: "General" }, async (dest, zk, commandeOptions
         coms[com.categorie].push(com.nomCom);
     });
 
-    moment.tz.setDefault('Africa/Dodoma');
+    moment.tz.setDefault("Africa/Nairobi");
 
 // Créer une date et une heure en GMT
 const temps = moment().format('HH:mm:ss');
@@ -74,8 +74,19 @@ let menuMsg = `
 
    if (lien.match(/\.(mp4|gif)$/i)) {
     try {
-        zk.sendMessage(dest, { video: { url: lien }, caption:infoMsg + menuMsg, footer: "Je suis *Boniphacemd*, déveloper Boniphace Tech" , gifPlayback : true }, { quoted: ms });
-    }
+        zk.sendMessage(dest, {
+      text: infoMsg + menuMsg,
+      contextInfo: {
+        externalAdReply: {
+          title: "Enjoy...",
+          body: "❣️ALONE-MD SWEET MENU❣️",
+          thumbnailUrl: conf.URL,
+          sourceUrl: conf.GURL,
+          mediaType: 1,
+          showAdAttribution: true
+        }
+      }
+    }, { quoted: ms });    }
     catch (e) {
         console.log("🥵🥵 Menu erreur " + e);
         repondre("🥵🥵 Menu erreur " + e);
@@ -84,8 +95,19 @@ let menuMsg = `
 // Vérification pour .jpeg ou .png
 else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
     try {
-        zk.sendMessage(dest, { image: { url: lien }, caption:infoMsg + menuMsg, footer: "Je suis *Boniphacemd*, déveloper Fredie Tech" }, { quoted: ms });
-    }
+        zk.sendMessage(dest, {
+      text: infoMsg + menuMsg,
+      contextInfo: {
+        externalAdReply: {
+          title: "Enjoy...",
+          body: "❣️ALONE-MD SWEET MENU❣️",
+          thumbnailUrl: conf.URL,
+          sourceUrl: conf.GURL,
+          mediaType: 1,
+          showAdAttribution: true
+        }
+      }
+    }, { quoted: ms });}
     catch (e) {
         console.log("🥵🥵 Menu erreur " + e);
         repondre("🥵🥵 Menu erreur " + e);
