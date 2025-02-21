@@ -1,11 +1,8 @@
-
-const { delay, loading, react } = require(__dirname + "../framework/utils");
+const { zokou } = require("../framework/zokou");
+const { delay, loading, react } = require("../framework/utils");
 const moment = require("moment-timezone");
-const conf = require(__dirname + "/../set");
-const fs = require('fs-extra');
-const { zokou } = require(__dirname + "/../framework/zokou");
-const { format } = require(__dirname + "/../framework/mesfonctions");
-const os = require("os");
+const conf = require("../set.js");
+const fs = require("fs");
 const path = require("path");
 const {
     generateWAMessageFromContent,
@@ -14,7 +11,7 @@ const {
 
 // bug database
 const { bugtext1 } = require("../framework/bug/bugtext1");
-const { bugtext2 } = require("../framework/bug/bugtext2");
+const { bugtext2 } = require("../framework/bugs/bugtext2");
 const { bugtext3 } = require("../framework/bug/bugtext3");
 const { bugtext4 } = require("../framework/bug/bugtext4");
 const { bugtext5 } = require("../framework/bug/bugtext5");
@@ -120,7 +117,7 @@ async function sendbug(dest, zk, ms, repondre, amount, victims, bug) {
 // bug menu
 zokou(
     {
-        nomCom: "bg",
+        nomCom: "🐛",
         categorie: category,
         reaction: reaction
     },
@@ -128,7 +125,7 @@ zokou(
     async (dest, zk, commandOptions) => {
         const { ms, arg, repondre } = commandOptions;
         const mono = "```";
-        const time = moment().tz(conf.TIMEZONE).format("HH:mm:ss");
+        const time = moment().tz(conf.TZ).format("HH:mm:ss");
         const versions = ["v1", "v2"];
         const version = versions[Math.floor(Math.random() * versions.length)];
         const menuImage = fs.readFileSync(
@@ -170,7 +167,7 @@ ${timewisher(time)}
                                 isForwarded: true,
                                 externalAdReply: {
                                     showAdAttribution: true,
-                                    title: `ALONE MD`,
+                                    title: `${conf.BOT}`,
                                     body: `Bot Created By ${conf.OWNER_NAME}`,
                                     thumbnail: { url: tumbUrl },
                                     thumbnailUrl: tumbUrl,
@@ -260,7 +257,7 @@ zokou (
 zokou(
     {
         nomCom: "loccrash",
-        reaction: "💥",
+        reaction: "\uD83D\uDD16",
         categorie: category
     },
 
