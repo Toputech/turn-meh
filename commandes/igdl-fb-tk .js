@@ -92,7 +92,7 @@ Description: ${tik.desc}
 });
 
 zokou({
-  nomCom: "fbdl2",
+  nomCom: "fb",
   categorie: "Download",
   reaction: "📽️"
 },
