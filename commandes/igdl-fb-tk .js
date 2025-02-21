@@ -112,8 +112,8 @@ async (dest, zk, commandeOptions) => {
         titre: ${result.title}
         Lien: ${result.url}
       `;
-             zk.sendMessage(dest, { video: { url: result.sd  }, sourceUrl: "https://whatsapp.com/channel/0029VaeRrcnADTOKzivM0S1r", 
-, caption: 'facebook video downloader powered by *ALONE-MD*' }, { quoted: ms });
+       zk.sendMessage(dest,{image : { url : result.thumbnail}, caption : caption},{quoted : ms}) ;
+       zk.sendMessage(dest, { video: { url: result.sd  }, caption: 'facebook video downloader powered by *ALONE-MD*' }, { quoted: ms });
       
     })
     .catch((error) => {console.log("Error:", error)
