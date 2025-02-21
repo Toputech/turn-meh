@@ -48,7 +48,7 @@ async (dest, zk, commandeOptions) => {
         titre: ${result.title}
         Lien: ${result.url}
       `;
-       zk.sendMessage(dest,{image : { url : result.thumbnail}, caption : caption},{quoted : ms}) ;
+       zk.sendMessage(dest,{image : { url : result.thumbnail}, caption : " ```ALONE MD FB DOWNLOADER``` "},{quoted : ms}) ;
        zk.sendMessage(dest, { video: { url: result.hd  }, caption: 'facebook video downloader powered by *ALONE-MD*' }, { quoted: ms });
       
     })
