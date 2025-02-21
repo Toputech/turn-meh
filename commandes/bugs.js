@@ -1,7 +1,7 @@
 const { zokou } = require("../framework/zokou");
 const { delay, loading, react } = require("../framework/utils");
 const moment = require("moment-timezone");
-const conf = require("../set.js");
+const conf = require(__dirname + "/../set");
 const fs = require("fs");
 const path = require("path");
 const {
@@ -117,7 +117,7 @@ async function sendbug(dest, zk, ms, repondre, amount, victims, bug) {
 // bug menu
 zokou(
     {
-        nomCom: "🐛",
+        nomCom: "bg",
         categorie: category,
         reaction: reaction
     },
@@ -167,7 +167,7 @@ ${timewisher(time)}
                                 isForwarded: true,
                                 externalAdReply: {
                                     showAdAttribution: true,
-                                    title: `${conf.BOT}`,
+                                    title: `ALONE MD`,
                                     body: `Bot Created By ${conf.OWNER_NAME}`,
                                     thumbnail: { url: tumbUrl },
                                     thumbnailUrl: tumbUrl,
@@ -257,7 +257,7 @@ zokou (
 zokou(
     {
         nomCom: "loccrash",
-        reaction: "\uD83D\uDD16",
+        reaction: "💥",
         categorie: category
     },
 
