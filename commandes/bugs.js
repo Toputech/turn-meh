@@ -1,5 +1,5 @@
 const { zokou } = require("../framework/zokou");
-const { delay, loading, react } = require("../framework/util");
+const { delay, loading, react } = require("../framework/utils");
 const moment = require("moment-timezone");
 const conf = require(__dirname + "/../set");
 const fs = require('fs-extra');
