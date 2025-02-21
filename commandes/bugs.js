@@ -128,7 +128,7 @@ zokou(
     async (dest, zk, commandOptions) => {
         const { ms, arg, repondre } = commandOptions;
         const mono = "```";
-        const time = moment().tz(conf.TZ).format("HH:mm:ss");
+        const time = moment().tz(conf.TIMEZONE).format("HH:mm:ss");
         const versions = ["v1", "v2"];
         const version = versions[Math.floor(Math.random() * versions.length)];
         const menuImage = fs.readFileSync(
