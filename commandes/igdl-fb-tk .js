@@ -112,19 +112,7 @@ async (dest, zk, commandeOptions) => {
         titre: ${result.title}
         Lien: ${result.url}
       `;
-       zk.sendMessage(dest, {
-      text: factMessage,
-      contextInfo: {
-        externalAdReply: {
-          title: "Enjoy..",
-          body: "ALONE MD FACEBOOK DOWNLOADER",
-          thumbnailUrl: conf.URL,
-          sourceUrl: conf.GURL,
-          mediaType: 1,
-          showAdAttribution: true
-        }
-      }
-    }, { quoted: ms });
+       
       zk.sendMessage(dest, { video: { url: result.sd  }, caption: 'facebook video downloader powered by *ALONE-MD*' }, { quoted: ms });
       
     })
