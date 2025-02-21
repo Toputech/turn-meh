@@ -4,7 +4,7 @@ const axios = require("axios");
 
 // Define the command with aliases
 zokou({
-  nomCom: "lyrics",
+  nomCom: "lyric",
   aliases: ["mistari", "lyric"],
   reaction: '❣️',
   categorie: "system"
