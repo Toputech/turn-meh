@@ -1,38 +1,60 @@
 const {zokou}=require("../framework/zokou");
-const {getContentType}=require("@whiskeysockets/baileys");
+const axios = require('axios');
+const config = require('../set');
+const { zokou, commands } = require('../commandes');
 
-const { downloadAndSaveMediaMessage } = require('@whiskeysockets/baileys');
+zokou({
+    nomCom: "vv",
+    react: "😩",
+    alias: ['retrive', "viewonce"],
+    desc: "Fetch and resend a ViewOnce message content (image/video/voice).",
+    categorie: "system",
+    use: '<query>',
+    filename: __filename
+},
+async (conn, mek, m, { from, reply }) => {
+    try {
+        const quotedMessage = m.msg.contextInfo.quotedMessage; // Get quoted message
 
-zokou({nomCom:"vv",categorie:"system",reaction:"🫣"},async(dest,zk,commandeOptions)=>{
+        if (quotedMessage && quotedMessage.viewOnceMessageV2) {
+            const quot = quotedMessage.viewOnceMessageV2;
+            if (quot.message.imageMessage) {
+                let cap = quot.message.imageMessage.caption;
+                let anu = await conn.downloadAndSaveMediaMessage(quot.message.imageMessage);
+                return conn.sendMessage(from, { image: { url: anu }, caption: cap }, { quoted: mek });
+            }
+            if (quot.message.videoMessage) {
+                let cap = quot.message.videoMessage.caption;
+                let anu = await conn.downloadAndSaveMediaMessage(quot.message.videoMessage);
+                return conn.sendMessage(from, { video: { url: anu }, caption: cap }, { quoted: mek });
+            }
+            if (quot.message.audioMessage) {
+                let anu = await conn.downloadAndSaveMediaMessage(quot.message.audioMessage);
+                return conn.sendMessage(from, { audio: { url: anu } }, { quoted: mek });
+            }
+        }
 
-const {ms,msgRepondu,repondre}=commandeOptions;
-
-
-if(!msgRepondu){return repondre("*Mention a view once media* .");}
-
-
-if(msgRepondu.viewOnceMessage)
-{
-      if(msgRepondu.viewOnceMessage.message.imageMessage)
-       {
-         var image =await zk.downloadAndSaveMediaMessage(msgRepondu.viewOnceMessage.message.imageMessage)
-        var texte = msgRepondu.viewOnceMessage.message.imageMessage.caption
-    
-     await zk.sendMessage(dest,{image:{url:image},caption:texte},{quoted:ms})
-      }else if(msgRepondu.viewOnceMessage.message.videoMessage){
-
-    var video = await zk.downloadAndSaveMediaMessage(msgRepondu.viewOnceMessage.message.videoMessage)
-var texte =msgRepondu.viewOnceMessage.message.videoMessage.caption
-
-
-await zk.sendMessage(dest,{video:{url:video},caption:texte},{quoted:ms})
-
-}
-}else
-{
-   return repondre("```this message is not on view once .```")
-}
-
-
-
-})
+        // If there is no quoted message or it's not a ViewOnce message
+        if (!m.quoted) return reply("Please reply to a ViewOnce message.");
+        if (m.quoted.mtype === "viewOnceMessage") {
+            if (m.quoted.message.imageMessage) {
+                let cap = m.quoted.message.imageMessage.caption;
+                let anu = await conn.downloadAndSaveMediaMessage(m.quoted.message.imageMessage);
+                return conn.sendMessage(from, { image: { url: anu }, caption: cap }, { quoted: mek });
+            }
+            else if (m.quoted.message.videoMessage) {
+                let cap = m.quoted.message.videoMessage.caption;
+                let anu = await conn.downloadAndSaveMediaMessage(m.quoted.message.videoMessage);
+                return conn.sendMessage(from, { video: { url: anu }, caption: cap }, { quoted: mek });
+            }
+        } else if (m.quoted.message.audioMessage) {
+            let anu = await conn.downloadAndSaveMediaMessage(m.quoted.message.audioMessage);
+            return conn.sendMessage(from, { audio: { url: anu } }, { quoted: mek });
+        } else {
+            return reply("> *This is not a ViewOnce message.*");
+        }
+    } catch (e) {
+        console.log("Error:", e);
+        reply("An error occurred while fetching the ViewOnce message.");
+    }
+});
