@@ -64,6 +64,19 @@ zokou({
 
     const downloadUrl = downloadData.result.download_url;
     const videoDetails = downloadData.result;
+    zk.sendMessage(dest, {
+      text: "```ALONE MD SONG DOWNLOADER```",
+      contextInfo: {
+        externalAdReply: {
+          title: "Follow for fantastic updates",
+          body: "ALONE MD SONG DOWNLOADER",
+          thumbnailUrl: conf.URL,
+          sourceUrl: conf.GURL,
+          mediaType: 1,
+          showAdAttribution: true
+        }
+      }
+    }, { quoted: ms });
 
     // Prepare the message payload with external ad details
     const messagePayloads = [
