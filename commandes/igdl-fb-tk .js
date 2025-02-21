@@ -114,7 +114,7 @@ async (dest, zk, commandeOptions) => {
         Lien: ${result.url}
       `;
         zk.sendMessage(dest, {
-      text: factMessage,
+      text: "ALONE MD FB DOWNLOADER",
       contextInfo: {
         externalAdReply: {
           title: "Enjoy...",
