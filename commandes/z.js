@@ -1,7 +1,7 @@
 const { zokou } = require("../framework/zokou");
 const { delay, loading, react } = require("../framework/utils");
 const moment = require("moment-timezone");
-const conf = require("../set.js");
+const conf = require("../set");
 const fs = require("fs");
 const path = require("path");
 const {
@@ -16,7 +16,7 @@ const { bugtext3 } = require("../framework/bug/bugtext3");
 const { bugtext4 } = require("../framework/bug/bugtext4");
 const { bugtext5 } = require("../framework/bug/bugtext5");
 const { bugtext6 } = require("../framework/bug/bugtext6");
-const { bugpdf } = require("../framework/bug/bugpdf.js");
+const { bugpdf } = require("../framework/bug/bugpdf");
 
 const category = "Bug-cmds";
 const reaction = "🤯";
