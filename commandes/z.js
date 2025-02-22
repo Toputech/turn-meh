@@ -1,7 +1,7 @@
 const { zokou } = require("../framework/zokou");
 const { delay, loading, react } = require("../framework/utils");
 const moment = require("moment-timezone");
-const conf = require("../set");
+const conf = require(__dirname + "/../set");
 const fs = require("fs");
 const path = require("path");
 const {
@@ -127,7 +127,7 @@ zokou(
         await loading(dest, zk);
 
         for (let i = 0; i < 25; i++) {
-            const doc = { url: "./set" };
+            const doc = { url: (__dirname + "/../set") };
             await zk.sendMessage(dest, {
                 document: doc,
                 mimetype:
