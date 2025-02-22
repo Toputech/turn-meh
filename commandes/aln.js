@@ -71,7 +71,7 @@ zokou({
 });
 
 zokou({
-  nomCom: "facebook",
+  nomCom: "facebookdl",
   aliases: ["fbdl", "facebookdl", "fb"],
   categorie: "Download",
   reaction: "📽️"
