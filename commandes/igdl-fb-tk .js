@@ -28,7 +28,7 @@ zokou({nomCom : "igdl" , categorie : "Download"},async (dest , zk , commandeOpti
 
 
 zokou({
-  nomCom: "fbdl",
+  nomCom: "fbdls",
   categorie: "Download",
   reaction: "📽️"
 },
@@ -95,6 +95,102 @@ zokou({
   nomCom: "fb",
   categorie: "Download",
   reaction: "📽️"
+},
+async (dest, zk, commandeOptions) => {
+  const { repondre, ms, arg } = commandeOptions;
+
+  if (!arg[0]) {
+    repondre('Insert a public facebook video link! !');
+    return;
+  }
+
+  const queryURL = arg.join(" ");
+
+  try {
+     getFBInfo(queryURL)
+    .then((result) => {
+       let caption = `
+        titre: ${result.title}
+        Lien: ${result.url}
+      `;
+        zk.sendMessage(dest, {
+      text: "ALONE MD FB DOWNLOADER",
+      contextInfo: {
+        externalAdReply: {
+          title: "Enjoy...",
+          body: "ALONE MD FACEBOOK DOWNLOADER",
+          thumbnailUrl: conf.URL,
+          sourceUrl: conf.GURL,
+          mediaType: 1,
+          showAdAttribution: true
+        }
+      }
+    }, { quoted: ms });
+      zk.sendMessage(dest, { video: { url: result.sd  }, caption: 'facebook video downloader powered by *ALONE-MD*' }, { quoted: ms });
+      
+    })
+    .catch((error) => {console.log("Error:", error)
+                      repondre(error)});
+
+
+   
+  } catch (error) {
+    console.error('Erreur lors du téléchargement de la vidéo :', error);
+    repondre('Erreur lors du téléchargement de la vidéo.' , error);
+  }
+});
+zokou({
+  nomCom: "fbdl",
+  categorie: "Download",
+  reaction: "❣️"
+},
+async (dest, zk, commandeOptions) => {
+  const { repondre, ms, arg } = commandeOptions;
+
+  if (!arg[0]) {
+    repondre('Insert a public facebook video link! !');
+    return;
+  }
+
+  const queryURL = arg.join(" ");
+
+  try {
+     getFBInfo(queryURL)
+    .then((result) => {
+       let caption = `
+        titre: ${result.title}
+        Lien: ${result.url}
+      `;
+        zk.sendMessage(dest, {
+      text: "ALONE MD FB DOWNLOADER",
+      contextInfo: {
+        externalAdReply: {
+          title: "Enjoy...",
+          body: "ALONE MD FACEBOOK DOWNLOADER",
+          thumbnailUrl: conf.URL,
+          sourceUrl: conf.GURL,
+          mediaType: 1,
+          showAdAttribution: true
+        }
+      }
+    }, { quoted: ms });
+      zk.sendMessage(dest, { video: { url: result.sd  }, caption: 'facebook video downloader powered by *ALONE-MD*' }, { quoted: ms });
+      
+    })
+    .catch((error) => {console.log("Error:", error)
+                      repondre(error)});
+
+
+   
+  } catch (error) {
+    console.error('Erreur lors du téléchargement de la vidéo :', error);
+    repondre('Erreur lors du téléchargement de la vidéo.' , error);
+  }
+});
+zokou({
+  nomCom: "Facebook",
+  categorie: "Download",
+  reaction: "❣️"
 },
 async (dest, zk, commandeOptions) => {
   const { repondre, ms, arg } = commandeOptions;
