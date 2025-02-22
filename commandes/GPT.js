@@ -2,15 +2,15 @@ const { zokou } = require("../framework/zokou");
 const ai = require('unlimited-ai');
 
 zokou({
-  nomCom: "gpt",
+  nomCom: "gpt4",
   aliases: ["gpt4", "ai"],
   reaction: '⚔️',
   categorie: "search"
 }, async (context, message, params) => {
   const { repondre, arg } = params;  // Use args for the command arguments
-  const alone = arg.join(" ").trim(); // Assuming args is an array of command parts
+  const zk = arg.join(" ").trim(); // Assuming args is an array of command parts
 
-  if (!alone) {
+  if (!zk) {
     return repondre("Please provide a song name.");
   }
 
