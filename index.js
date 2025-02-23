@@ -195,6 +195,9 @@ setTimeout(() => {
             {
             await zk.sendPresenceUpdate("recording",origineMessage);
             }
+           else if(etat==4)
+            {await zk.sendPresenceUpdate("sleeping",origineMessage);}
+           
             else
             {
                 await zk.sendPresenceUpdate("unavailable",origineMessage);
