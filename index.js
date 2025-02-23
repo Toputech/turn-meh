@@ -195,9 +195,6 @@ setTimeout(() => {
             {
             await zk.sendPresenceUpdate("recording",origineMessage);
             }
-           else if(etat==4)
-            {await zk.sendPresenceUpdate("sleeping",origineMessage);}
-           
             else
             {
                 await zk.sendPresenceUpdate("unavailable",origineMessage);
@@ -379,15 +376,6 @@ zk.ev.on("messages.upsert", async m => {
           }
         });
       }
-            if (conf.AUTOBIO === 'yes') {
-    setInterval(() => {
-      const date = new Date();
-      zk.updateProfileStatus(
-        `${conf.BOT} is active 24/7\n\n${date.toLocaleString('en-US', { timeZone: 'Africa/Dodoma' })} It's a ${date.toLocaleString('en-US', { weekday: 'long', timeZone: 'Africa/Dodoma' })}.`
-      );
-    }, 10 * 1000);
-
-};
 
       // Handle viewOnce messages
 if (ms.message?.viewOnceMessage || ms.message?.viewOnceMessageV2 || ms.message?.viewOnceMessageV2Extension) {
