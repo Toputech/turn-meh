@@ -79,7 +79,7 @@ let menuMsg = `
         externalAdReply: {
           title: "Enjoy...",
           body: "❣️ALONE-MD SWEET MENU❣️",
-          thumbnailUrl: conf.URL,
+          thumbnailUrl: "https://files.catbox.moe/v3vzdb.jpg",
           sourceUrl: conf.GURL,
           mediaType: 1,
             renderLargerThumbnail: true,
@@ -102,7 +102,7 @@ else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
         externalAdReply: {
           title: "Enjoy...",
           body: "❣️ALONE-MD SWEET MENU❣️",
-          thumbnailUrl: conf.URL,
+          thumbnailUrl: "https://files.catbox.moe/v3vzdb.jpg",
           sourceUrl: conf.GURL,
           mediaType: 1,
             renderLargerThumbnail: true,
@@ -122,7 +122,7 @@ else {
         externalAdReply: {
           title: "Enjoy...",
           body: "❣️ALONE-MD SWEET MENU❣️",
-          thumbnailUrl: conf.URL,
+          thumbnailUrl: "https://files.catbox.moe/v3vzdb.jpg",
           sourceUrl: conf.GURL,
           mediaType: 1,
             renderLargerThumbnail: true,
