@@ -54,8 +54,7 @@ const date = moment().format('DD/MM/YYYY');
     
 let menuMsg = `
 
- * ALONE MD CURIOUS COMMADS *${readmore}
-`;
+ *ALONE MD CURIOUS COMMADS*`;
 
     for (const cat in coms) {
         menuMsg += ` ╭──────✣ *${cat}* ✣─────☹︎`;
@@ -83,6 +82,8 @@ let menuMsg = `
           thumbnailUrl: conf.URL,
           sourceUrl: conf.GURL,
           mediaType: 1,
+            renderLargerThumbnail: true,
+
           showAdAttribution: true
         }
       }
@@ -104,6 +105,7 @@ else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
           thumbnailUrl: conf.URL,
           sourceUrl: conf.GURL,
           mediaType: 1,
+            renderLargerThumbnail: true,
           showAdAttribution: true
         }
       }
@@ -123,6 +125,8 @@ else {
           thumbnailUrl: conf.URL,
           sourceUrl: conf.GURL,
           mediaType: 1,
+            renderLargerThumbnail: true,
+
           showAdAttribution: true
         }
       }
