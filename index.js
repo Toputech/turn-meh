@@ -37,18 +37,6 @@ const axios = require("axios");
 let fs = require("fs-extra");
 let path = require("path");
 const FileType = require('file-type');
-const handleCall = require("./vars/anticall"); 
-//import chalk from 'chalk'
-const autobio = require("./vars/autobio");
-const handleStatus = require("./vars/statushandle");
-const handleAutoReply = require("./vars/greet");
-const handleAntiDelete = require("./vars/antidelete");
-const handleAntiLink = require("./vars/antilink");
-const handleEvalCommand = require('./vars/eval');
-const handleAutoBlock = require('./vars/autoblock');
-const handleAutoReact = require("./vars/autoreact");
-const handleAutoRead = require("./vars/autoread");
-
 const { Sticker, createSticker, StickerTypes } = require('wa-sticker-formatter');
 //import chalk from 'chalk'
 const { verifierEtatJid , recupererActionJid } = require("./bdd/antilien");
