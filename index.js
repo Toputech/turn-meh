@@ -49,7 +49,7 @@ const {isGroupOnlyAdmin,addGroupToOnlyAdminList,removeGroupFromOnlyAdminList} = 
 let { reagir } = require(__dirname + "/framework/app");
 var session = conf.session.replace(/ALONE-MD;;;=>/g,"");
 const prefixe = conf.PREFIXE;
-const autobio = require("./vars/autobio");
+
 
 async function authentification() {
     try {
