@@ -54,11 +54,12 @@
     },
     "ANTI_VV": {
       "description": "Detect view-once messages",
-      "value": "no",
+      "value": "yes",
       "required": false
     },
-    "ANTILINK": {
-      "description": "Detect view-once links",
+ 
+    "GROUP_CONTROL": {
+      "description": "urs if you want bot yo control group features such as antilink,antispam,antibad",
       "value": "no",
       "required": false
     },
