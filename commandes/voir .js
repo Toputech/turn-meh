@@ -1,60 +1,48 @@
-const {zokou}=require("../framework/zokou");
+const util = require('util');
+const fs = require('fs-extra');
 const axios = require('axios');
-const config = require('../set');
-const { zokou, commands } = require('../commandes');
+const { zokou } = require(__dirname + "/../framework/zokou");
+const os = require("os");
+const moment = require("moment-timezone");
+const conf = require(__dirname + "/../set");
 
-zokou({
-    nomCom: "vv",
-    react: "😩",
-    alias: ['retrive', "viewonce"],
-    desc: "Fetch and resend a ViewOnce message content (image/video/voice).",
-    categorie: "system",
-    use: '<query>',
-    filename: __filename
-},
-async (conn, mek, m, { from, reply }) => {
+const AUDIO_URL = "https://files.catbox.moe/e52xx6.mp3"; // New audio URL
+const THUMBNAIL_URL = "https://files.catbox.moe/533oqh.jpg"; // New image URL
+
+moment.tz.setDefault(`${conf.TZ}`);
+
+const getTimeAndDate = () => {
+    return {
+        time: moment().format('HH:mm:ss'),
+        date: moment().format('DD/MM/YYYY')
+    };
+};
+
+// Ping Command
+zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) => {
+    let { ms } = commandeOptions;
+    const { time, date } = getTimeAndDate();
+    const ping = Math.floor(Math.random() * 100) + 1; // Generate a random ping between 1ms - 100ms
+
     try {
-        const quotedMessage = m.msg.contextInfo.quotedMessage; // Get quoted message
+        await zk.sendMessage(dest, { 
+            audio: { url: AUDIO_URL }, 
+            mimetype: 'audio/mp4', 
+            ptt: true, // Voice note form
+            contextInfo: {
+                externalAdReply: {
+                    title: "ALONE MD",
+                    body: `❣️ *Pong:* ${ping}ms\n📅 *Date:* ${date}\n⏰ *Time:* ${time}`,
+                    thumbnailUrl: conf.url,
+                    mediaType: 1,
+                    sourceUrl: conf.GURL,
+                    renderSmallThumbnail: true // Small thumbnail rendering
+                }
+            }
+        }, { quoted: ms });
 
-        if (quotedMessage && quotedMessage.viewOnceMessageV2) {
-            const quot = quotedMessage.viewOnceMessageV2;
-            if (quot.message.imageMessage) {
-                let cap = quot.message.imageMessage.caption;
-                let anu = await conn.downloadAndSaveMediaMessage(quot.message.imageMessage);
-                return conn.sendMessage(from, { image: { url: anu }, caption: cap }, { quoted: mek });
-            }
-            if (quot.message.videoMessage) {
-                let cap = quot.message.videoMessage.caption;
-                let anu = await conn.downloadAndSaveMediaMessage(quot.message.videoMessage);
-                return conn.sendMessage(from, { video: { url: anu }, caption: cap }, { quoted: mek });
-            }
-            if (quot.message.audioMessage) {
-                let anu = await conn.downloadAndSaveMediaMessage(quot.message.audioMessage);
-                return conn.sendMessage(from, { audio: { url: anu } }, { quoted: mek });
-            }
-        }
-
-        // If there is no quoted message or it's not a ViewOnce message
-        if (!m.quoted) return reply("Please reply to a ViewOnce message.");
-        if (m.quoted.mtype === "viewOnceMessage") {
-            if (m.quoted.message.imageMessage) {
-                let cap = m.quoted.message.imageMessage.caption;
-                let anu = await conn.downloadAndSaveMediaMessage(m.quoted.message.imageMessage);
-                return conn.sendMessage(from, { image: { url: anu }, caption: cap }, { quoted: mek });
-            }
-            else if (m.quoted.message.videoMessage) {
-                let cap = m.quoted.message.videoMessage.caption;
-                let anu = await conn.downloadAndSaveMediaMessage(m.quoted.message.videoMessage);
-                return conn.sendMessage(from, { video: { url: anu }, caption: cap }, { quoted: mek });
-            }
-        } else if (m.quoted.message.audioMessage) {
-            let anu = await conn.downloadAndSaveMediaMessage(m.quoted.message.audioMessage);
-            return conn.sendMessage(from, { audio: { url: anu } }, { quoted: mek });
-        } else {
-            return reply("> *This is not a ViewOnce message.*");
-        }
     } catch (e) {
-        console.log("Error:", e);
-        reply("An error occurred while fetching the ViewOnce message.");
+        console.log("❌ Ping Command Error: " + e);
+        repondre("❌ Error: " + e);
     }
 });
