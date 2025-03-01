@@ -26,13 +26,12 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
 
     try {
         await zk.sendMessage(dest, { 
-            audio: { url: AUDIO_URL }, 
-            mimetype: 'audio/mp4', 
+            text:`❣️ *Pong:* ${ping}ms\n📅 *Date:* ${date}\n⏰ *Time:* ${time}`, 
             ptt: true, // Voice note form
             contextInfo: {
                 externalAdReply: {
                     title: "ALONE MD",
-                    body: `❣️ *Pong:* ${ping}ms\n📅 *Date:* ${date}\n⏰ *Time:* ${time}`,
+                    body: `❣️ Follow for Fantastic updates `,
                     thumbnailUrl: conf.url,
                     mediaType: 1,
                     sourceUrl: conf.GURL,
