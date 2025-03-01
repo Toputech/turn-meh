@@ -3,7 +3,40 @@ const { zokou } = require('../framework/zokou');
 const axios = require('axios');
 const wiki = require('wikipedia');
 const conf = require(__dirname + "/../set");
+zokou({
+  nomCom: "hand",
+  categorie: "fun",
+  reaction: "📽️"
+}, async (dest, zk, commandeOptions) => {
+  const { repondre, ms } = commandeOptions;
+  
+  try {
+    const sentMessage = await zk.sendMessage(dest, { text: "✊🏻 *STARTED...* 💦" });
+    const animations = [
+      '8✊️===D', '8=✊️==D', '8==✊️=D', '8===✊️D', '8==✊️=D', '8=✊️==D', 
+      '8✊️===D', '8=✊️==D', '8==✊️=D', '8===✊️D', '8==✊️=D', '8=✊️==D', 
+      '8✊️===D', '8=✊️==D', '8==✊️=D', '8===✊️D', '8==✊️=D', '8=✊️==D', 
+      '8✊️===D', '8=✊️==D', '8==✊️=D', '8===✊️D 💦', '8==✊️=D💦 💦', '8=✊️==D 💦💦 💦'
+    ];
 
+    for (const animation of animations) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      await zk.relayMessage(dest, {
+        protocolMessage: {
+          key: sentMessage.key,
+          type: 14, // Protocol message type for edited message
+          editedMessage: {
+            conversation: animation
+          }
+        }
+      }, {});
+    }
+  } catch (error) {
+    console.log(error);
+    repondre("❌ *Error!* " + error.message);
+  }
+});
 zokou({
   nomCom: "technews",
   reaction: '📰',
