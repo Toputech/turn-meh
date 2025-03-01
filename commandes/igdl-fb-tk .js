@@ -28,7 +28,8 @@ zokou({nomCom : "igdl" , categorie : "Download"},async (dest , zk , commandeOpti
 
 
 zokou({
-  nomCom: "fbdls",
+  nomCom: "fbdl",
+  alliases: "facebook"
   categorie: "Download",
   reaction: "📽️"
 },
@@ -49,8 +50,20 @@ async (dest, zk, commandeOptions) => {
         titre: ${result.title}
         Lien: ${result.url}
       `;
-       zk.sendMessage(dest,{image : { url : result.thumbnail}, caption : " ```ALONE MD FB DOWNLOADER``` "},{quoted : ms}) ;
-       zk.sendMessage(dest, { video: { url: result.hd  }, caption: 'facebook video downloader powered by *ALONE-MD*' }, { quoted: ms });
+       zk.sendMessage(dest, {
+      text: "ALONE MD FB DOWNLOADER",
+      contextInfo: {
+        externalAdReply: {
+          title: "Enjoy...",
+          body: "ALONE MD FACEBOOK DOWNLOADER",
+          thumbnailUrl: conf.URL,
+          sourceUrl: conf.GURL,
+          mediaType: 1,
+          showAdAttribution: true
+        }
+      }
+    }, { quoted: ms });
+      zk.sendMessage(dest, { video: { url: result.hd  }, caption: 'facebook video downloader powered by *ALONE-MD*' }, { quoted: ms });
       
     })
     .catch((error) => {console.log("Error:", error)
@@ -92,7 +105,7 @@ Description: ${tik.desc}
 });
 
 zokou({
-  nomCom: "fb",
+  nomCom: "fbs",
   categorie: "Download",
   reaction: "📽️"
 },
@@ -140,7 +153,7 @@ async (dest, zk, commandeOptions) => {
   }
 });
 zokou({
-  nomCom: "fbdl",
+  nomCom: "fbdl2",
   categorie: "Download",
   reaction: "❣️"
 },
