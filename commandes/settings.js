@@ -2,7 +2,7 @@
 
 
 const { zokou } = require("../framework/zokou");
-const s = require("../set");
+const s = require(_dirname+"../set");
 const fs = require('fs');
 const Heroku = require('heroku-client');
 
@@ -750,7 +750,7 @@ zokou({
 });
 
 zokou({
-  nomCom: 'settings',
+  nomCom: 'setting',
   categorie: "HEROKU-CLIENT"
 }, async (chatId, messagingService, context) => {
   const { ms, repondre, superUser, auteurMessage } = context;
@@ -823,41 +823,6 @@ zokou({
   });
 
   repondre("That Heroku variable is changing, The bot is restarting....");
-});
+})
 
 // Function to change Heroku environment variables
-function changevars(commandName, varName) {
-  zokou({
-    nomCom: commandName,
-    categorie: 'HEROKU-CLIENT'
-  }, async (chatId, messagingService, context) => {
-    const { arg, superUser, repondre } = context;
-    
-    if (!superUser) {
-      repondre("This command is for my owner only!");
-      return;
-    }
-
-    if (!s.HEROKU_APP_NAME || !s.HEROKU_API_KEY) {
-      repondre("Fill in the HEROKU_APP_NAME and HEROKU_API_KEY environment variables");
-      return;
-    }
-
-    if (!arg[0]) {
-      repondre(getDescriptionFromEnv(varName));
-      return;
-    }
-
-    const heroku = new Heroku({ token: s.HEROKU_API_KEY });
-    await heroku.patch(`/apps/${s.HEROKU_APP_NAME}/config-vars`, {
-      body: {
-        [varName]: arg.join(" ")
-      }
-    });
-
-    repondre("That Heroku variable is changing, The bot is restarting....");
-  });
-}
-
-changevars("setprefix", "PREFIXES");
-changevars("menulinks", "BOT_MENU_LINKS"
