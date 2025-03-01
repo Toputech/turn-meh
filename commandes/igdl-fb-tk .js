@@ -29,7 +29,6 @@ zokou({nomCom : "igdl" , categorie : "Download"},async (dest , zk , commandeOpti
 
 zokou({
   nomCom: "fbdl",
-  alliases: "facebook"
   categorie: "Download",
   reaction: "📽️"
 },
