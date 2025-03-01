@@ -1,607 +1,553 @@
-const { zokou } = require('../framework/zokou');
-
-const isIdeaCommandEnabled = true; // Variable pour activer ou désactiver la commande "idea"
-
+const cheerio = require('cheerio');
 const { zokou } = require("../framework/zokou");
-const conf = require(__dirname + "/../set");
-const axios = require('axios');
+const JavaScriptObfuscator = require("javascript-obfuscator");
+const { c, cpp, node, python, java } = require('compile-run');
+const { dBinary, eBinary } = require("../framework/binary");
+const { default: axios } = require("axios");
+const { writeFile } = require("fs/promises");
+const { mediafireDl } = require("../framework/dl/Function");
 
 
-
-
+ // command for run cc++
 zokou({
-  nomCom: "timezone",
-  aliases: ["timee", "datee"],
-  desc: "Check the current local time and date for a specified timezone.",
-  categorie: "new",
-  reaction: '🕰️',
-}, async (dest, zk, context) => {
-  const { repondre, arg } = context;
-  const timezone = arg[0];
-
-  if (!timezone) {
-    return repondre("❌ Please provide a timezone code. Example: .timezone TZ");
-  }
-
+  'nomCom': "run-c++",
+  'aliases': ["c++", "runc++"],
+  'categorie': "script"
+}, async (message, args, context) => {
+  const {
+    ms: messageSentTime,
+    arg: commandArguments,
+    repondre: reply,
+    auteurMessage: messageAuthor,
+    nomAuteurMessage: authorName,
+    msgRepondu: repliedMessage,
+    auteurMsgRepondu: repliedMessageAuthor
+  } = context;
   try {
-    // Get current date and time
-    const now = new Date();
-    
-    // Get local time and date in the specified timezone
-    const options = { 
-      hour: "2-digit", 
-      minute: "2-digit", 
-      second: "2-digit", 
-      hour12: true, 
-      timeZone: timezone 
-    };
-
-    const timeOptions = { 
-      ...options, 
-      weekday: "long", 
-      year: "numeric", 
-      month: "long", 
-      day: "numeric" 
-    };
-
-    const localTime = now.toLocaleTimeString("en-US", options);
-    const localDate = now.toLocaleDateString("en-US", timeOptions);
-
-    // Send the local time and date as reply
-    repondre(`🕰️ *Current Local Time:* ${localTime}\n📅 *Current Date:* ${localDate}`);
-  } catch (e) {
-    console.error("Error in .timezone command:", e);
-    repondre("❌ An error occurred. Please try again later.");
-  }
-});
-
-zokou({
-  nomCom: "color",
-  aliases: ["rcolor", "colorcode"],
-  desc: "Generate a random color with name and code.",
-  categorie: "script",
-  reaction: '🤦',
-}, async (dest, zk, context) => {
-  const { repondre, arg } = context;
-  
-  try {
-    const colorNames = [
-      "Red", "Green", "Blue", "Yellow", "Orange", "Purple", "Pink", "Brown", "Black", "White", 
-      "Gray", "Cyan", "Magenta", "Violet", "Indigo", "Teal", "Lavender", "Turquoise"
-    ];
-    
-    const randomColorHex = "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
-    const randomColorName = colorNames[Math.floor(Math.random() * colorNames.length)];
-
-    repondre(`🎨 *Random Color:* \nName: ${randomColorName}\nCode: ${randomColorHex}`);
-  } catch (e) {
-    console.error("Error in .color command:", e);
-    repondre("❌ An error occurred while generating the random color.");
-  }
-});
-
-
-zokou({
-  nomCom: "binary",
-  aliases: ["binarydgt", "binarycode"],
-  desc: "Convert text into binary format",
-  categorie: "script",
-  reaction: '🤦',
-}, async (dest, zk, context) => {
-  const { repondre, arg } = context;
-  const text = arg.join(" ");
-  
-  if (!text) {
-    return repondre('Please provide a text to convert to binary.');
-  }
-
-  try {
-    const binaryText = text.split('').map(char => {
-      return `00000000${char.charCodeAt(0).toString(2)}`.slice(-8);
-    }).join(' ');
-
-    repondre(`🔑 *Binary Representation:* \n${binaryText}`);
-  } catch (e) {
-    console.error("Error in .binary command:", e);
-    repondre("❌ An error occurred while converting to binary.");
-  }
-});
-
-zokou({
-  nomCom: "dbinary",
-  aliases: ["binarydecode", "decodebinary"],
-  desc: "Decode binary string into text.",
-  categorie: "script",
-  reaction: '🔓',
-}, async (dest, zk, context) => {
-  const { repondre, arg } = context;
-  const text = arg.join(" ");
-  
-  if (!text) {
-    return repondre("❌ Please provide the binary string to decode.");
-  }
-
-  try {
-    const binaryString = text;
-    const textDecoded = binaryString.split(' ').map(bin => {
-      return String.fromCharCode(parseInt(bin, 2));
-    }).join('');
-
-    repondre(`🔓 *Decoded Text:* \n${textDecoded}`);
-  } catch (e) {
-    console.error("Error in .dbinary command:", e);
-    repondre("❌ An error occurred while decoding the binary string.");
-  }
-});
-
-zokou({
-  nomCom: "base64",
-  aliases: ["base64encode", "encodebase64"],
-  desc: "Encode text into Base64 format.",
-  categorie: "script",
-  reaction: '🔒',
-}, async (dest, zk, context) => {
-  const { repondre, arg } = context;
-  const text = arg.join(" ");
-
-  if (!text) {
-    return repondre("❌ Please provide the text to encode into Base64.");
-  }
-
-  try {
-    // Encode the text into Base64
-    const encodedText = Buffer.from(text).toString('base64');
-    
-    // Send the encoded Base64 text
-    repondre(`🔑 *Encoded Base64 Text:* \n${encodedText}`);
-  } catch (e) {
-    console.error("Error in .base64 command:", e);
-    repondre("❌ An error occurred while encoding the text into Base64.");
-  }
-});
-
-zokou({
-  nomCom: "unbase64",
-  aliases: ["base64decode", "decodebase64"],
-  desc: "Decode Base64 encoded text.",
-  categorie: "script",
-  reaction: '🔓',
-}, async (dest, zk, context) => {
-  const { repondre, arg } = context;
-  const text = arg.join(" ");
-
-  if (!text) {
-    return repondre("❌ Please provide the Base64 encoded text to decode.");
-  }
-
-  try {
-    // Decode the Base64 text
-    const decodedText = Buffer.from(text, 'base64').toString('utf-8');
-    
-    // Send the decoded text
-    repondre(`🔓 *Decoded Text:* \n${decodedText}`);
-  } catch (e) {
-    console.error("Error in .unbase64 command:", e);
-    repondre("❌ An error occurred while decoding the Base64 text.");
-  }
-});
-
-zokou({
-  nomCom: "urlencode",
-  aliases: ["urlencode", "encodeurl"],
-  desc: "Encode text into URL encoding.",
-  categorie: "script",
-  reaction: '🔒',
-}, async (dest, zk, context) => {
-  const { repondre, arg } = context;
-  const text = arg.join(" ");
-
-  if (!text) {
-    return repondre("❌ Please provide the text to encode into URL encoding.");
-  }
-
-  try {
-    // Encode the text into URL encoding
-    const encodedText = encodeURIComponent(text);
-
-    // Send the encoded URL text
-    repondre(`🔑 *Encoded URL Text:* \n${encodedText}`);
-  } catch (e) {
-    console.error("Error in .urlencode command:", e);
-    repondre("❌ An error occurred while encoding the text.");
-  }
-});
-
-zokou({
-  nomCom: "urldecode",
-  aliases: ["decodeurl", "urldecode"],
-  desc: "Decode URL encoded text.",
-  categorie: "coding",
-  reaction: '🔓',
-}, async (dest, zk, context) => {
-  const { repondre, arg } = context;
-  const text = arg.join(" ");
-
-  if (!text) {
-    return repondre("❌ Please provide the URL encoded text to decode.");
-  }
-
-  try {
-    const decodedText = decodeURIComponent(text);
-
-    repondre(`🔓 *Decoded Text:* \n${decodedText}`);
-  } catch (e) {
-    console.error("Error in .urldecode command:", e);
-    repondre("❌ An error occurred while decoding the URL encoded text.");
-  }
-});
-
-zokou({
-  nomCom: "dice",
-  aliases: ["rolldice", "diceroll", "roll"],
-  desc: "Roll a dice (1-6).",
-  categorie: "fun",
-  reaction: '🎲',
-}, async (dest, zk, context) => {
-  const { repondre } = context;
-  
-  try {
-    // Roll a dice (generate a random number between 1 and 6)
-    const result = Math.floor(Math.random() * 6) + 1;
-    
-    // Send the result
-    repondre(`🎲 You rolled: *${result}*`);
-  } catch (e) {
-    console.error("Error in .roll command:", e);
-    repondre("❌ An error occurred while rolling the dice.");
-  }
-});
-
-zokou({
-  nomCom: "coinflip",
-  aliases: ["flipcoin", "coinflip"],
-  desc: "Flip a coin and get Heads or Tails.",
-  categorie: "fun",
-  reaction: '🪙',
-}, async (dest, zk, context) => {
-  const { repondre } = context;
-  
-  try {
-    // Simulate coin flip (randomly choose Heads or Tails)
-    const result = Math.random() < 0.5 ? "Heads" : "Tails";
-    
-    // Send the result
-    repondre(`🪙 Coin Flip Result: *${result}*`);
-  } catch (e) {
-    console.error("Error in .coinflip command:", e);
-    repondre("❌ An error occurred while flipping the coin.");
-  }
-});
-
-zokou({
-  nomCom: "flip",
-  aliases: ["fliptext", "textflip"],
-  desc: "Flip the text you provide.",
-  categorie: "fun",
-  reaction: '🔄',
-}, async (dest, zk, context) => {
-  const { repondre, arg } = context;
-  const text = arg.join(" ");
-
-  if (!text) {
-    return repondre("❌ Please provide the text to flip.");
-  }
-
-  try {
-    // Flip the text
-    const flippedText = text.split('').reverse().join('');
-    
-    // Send the flipped text
-    repondre(`🔄 Flipped Text: *${flippedText}*`);
-  } catch (e) {
-    console.error("Error in .flip command:", e);
-    repondre("❌ An error occurred while flipping the text.");
-  }
-});
-
-zokou({
-  nomCom: "pick",
-  aliases: ["choose", "select"],
-  desc: "Pick between two choices.",
-  categorie: "fun",
-  reaction: '🚚',
-}, async (dest, zk, context) => {
-  const { repondre, arg } = context;
-  const text = arg.join(" ");
-
-  // Ensure two options are provided
-  if (!text.includes(',')) {
-    return repondre("❌ Please provide two choices to pick from. Example: `.pick Ice Cream, Pizza`");
-  }
-
-  try {
-    // Pick a random option
-    const options = text.split(',').map(option => option.trim());
-    const choice = options[Math.floor(Math.random() * options.length)];
-
-    // Send the result
-    repondre(`🎉 Bot picks: *${choice}*`);
-  } catch (e) {
-    console.error("Error in .pick command:", e);
-    repondre("❌ An error occurred while processing your request.");
-  }
-});
-
-zokou({
-  nomCom: "timenow",
-  aliases: ["currenttime", "time"],
-  desc: "Check the current local time.",
-  categorie: "new",
-  reaction: '🕰️',
-}, async (dest, zk, context) => {
-  const { repondre } = context;
-  
-  try {
-    // Get current date and time
-    const now = new Date();
-    
-    // Get local time in the configured timezone
-    const localTime = now.toLocaleTimeString("en-US", { 
-      hour: "2-digit", 
-      minute: "2-digit", 
-      second: "2-digit", 
-      hour12: true,
-      timeZone: conf.TIMEZONE, // Using the configured timezone from set.js
-    });
-    
-    // Send the local time as reply
-    repondre(`🕒 Current Local Time: ${localTime}`);
-  } catch (e) {
-    console.error("Error in .timenow command:", e);
-    repondre("❌ An error occurred. Please try again later.");
-  }
-});
-
-
-zokou({
-  nomCom: "date",
-  aliases: ["currentdate", "todaydate"],
-  desc: "Check the current date.",
-  categorie: "new",
-  reaction: '📆',
-}, async (dest, zk, context) => {
-  const { repondre } = context;
-
-  try {
-    // Get current date
-    const now = new Date();
-    
-    // Get the formatted date (e.g., "Monday, January 15, 2025")
-    const currentDate = now.toLocaleDateString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric"
-    });
-    
-    // Send the current date as reply
-    repondre(`📅 Current Date: ${currentDate}`);
-  } catch (e) {
-    console.error("Error in .date command:", e);
-    repondre("❌ An error occurred. Please try again later.");
-  }
-});
-
-
-zokou({
-  nomCom: "calculate2",
-  aliases: ["calcu", "maths", "mathema"],
-  desc: "Evaluate a mathematical expression.",
-  categorie: "new",
-  reaction: '🧮',
-}, async (dest, zk, context) => {
-  const { repondre, arg } = context;
-  const text = arg.join(" ");
-
-  // Ensure arguments are provided
-  if (!text) {
-    return repondre("🧮 Use this command like:\n *Example:* .calculate 5+3*2");
-  }
-
-  // Validate the input to prevent unsafe operations
-  if (!/^[0-9+\-*/().\s]+$/.test(text)) {
-    return repondre("❎ Invalid expression. Only numbers and +, -, *, /, ( ) are allowed.");
-  }
-
-  try {
-    // Evaluate the mathematical expression
-    let result = eval(text);
-
-    // Reply with the result
-    repondre(`✅ Result of "${text}" is: ${result}`);
-  } catch (e) {
-    console.error("Error in .calculate command:", e);
-    repondre("❎ Error in calculation. Please check your expression.");
-  }
-});
-
-zokou({
-  nomCom: "emojify",
-  aliases: ["emoji", "txtemoji"],
-  desc: "Convert text into emoji form.",
-  categorie: "fun",
-  reaction: '🙂',
-}, async (dest, zk, context) => {
-  const { repondre, arg } = context;
-  const text = arg.join(" ");
-
-  // If no valid text is provided
-  if (!text) {
-    return repondre("❌ Please provide some text to convert into emojis!");
-  }
-
-  try {
-    // Map text to corresponding emoji characters
-    const emojiMapping = {
-      "a": "🅰️",
-      "b": "🅱️",
-      "c": "🇨️",
-      "d": "🇩️",
-      "e": "🇪️",
-      "f": "🇫️",
-      "g": "🇬️",
-      "h": "🇭️",
-      "i": "🇮️",
-      "j": "🇯️",
-      "k": "🇰️",
-      "l": "🇱️",
-      "m": "🇲️",
-      "n": "🇳️",
-      "o": "🅾️",
-      "p": "🇵️",
-      "q": "🇶️",
-      "r": "🇷️",
-      "s": "🇸️",
-      "t": "🇹️",
-      "u": "🇺️",
-      "v": "🇻️",
-      "w": "🇼️",
-      "x": "🇽️",
-      "y": "🇾️",
-      "z": "🇿️",
-      "0": "0️⃣",
-      "1": "1️⃣",
-      "2": "2️⃣",
-      "3": "3️⃣",
-      "4": "4️⃣",
-      "5": "5️⃣",
-      "6": "6️⃣",
-      "7": "7️⃣",
-      "8": "8️⃣",
-      "9": "9️⃣",
-      " ": "␣" // for space
-    };
-
-    // Convert the input text into emoji form
-    const emojiText = text.toLowerCase().split("").map(char => emojiMapping[char] || char).join("");
-
-    await zk.sendMessage(dest, {
-      text: emojiText,
-    }, { quoted: context.ms });
-
-  } catch (e) {
-    console.error("Error in .emoji command:", e);
-    repondre(`❌ Error: ${e.message}`);
-  }
-});
-
-
-
-zokou({
-  nomCom: "news2",
-  aliases: ["latestnews", "newsheadlines"],
-  desc: "Get the latest news headlines.",
-  categorie: "AI",
-  reaction: '🗞️',
-}, async (dest, zk, context) => {
-  const { repondre, from } = context;
-
-  try {
-    const apiKey = "0f2c43ab11324578a7b1709651736382";
-    const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`);
-    const articles = response.data.articles;
-
-    if (!articles.length) {
-      return repondre("No news articles found.");
+    // Check if the user provided a valid code
+    if (!commandArguments[0]) {
+      return reply("Quote a valid and short C++ code to compile.");
     }
 
-    // Send each article as a separate message with image and title
-    for (let i = 0; i < Math.min(articles.length, 5); i++) {
-      const article = articles[i];
-      let message = `
-📰 *${article.title}*
-📝 _${article.description}_
-🔗 _${article.url}_
+    // Join the command arguments into a single code string
+    let code = commandArguments.join(" ");
 
-> © Powered by ${conf.BOT}
-      `;
+    // Compile and run the C++ code
+    let result = await cpp.runSource(code);
 
-      console.log('Article URL:', article.urlToImage); // Log image URL for debugging
-
-      if (article.urlToImage) {
-        // Send image with caption
-        await zk.sendMessage(dest, { image: { url: article.urlToImage }, caption: message });
-      } else {
-        // Send text message if no image is available
-        await zk.sendMessage(dest, { text: message });
+    // Handle result
+    if (result.error) {
+      reply(`Error: ${result.error}`);
+    } else {
+      reply(`Output:\n${result.stdout}`);
+      if (result.stderr) {
+        reply(`Error Output:\n${result.stderr}`);
       }
     }
-  } catch (e) {
-    console.error("Error fetching news:", e);
-    repondre("Could not fetch news. Please try again later.");
+  } catch (err) {
+    // Handle unexpected errors
+    console.error(err);
+    reply("An error occurred while trying to run the code.");
   }
 });
-zokou({ nomCom: "lydea", categorie: "IA", reaction:"❣️", active: isIdeaCommandEnabled }, async (dest, zk, commandeOptions) => {
-  const { ms, arg, repondre } = commandeOptions;
-  const message = arg.join(' ');
 
-  // Greetings
-  const greetings = ["Hello!", "Hi there!", "Greetings!", "Hey!", "Nice to see you!"];
-  const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+ // command for run c
+zokou({
+  'nomCom': "run-c",
+  'aliases': ["runcc", "runc"],
+  'categorie': "script"
+}, async (message, args, context) => {
+  const {
+    ms: messageSentTime,
+    arg: commandArguments,
+    repondre: reply,
+    auteurMessage: messageAuthor,
+    nomAuteurMessage: authorName,
+    msgRepondu: repliedMessage,
+    auteurMsgRepondu: repliedMessageAuthor
+  } = context;
+  try {
+    // Check if the user provided a valid code
+    if (!commandArguments[0]) {
+      return reply("Quote a valid and short C code to compile.");
+    }
 
-  // Introduction
-  const introduction = [
-    "I'm Assistant, a helpful bot. I'm here to assist you with any questions or tasks you have.",
-    "Welcome! I'm Assistant, your friendly bot here to help you with anything you need.",
-    "Hi! I'm Assistant, your personal AI assistant. How can I assist you today?",
-    "Greetings! I'm Assistant, ready to assist you with your queries and tasks."
-  ];
-  const randomIntroduction = introduction[Math.floor(Math.random() * introduction.length)];
+    // Join the command arguments into a single code string
+    let code = commandArguments.join(" ");
 
-  // Project Suggestions
-  const projet = [
-    "You should start a new project related to your passion!",
-    "How about working on a creative project that excites you?",
-    "Consider starting a project that aligns with your interests and goals.",
-    "Why not embark on a project that challenges and inspires you?"
-  ];
-  const randomProjet = projet[Math.floor(Math.random() * projet.length)];
+    // Compile and run the C++ code
+    let result = await c.runSource(code);
 
-  // Suggestions for "presentement"
-  const presentement = [
-    "Currently, you could learn a new skill or hobby.",
-    "Right now, you might explore new books or movies.",
-    "At the moment, you could try practicing mindfulness or meditation.",
-    "Presently, you could focus on improving your physical fitness."
-  ];
-  const randomPresentement = presentement[Math.floor(Math.random() * presentement.length)];
+    // Handle result
+    if (result.error) {
+      reply(`Error: ${result.error}`);
+    } else {
+      reply(`Output:\n${result.stdout}`);
+      if (result.stderr) {
+        reply(`Error Output:\n${result.stderr}`);
+      }
+    }
+  } catch (err) {
+    // Handle unexpected errors
+    console.error(err);
+    reply("An error occurred while trying to run the code.");
+  }
+});
 
-  // Custom response for the "idea" command when it is enabled
-  const customResponse = `This is a custom response for the 'idea' command when it is enabled.
-Réponse générée le ${new Date().toLocaleString()}.`;
+ // command for run java
+zokou({
+  'nomCom': "run-java",
+  'aliases': ["java", "runjava"],
+  'categorie': "script"
+}, async (message, args, context) => {
+  const {
+    ms: messageSentTime,
+    arg: commandArguments,
+    repondre: reply,
+    auteurMessage: messageAuthor,
+    nomAuteurMessage: authorName,
+    msgRepondu: repliedMessage,
+    auteurMsgRepondu: repliedMessageAuthor
+  } = context;
+  try {
+    // Check if the user provided a valid code
+    if (!commandArguments[0]) {
+      return reply("Quote a valid and short java code to compile.");
+    }
 
-  // Check if the "idea" command is enabled
-  if (isIdeaCommandEnabled) {
-    // Ajouter un délai de 60 secondes pour la réponse
-    setTimeout(() => {
-      repondre(customResponse);
-    }, 60000); // 60 secondes (60000 millisecondes)
+    // Join the command arguments into a single code string
+    let code = commandArguments.join(" ");
+
+    // Compile and run the C++ code
+    let result = await java.runSource(code);
+
+    // Handle result
+    if (result.error) {
+      reply(`Error: ${result.error}`);
+    } else {
+      reply(`Output:\n${result.stdout}`);
+      if (result.stderr) {
+        reply(`Error Output:\n${result.stderr}`);
+      }
+    }
+  } catch (err) {
+    // Handle unexpected errors
+    console.error(err);
+    reply("An error occurred while trying to run the code.");
+  }
+});
+
+ // command for run js
+zokou({
+  'nomCom': "run-js",
+  'aliases': ["node", "javascript"],
+  'categorie': "script"
+}, async (message, args, context) => {
+  const {
+    ms: messageSentTime,
+    arg: commandArguments,
+    repondre: reply,
+    auteurMessage: messageAuthor,
+    nomAuteurMessage: authorName,
+    msgRepondu: repliedMessage,
+    auteurMsgRepondu: repliedMessageAuthor
+  } = context;
+  try {
+    // Check if the user provided a valid code
+    if (!commandArguments[0]) {
+      return reply("Quote a valid and short javascript code to compile.");
+    }
+
+    // Join the command arguments into a single code string
+    let code = commandArguments.join(" ");
+
+    // Compile and run the C++ code
+    let result = await node.runSource(code);
+
+    // Handle result
+    if (result.error) {
+      reply(`Error: ${result.error}`);
+    } else {
+      reply(`Output:\n${result.stdout}`);
+      if (result.stderr) {
+        reply(`Error Output:\n${result.stderr}`);
+      }
+    }
+  } catch (err) {
+    // Handle unexpected errors
+    console.error(err);
+    reply("An error occurred while trying to run the code.");
+  }
+});
+
+ // command for run python
+zokou({
+  'nomCom': "run-py",
+  'aliases': ["python", "runpy"],
+  'categorie': "script"
+}, async (message, args, context) => {
+  const {
+    ms: messageSentTime,
+    arg: commandArguments,
+    repondre: reply,
+    auteurMessage: messageAuthor,
+    nomAuteurMessage: authorName,
+    msgRepondu: repliedMessage,
+    auteurMsgRepondu: repliedMessageAuthor
+  } = context;
+  try {
+    // Check if the user provided a valid code
+    if (!commandArguments[0]) {
+      return reply("Quote a valid and short python code to compile.");
+    }
+
+    // Join the command arguments into a single code string
+    let code = commandArguments.join(" ");
+
+    // Compile and run the C++ code
+    let result = await python.runSource(code);
+
+    // Handle result
+    if (result.error) {
+      reply(`Error: ${result.error}`);
+    } else {
+      reply(`Output:\n${result.stdout}`);
+      if (result.stderr) {
+        reply(`Error Output:\n${result.stderr}`);
+      }
+    }
+  } catch (err) {
+    // Handle unexpected errors
+    console.error(err);
+    reply("An error occurred while trying to run the code.");
+  }
+});
+
+ // command for debinary
+zokou({
+  'nomCom': "debinary",
+  // Command name
+  'aliases': ["decode", "decodebinary"],
+  // Aliases for the command
+  'categorie': "script" // Category of the command
+}, async (zk, args, context) => {
+  const {
+    ms,
+    repondre
+  } = context;
+
+  // Get the text (argument) provided after the command
+  const text = args.join(" ").trim();
+
+  // If no text is provided after the command, send an error message
+  if (!text) {
+    return repondre('Please provide a text to decode.');
+  }
+  // Extract the basePath from the input text (if needed)
+  const basePath = text.split(/^[\\/!#.]/)[0] || '/';
+
+  // Check if the text starts with a valid condition
+  const isPathStartsWithCondition = text.slice(basePath.length).trim().split(' ')[0]?.toLowerCase();
+  const possibleKeys = ['Please pro', 'decode text to video'];
+
+  // If the decoded key matches any of the valid keys, proceed with decoding
+  if (possibleKeys.includes(isPathStartsWithCondition)) {
+    // Extract the key for decoding the binary data
+    const decodedKey = text.slice(basePath.length + isPathStartsWithCondition.length).trim();
+    if (!decodedKey) {
+      return repondre('Invalid decoding request.');
+    }
+    try {
+      // Decode the binary data asynchronously using dBinary
+      const decodedData = await dBinary(decodedKey);
+      repondre(decodedData);
+    } catch (error) {
+      repondre('An error occurred while decoding the data.');
+    }
   } else {
-    // Envoyer une réponse indiquant que la commande est désactivée
-    repondre("Désolé, la commande 'idea' est actuellement désactivée.");
+    repondre('Invalid decoding request.');
+  }
+});
+
+ // command for ebinary
+zokou({
+  'nomCom': "ebinary",
+  // Command name
+  'aliases': ["encode", "encodebinary"],
+  // Aliases for the command
+  'categorie': "script" // Category of the command
+}, async (zk, args, context) => {
+  const {
+    ms,
+    repondre
+  } = context;
+
+  // Get the text (argument) provided after the command
+  const text = args.join(" ").trim(); // Use `args` instead of `ms.body`
+
+  // If no text is provided after the command, send an error message
+  if (!text) {
+    repondre('Please provide a text to encode.');
     return;
   }
 
-  // Vérifier le contenu du message et générer une réponse en conséquence
-  if (message.includes('project')) {
-    repondre(` ${randomGreeting} ${randomProjet} ${randomIntroduction}`);
-  } else if (message.includes('book')) {
-    repondre(` ${randomGreeting} How about writing a book on a topic you're knowledgeable about? ${randomIntroduction}`);
-  } else if (message.includes('trip') || message.includes('travel')) {
-    repondre(` ${randomGreeting} Plan a trip to a destination you've always wanted to visit! ${randomIntroduction}`);
-  } else if (message.includes('presentement')) {
-    repondre(` ${randomGreeting} ${randomPresentement} ${randomIntroduction}`);
-  } else {
-    repondre(` ${randomGreeting} I have an idea for you, but I need more information. Could you provide more details? ${randomIntroduction}`);
+  // Attempt to encode the text in binary
+  try {
+    let encodedResult = await eBinary(text); // Encode the text to binary
+
+    // Send the encoded result back to the user
+    repondre(encodedResult);
+  } catch (error) {
+    // If an error occurs during encoding, send an error message
+    repondre('Error encoding the text to binary.');
+  }
+});
+
+ // command for obfuscate 
+zokou({
+  'nomCom': "obfuscate",
+  'aliases': ["obfuscate", "obfu"],
+  'categorie': "script"
+}, async (message, args, context) => {
+  const {
+    ms: messageSentTime,
+    arg: commandArguments,
+    repondre: reply,
+    auteurMessage: messageAuthor,
+    nomAuteurMessage: authorName,
+    msgRepondu: repliedMessage,
+    auteurMsgRepondu: repliedMessageAuthor
+  } = context;
+  try {
+    // Join the command arguments into a single string
+    let codeToObfuscate = commandArguments.join(" ");
+
+    // Check if there's no code provided to obfuscate
+    if (!commandArguments[0]) {
+      reply("After the command, provide a valid JavaScript code for encryption.");
+      return;
+    }
+
+    // Obfuscate the JavaScript code with specific options
+    const obfuscatedCode = JavaScriptObfuscator.obfuscate(codeToObfuscate, {
+      'compact': true,
+      'controlFlowFlattening': true,
+      'controlFlowFlatteningThreshold': 0.1,
+      'numbersToExpressions': true,
+      'simplify': true,
+      'stringArrayShuffle': true,
+      'splitStrings': true,
+      'stringArrayThreshold': 0.1
+    });
+
+    // Send back the obfuscated code
+    await reply(obfuscatedCode.getObfuscatedCode());
+  } catch (error) {
+    // In case of any errors, notify the user
+    reply("Something went wrong. Please check if your code is logical and has the correct syntax.");
+  }
+});
+
+ // command for run-carbon
+zokou({
+  'nomCom': "carbon",
+  'aliases': ["C", "run-carbon"],
+  'categorie': "script"
+}, async (zk, args, context) => {
+  const { ms, repondre } = context;
+
+  try {
+    // Ensure that the user has provided code to compile
+    if (!args || args.length === 0) {
+      return repondre("Please provide a valid and short Carbon code to compile.");
+    }
+
+    // Join the arguments into a single code string
+    let code = args.join(" ");
+
+    // Send the request to the Carbonara API to generate the image
+    try {
+      const response = await axios.post('https://carbonara.solopov.dev/api/cook', {
+        code: code,
+        backgroundColor: '#1F816D', // You can change the background color here
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      // Check if the API response is valid
+      if (response.status !== 200) {
+        return repondre('API failed to fetch a valid response.');
+      }
+
+      // Get the image buffer from the response (response.data is base64 encoded)
+      const imageBuffer = Buffer.from(response.data, 'base64');
+
+      // Send the generated image as a message
+      const caption = "> Thank for choosing ᴅᴜʟʟᴀʜ-xᴍᴅ";
+      await zk.sendMessage(ms, { image: imageBuffer, caption: caption }, { quoted: ms });
+    } catch (error) {
+      return repondre("An error occurred while processing your request.\n" + error.message);
+    }
+  } catch (error) {
+    return repondre('An unexpected error occurred: ' + error.message);
+  }
+});
+
+
+ // command for scrap
+zokou({
+  nomCom: "scrap",
+  aliases: ["get", "find"],
+  categorie: "script",
+  reaction: '🛄',
+}, async (sender, zk, context) => {
+  const { repondre: sendResponse, arg: args } = context;
+  const urlInput = args.join(" ");
+
+  // Check if URL starts with http:// or https://
+  if (!/^https?:\/\//.test(urlInput)) {
+    return sendResponse("Start the *URL* with http:// or https://");
+  }
+
+  try {
+    const url = new URL(urlInput);
+    const fetchUrl = `${url.origin}${url.pathname}?${url.searchParams.toString()}`;
+    
+    // Fetch the URL content
+    const response = await fetch(fetchUrl);
+
+    // Check if the response is okay
+    if (!response.ok) {
+      return sendResponse(`Failed to fetch the URL. Status: ${response.status} ${response.statusText}`);
+    }
+
+    const contentLength = response.headers.get('content-length');
+    if (contentLength && parseInt(contentLength) > 104857600) {
+      return sendResponse(`Content-Length exceeds the limit: ${contentLength}`);
+    }
+
+    const contentType = response.headers.get('content-type');
+    console.log('Content-Type:', contentType);
+
+    // Fetch the response as a buffer
+    const buffer = Buffer.from(await response.arrayBuffer());
+
+    // Handle different content types
+    if (/image\/.*/.test(contentType)) {
+      // Send image message
+      await zk.sendMessage(sender, {
+        image: { url: fetchUrl },
+        caption: "> Thank you for choosing ᴅᴜʟʟᴀʜ-xᴍᴅ"
+      }, { quoted: context.ms });
+    } else if (/video\/.*/.test(contentType)) {
+      // Send video message
+      await zk.sendMessage(sender, {
+        video: { url: fetchUrl },
+        caption: "> *Thank for choosing ᴅᴜʟʟᴀʜ-xᴍᴅ"
+      }, { quoted: context.ms });
+    } else if (/text|json/.test(contentType)) {
+      try {
+        // Try parsing the content as JSON
+        const json = JSON.parse(buffer);
+        console.log("Parsed JSON:", json);
+        sendResponse(JSON.stringify(json, null, 2).slice(0, 10000)); // Limit response size to 10000 characters
+      } catch {
+        // If parsing fails, send the raw text response
+        sendResponse(buffer.toString().slice(0, 10000)); // Limit response size to 10000 characters
+      }
+    } else {
+      // Send other types of documents
+      await zk.sendMessage(sender, {
+        document: { url: fetchUrl },
+        caption: "> *Thank you for choosing ᴅᴜʟʟᴀʜ-xᴍᴅ"
+      }, { quoted: context.ms });
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    sendResponse(`Error fetching data: ${error.message}`);
+  }
+});
+
+ // command for web scraper
+zokou({
+  nomCom: "web",
+  aliases: ["inspectweb", "webinspect", "webscrap"],
+  categorie: "script",
+  reaction: "🌐"
+}, async (dest, zk, commandeOptions) => {
+  const { repondre, arg } = commandeOptions;
+
+  if (!arg[0]) {
+    return repondre('Provide a valid web link to fetch! The bot will crawl the website and fetch its HTML, CSS, JavaScript, and any media embedded in it!');
+  }
+
+  if (!arg[0].includes('https://')) {
+    return repondre("That is not a valid link.");
+  }
+
+  try {
+    // Use axios to fetch the webpage
+    const response = await axios.get(arg[0]);
+    const html = response.data;
+    const $ = cheerio.load(html);
+
+    const mediaFiles = [];
+    $('img[src], video[src], audio[src]').each((i, element) => {
+      let src = $(element).attr('src');
+      if (src) {
+        mediaFiles.push(src);
+      }
+    });
+
+    const cssFiles = [];
+    $('link[rel="stylesheet"]').each((i, element) => {
+      let href = $(element).attr('href');
+      if (href) {
+        cssFiles.push(href);
+      }
+    });
+
+    const jsFiles = [];
+    $('script[src]').each((i, element) => {
+      let src = $(element).attr('src');
+      if (src) {
+        jsFiles.push(src);
+      }
+    });
+
+    await repondre(`**Full HTML Content**:\n\n${html}`);
+
+    if (cssFiles.length > 0) {
+      for (const cssFile of cssFiles) {
+        const cssResponse = await axios.get(new URL(cssFile, arg[0]));
+        const cssContent = cssResponse.data;
+        await repondre(`**CSS File Content**:\n\n${cssContent}`);
+      }
+    } else {
+      await repondre("No external CSS files found.");
+    }
+
+    if (jsFiles.length > 0) {
+      for (const jsFile of jsFiles) {
+        const jsResponse = await axios.get(new URL(jsFile, arg[0]));
+        const jsContent = jsResponse.data;
+        await repondre(`**JavaScript File Content**:\n\n${jsContent}`);
+      }
+    } else {
+      await repondre("No external JavaScript files found.");
+    }
+
+    if (mediaFiles.length > 0) {
+      await repondre(`**Media Files Found**:\n${mediaFiles.join('\n')}`);
+    } else {
+      await repondre("No media files (images, videos, audios) found.");
+    }
+
+  } catch (error) {
+    console.error(error);
+    // Return error in response
+    return repondre(`An error occurred while fetching the website content: ${error.message}`);
   }
 });
