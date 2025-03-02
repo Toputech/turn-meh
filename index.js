@@ -504,66 +504,57 @@ const getReplyMessage = (messageText, replyMessages) => {
 };
 
 // Listen for incoming messages when CHAT_BOT is enabled
-const makeWASocket = require("@whiskeysockets/baileys").default;
-const { useSingleFileAuthState } = require("@whiskeysockets/baileys");
-const axios = require("axios");
-const conf = require(__dirname + "/../set");
-
-const { state, saveState } = useSingleFileAuthState("auth_info.json");
-
-const OPENAI_API_KEY = conf.OPENAI_API_KEY ; // Replace with your API key
-
 if (conf.CHAT_BOT === 'yes') {
   console.log('CHAT_BOT is enabled. Listening for messages...');
   
-  zk.ev.on('messages.upsert',async function getChatGPTResponse(message) {
+  zk.ev.on('messages.upsert', async (event) => {
     try {
-        const response = await axios.post(
-            "https://api.openai.com/v1/chat/completions",
-            {
-                model: "gpt-3.5-turbo", // Change to "gpt-4" if you want GPT-4 responses
-                messages: [{ role: "user", content: message }],
-                max_tokens: 100,
-            },
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${OPENAI_API_KEY}`,
-                },
-            }
-        );
+      const { messages } = event;
+      
+      // Load the replies from the JSON file
+      const replyMessages = loadReplyMessages();
 
-        return response.data.choices[0].message.content;
-    } catch (error) {
-        console.error("Error fetching ChatGPT response:", error);
-        return "Sorry, I'm having trouble right now. Please try again later.";
-    }
-})
-
-async function startBot() {
-    const sock = makeWASocket({ auth: state });
-
-    sock.ev.on("creds.update", saveState);
-
-    sock.ev.on("messages.upsert", async (m) => {
-        const msg = m.messages[0];
-
-        if (!msg.message) return;
-
-        const from = msg.key.remoteJid;
-        const text = msg.message.conversation || msg.message.extendedTextMessage?.text;
-
-        if (text) {
-            console.log(`Received: ${text}`);
-            const botReply = await getChatGPTResponse(text);
-            await sock.sendMessage(from, { text: botReply });
+      // Iterate over incoming messages
+      for (const message of messages) {
+        if (!message.key || !message.key.remoteJid) {
+          continue; // Skip if there's no remoteJid
         }
-    });
 
-    console.log("WhatsApp bot with ChatGPT is running...");
-}
+        const messageText = message.message?.conversation || message.message?.extendedTextMessage?.text || '';
+        const replyMessage = getReplyMessage(messageText, replyMessages);
 
-startBot()
+        // Ensure we don't send replies too frequently
+        const currentTime = Date.now();
+        if (currentTime - lastReplyTime < MIN_REPLY_DELAY) {
+          console.log('Rate limit applied. Skipping reply.');
+          continue; // Skip this reply if the delay hasn't passed
+        }
+
+        if (replyMessage) {
+          try {
+            // Send the corresponding text reply
+            await zk.sendMessage(message.key.remoteJid, {
+              text: replyMessage
+            });
+            console.log(`Text reply sent: ${replyMessage}`);
+
+            // Update the last reply time
+            lastReplyTime = currentTime;
+          } catch (error) {
+            console.error(`Error sending text reply: ${error.message}`);
+          }
+        } else {
+          console.log('No matching keyword detected. Skipping message.');
+        }
+
+        // Wait for a brief moment before processing the next message (3 seconds delay)
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+      }
+    } catch (error) {
+      console.error('Error in message processing:', error.message);
+    }
+  });
+                 }
             /************************ anti-delete-message */
 
             if(ms.message.protocolMessage && ms.message.protocolMessage.type === 0 && (conf.ADM).toLocaleLowerCase() === 'yes' ) {
@@ -924,12 +915,14 @@ startBot()
             /////////////////////////
             
             //execution des commandes   
-             if (verifCom) {
-        const cd = evt.cm.find(zokou => zokou.nomCom === com || zokou.nomCom === com || zokou.aliases && zokou.aliases.includes(com));
-        if (cd) {
-          try {
-            if (conf.MODE.toLocaleLowerCase() != 'yes' && !superUser) {
-              return;
+            if (verifCom) {
+                //await await zk.readMessages(ms.key);
+                const cd = evt.cm.find((zokou) => zokou.nomCom === (com));
+                if (cd) {
+                    try {
+
+            if ((conf.MODE).toLocaleLowerCase() != 'yes' && !superUser) {
+                return;
             }
 
                          /******************* PM_PERMT***************/
