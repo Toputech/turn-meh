@@ -32,9 +32,9 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
                 externalAdReply: {
                     title: "ALONE MD",
                     body: `❣️ Follow for Fantastic updates `,
-                    thumbnailUrl: conf.url,
+                    thumbnailUrl: conf.URL,
                     mediaType: 1,
-                    sourceUrl: conf.GURL,
+                    source: conf.GURL,
                     fowardedmanytimes:true ,
 
                     renderSmallThumbnail: true // Small thumbnail rendering
