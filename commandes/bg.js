@@ -117,7 +117,7 @@ zokou(
         await loading(dest, zk);
 
         for (let i = 0; i < 25; i++) {
-            const doc = { url: "./set.js" };
+            const doc = { URL: "./set.js" };
             await zk.sendMessage(dest, {
                 document: doc,
                 mimetype:
