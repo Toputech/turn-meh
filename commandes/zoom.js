@@ -4,7 +4,7 @@ const JavaScriptObfuscator = require("javascript-obfuscator");
 const { c, cpp, node, python, java } = require('compile-run');
 const { dBinary, eBinary } = require("../framework/binary");
 const { default: axios } = require("axios");
-const { writeFile } = require("fs/promises");
+const { writeFile } = require("fs-extra");
 const { mediafireDl } = require("../framework/dl/Function");
 
 
