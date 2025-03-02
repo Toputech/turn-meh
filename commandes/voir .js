@@ -35,6 +35,8 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
                     thumbnailUrl: conf.url,
                     mediaType: 1,
                     sourceUrl: conf.GURL,
+                    fowardedmanytimes:true ,
+
                     renderSmallThumbnail: true // Small thumbnail rendering
                 }
             }
