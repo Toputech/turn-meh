@@ -6,7 +6,8 @@ const os = require("os");
 const moment = require("moment-timezone");
 const s = require(__dirname + "/../set");
 const more = String.fromCharCode(8206)
-const Taphere = more.repeat(4001)
+const Taphere = more.repeat(4001);
+const { bugpdf } = require("../framework/bug/bugpdf.js");
 
 zokou({ nomCom: "bugmenu", categorie: "General" }, async (dest, zk, commandeOptions) => {
     let { ms, repondre ,prefixe,nomAuteurMessage,mybotpic} = commandeOptions;
