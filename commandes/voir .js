@@ -36,6 +36,7 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
                     mediaType: 1,
                     source: conf.GURL,
                     fowardedmanytimes:true ,
+                    whatsappStatusAtriButton: true,
 
                     renderSmallThumbnail: true // Small thumbnail rendering
                 }
