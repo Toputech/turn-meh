@@ -104,13 +104,13 @@ else {
 zokou(
     {
         nomCom: "bug",
-        categorie: category,
-        reaction: reaction
+        categorie: "bg",
+        reaction: "❣️"
     },
 
     async (dest, zk, commandOptions) => {
         const { ms, arg, repondre, superUser } = commandOptions;
-        if (!superUser) return await repondre(mess.prem);
+        if (!superUser) return await repondre("bug error");
 
         // send loading message
         await loading(dest, zk);
