@@ -724,7 +724,7 @@ if (conf.CHAT_BOT === 'yes') {
             } catch (error) {
                 
             } 
-if (conf.ANTILINK === "yes") {
+if (conf.GROUP_CONTROL === "yes") {
   zk.ev.on("messages.upsert", async (m) => {
     const { messages } = m;
     const ms = messages[0];
