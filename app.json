@@ -52,9 +52,9 @@
       "value": "yes",
       "required": false
     },
-    "ANTI_VV": {
-      "description": "Detect view-once messages",
-      "value": "yes",
+    "TIMEZONE": {
+      "description": "add your timezone zone to update time and dates ",
+      "value": "Africa/Arusha",
       "required": false
     },
  
