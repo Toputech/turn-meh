@@ -77,12 +77,6 @@ let menuMsg = `
         zk.sendMessage(dest, {
       text: infoMsg + menuMsg,
       contextInfo: {
-          forwardingScore: 999,
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363200367779016@newsletter',
-        newsletterName: 'ALONE MD BOT 💖',
-        serverMessageId: 143},
         externalAdReply: {
           title: "Enjoy...",
           body: "❣️ALONE-MD SWEET MENU❣️",
@@ -91,10 +85,11 @@ let menuMsg = `
           mediaType: 1,
             renderLargerThumbnail: true,
 
-          showAdAttribution: false
+          showAdAttribution: true
         }
       }
-    }, { quoted: ms });}
+    }, { quoted: ms });
+    }
     catch (e) {
         console.log("🥵🥵 Menu erreur " + e);
         repondre("🥵🥵 Menu erreur " + e);
@@ -104,15 +99,8 @@ let menuMsg = `
 else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
     try {
         zk.sendMessage(dest, {
-      tezk.sendMessage(dest, {
       text: infoMsg + menuMsg,
       contextInfo: {
-          forwardingScore: 999,
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363200367779016@newsletter',
-        newsletterName: 'ALONE MD BOT 💖',
-        serverMessageId: 143},
         externalAdReply: {
           title: "Enjoy...",
           body: "❣️ALONE-MD SWEET MENU❣️",
@@ -121,10 +109,11 @@ else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
           mediaType: 1,
             renderLargerThumbnail: true,
 
-          showAdAttribution: false
+          showAdAttribution: true
         }
       }
-    }, { quoted: ms });   }
+    }, { quoted: ms });
+      }
     catch (e) {
         console.log("🥵🥵 Menu erreur " + e);
         repondre("🥵🥵 Menu erreur " + e);
