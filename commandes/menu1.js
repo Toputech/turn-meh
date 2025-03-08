@@ -77,14 +77,14 @@ let menuMsg = `
         zk.sendMessage(dest, {
       text: infoMsg + menuMsg,
       contextInfo: {
-        externalAdReply: {
-          title: "Enjoy...",
-            forwardingScore: 999,
+          forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: '120363200367779016@newsletter',
-        newsletterName: 'ALONE MD BOT ❣️',
-        serverMessageId: 143,
+        newsletterName: 'ALONE MD BOT 💖',
+        serverMessageId: 143},
+        externalAdReply: {
+          title: "Enjoy...",
           body: "❣️ALONE-MD SWEET MENU❣️",
           thumbnailUrl: "https://files.catbox.moe/v3vzdb.jpg",
           sourceUrl: conf.GURL,
@@ -94,7 +94,7 @@ let menuMsg = `
           showAdAttribution: false
         }
       }
-    }, { quoted: ms });    }
+    }, { quoted: ms });}
     catch (e) {
         console.log("🥵🥵 Menu erreur " + e);
         repondre("🥵🥵 Menu erreur " + e);
@@ -104,16 +104,17 @@ let menuMsg = `
 else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
     try {
         zk.sendMessage(dest, {
+      tezk.sendMessage(dest, {
       text: infoMsg + menuMsg,
       contextInfo: {
-        externalAdReply: {
-          title: "Enjoy...",
-            forwardingScore: 999,
+          forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
         newsletterJid: '120363200367779016@newsletter',
-        newsletterName: 'ALONE MD BOT ❣️',
-        serverMessageId: 143,
+        newsletterName: 'ALONE MD BOT 💖',
+        serverMessageId: 143},
+        externalAdReply: {
+          title: "Enjoy...",
           body: "❣️ALONE-MD SWEET MENU❣️",
           thumbnailUrl: "https://files.catbox.moe/v3vzdb.jpg",
           sourceUrl: conf.GURL,
@@ -123,7 +124,7 @@ else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
           showAdAttribution: false
         }
       }
-    }, { quoted: ms });    }
+    }, { quoted: ms });   }
     catch (e) {
         console.log("🥵🥵 Menu erreur " + e);
         repondre("🥵🥵 Menu erreur " + e);
