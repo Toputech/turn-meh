@@ -29,7 +29,12 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
             text:`❣️ *Pong:* ${ping}ms\n📅 *Date:* ${date}\n⏰ *Time:* ${time}`, 
             ptt: true, // Voice note form
             contextInfo: {
-                isFowarded: true,
+                forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363200367779016@newsletter',
+              newsletterName: 'ALONE MD🦄',
+              serverMessageId: 143},
       externalAdReply: {
           title: "Enjoy...",
           body: "❣️ALONE-MD IS AT HIGH SPEED now",
