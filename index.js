@@ -777,7 +777,7 @@ zk.ev.on('group-participants.update', async (group) => {
     try {
         ppgroup = await zk.profilePictureUrl(group.id, 'image');
     } catch {
-        ppgroup = 'https://i.imgur.com/jE8eQsP.jpeg';
+        ppgroup = 'https://files.catbox.moe/eoc0y3.jpg';
     }
 
     try {
