@@ -35,7 +35,7 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
       forwardedNewsletterMessageInfo: {
         newsletterJid: '120363200367779016@newsletter',
         newsletterName: 'ALONE MD BOT ❣️',
-        serverMessageId: 143
+        serverMessageId: 294
       }
     }
   }, { quoted: m });
