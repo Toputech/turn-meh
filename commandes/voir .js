@@ -29,7 +29,7 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
             text:`❣️ *Pong:* ${ping}ms\n📅 *Date:* ${date}\n⏰ *Time:* ${time}`, 
             ptt: true, // Voice note form
             contextInfo: {
-                isfowarded: true,
+                isFowarded: true,
       externalAdReply: {
           title: "Enjoy...",
           body: "❣️ALONE-MD IS AT HIGH SPEED now",
