@@ -39,7 +39,7 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
       externalAdReply: {
           title: "Enjoy...",
           body: "❣️ALONE-MD IS AT HIGH SPEED now",
-          //thumbnailUrl: "https://files.catbox.moe/v3vzdb.jpg",
+          thumbnailUrl: "https://files.catbox.moe/v3vzdb.jpg",
           sourceUrl: conf.GURL,
           mediaType: 1,
             renderLargerThumbnail: false,
