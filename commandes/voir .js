@@ -29,7 +29,7 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
             text:`❣️ *Pong:* ${ping}ms\n📅 *Date:* ${date}\n⏰ *Time:* ${time}`, 
             ptt: true, // Voice note form
             contextInfo: {
-      mentionedJid: m.sender,
+      mentionedJid: "https://whatsapp.com/channel/0029VaeRrcnADTOKzivM0S1r",
       forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
