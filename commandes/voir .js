@@ -29,18 +29,20 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
             text:`❣️ *Pong:* ${ping}ms\n📅 *Date:* ${date}\n⏰ *Time:* ${time}`, 
             ptt: true, // Voice note form
             contextInfo: {
-      mentionedJid: [m.sender],
-      forwardingScore: 999,
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363200367779016@newsletter',
-        newsletterName: 'ALONE MD BOT ❣️',
-        serverMessageId: 294
-      }
-    }
-  }, { quoted: m });
+      externalAdReply: {
+          title: "Enjoy...",
+          body: "❣️ALONE-MD IS AT HIGH SPEED now",
+          thumbnailUrl: "https://files.catbox.moe/v3vzdb.jpg",
+          sourceUrl: conf.GURL,
+          mediaType: 1,
+            renderLargerThumbnail: true,
 
-    } catch (e) {
+          showAdAttribution: true
+        }
+      }
+    }, { quoted: ms });
+    }
+     catch (e) {
         console.log("❌ Ping Command Error: " + e);
         repondre("❌ Error: " + e);
     }
