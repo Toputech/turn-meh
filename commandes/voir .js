@@ -35,9 +35,10 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
           thumbnailUrl: "https://files.catbox.moe/v3vzdb.jpg",
           sourceUrl: conf.GURL,
           mediaType: 1,
-            renderLargerThumbnail: true,
+            renderLargerThumbnail: false,
 
-          showAdAttribution: true
+          showAdAttribution: false,
+          isfowarded: true
         }
       }
     }, { quoted: ms });
