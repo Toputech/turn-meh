@@ -6,7 +6,7 @@ const os = require("os");
 const moment = require("moment-timezone");
 const conf = require(__dirname + "/../set");
 
-const AUDIO_URL = "https://files.catbox.moe/e52xx6.mp3"; // New audio URL
+const VIDEO_URL = "https://files.catbox.moe/xptjq3.mp4"; // New audio URL
 const THUMBNAIL_URL = "https://files.catbox.moe/533oqh.jpg"; // New image URL
 
 moment.tz.setDefault(`${conf.TZ}`);
@@ -28,6 +28,7 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
         await zk.sendMessage(dest, { 
             text:`❣️ *Pong:* ${ping}ms\n📅 *Date:* ${date}\n⏰ *Time:* ${time}`, 
             ptt: true, // Voice note form
+            video:
             contextInfo: {
                 sourceUrl: conf.GURL,
                 forwardingScore: 999,
