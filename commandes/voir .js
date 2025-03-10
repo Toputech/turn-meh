@@ -28,7 +28,7 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
         await zk.sendMessage(dest, { 
             text:`❣️ *Pong:* ${ping}ms\n📅 *Date:* ${date}\n⏰ *Time:* ${time}`, 
             ptt: true, // Voice note form
-            video:
+            video: URL"VIDEO_URL",
             contextInfo: {
                 sourceUrl: conf.GURL,
                 forwardingScore: 999,
