@@ -34,7 +34,7 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
                 forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-              newsletterJid: '0029VaeRrcnADTOKzivM0S1r@newsletter',
+              newsletterJid: '120363295141350550@newsletter',
               newsletterName: 'ALONE MD🦄',
               serverMessageId: 143},
       externalAdReply: {
