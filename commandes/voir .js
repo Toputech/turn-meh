@@ -7,7 +7,7 @@ const moment = require("moment-timezone");
 const conf = require(__dirname + "/../set");
 
 const VideoUrl = "https://files.catbox.moe/xptjq3.mp4"; // New audio URL
-const THUMBNAIL_URL = "https://files.catbox.moe/533oqh.jpg"; // New image URL
+const thumbnail = "https://files.catbox.moe/533oqh.jpg"; // New image URL
 
 moment.tz.setDefault(`${conf.TZ}`);
 
@@ -51,6 +51,22 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
       }
     }, { quoted: ms });
     }
+        
+  // Send audio with metadata
+  await conn.sendMessage(m.chat, { 
+    video: { url: videoUrl }, 
+    mimetype: 'audio/mp4',
+    ptt: true,
+    contextInfo: {
+      externalAdReply: {
+        title: 'Alone queen wa bot',
+        body: 'Advanced AI-Powered Bot',
+        thumbnailUrl:Thumbnail,
+        mediaType: 1
+      }
+    }
+  }, { quoted: m });
+};
      catch (e) {
         console.log("❌ Ping Command Error: " + e);
         repondre("❌ Error: " + e);
