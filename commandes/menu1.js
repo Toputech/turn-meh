@@ -82,7 +82,7 @@ let menuMsg = `
             forwardedNewsletterMessageInfo: {
               newsletterJid: '120363295141350550@newsletter',
               newsletterName: 'ALONE Queen MD V²',
-              serverMessageId: 107},
+              serverMessageId: 143},
         externalAdReply: {
           title: "Enjoy...",
           body: "❣️ALONE-MD SWEET MENU❣️",
@@ -91,7 +91,7 @@ let menuMsg = `
           mediaType: 1,
             renderLargerThumbnail: true,
 
-          showAdAttribution: true
+          showAdAttribution: false
         }
       }
     }, { quoted: ms });
@@ -107,6 +107,12 @@ else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
         zk.sendMessage(dest, {
       text: infoMsg + menuMsg,
       contextInfo: {
+          forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
         externalAdReply: {
           title: "Enjoy...",
           body: "❣️ALONE-MD SWEET MENU❣️",
@@ -115,7 +121,7 @@ else if (lien.match(/\.(jpeg|png|jpg)$/i)) {
           mediaType: 1,
             renderLargerThumbnail: true,
 
-          showAdAttribution: true
+          showAdAttribution: false
         }
       }
     }, { quoted: ms });
@@ -129,15 +135,21 @@ else {
     zk.sendMessage(dest, {
       text: infoMsg + menuMsg,
       contextInfo: {
+          forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
         externalAdReply: {
           title: "Enjoy...",
           body: "❣️ALONE-MD SWEET MENU❣️",
           thumbnailUrl: "https://files.catbox.moe/eoc0y3.jpg",
           sourceUrl: conf.GURL,
           mediaType: 1,
-            renderLargerThumbnail: true,
+            renderLargerThumbnail: true
 
-          showAdAttribution: true
+
         }
       }
     }, { quoted: ms });
