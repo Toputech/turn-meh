@@ -22,9 +22,14 @@
       "value": "yes",
       "required": false
     },
-    "AUTO_REPLY": {
+      "AUTO_REPLY": {
       "description": "This sets a greeting message when someone texts you automatically",
       "value": "yes",
+      "required": false
+    },
+    "ANTI_LINK": {
+      "description": "This detects and deletelinks sent to a group ",
+      "value": "no",
       "required": false
     },
     "AUTO_LIKE_STATUS": {
