@@ -53,15 +53,15 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
     }
         
   // Send audio with metadata
-  await conn.sendMessage(m.chat, { 
+  await zk.sendMessage(m.chat, { 
     video: { url: videoUrl }, 
-    mimetype: 'audio/mp4',
+    mimetype: 'video/mp4',
     ptt: true,
     contextInfo: {
       externalAdReply: {
         title: 'Alone queen wa bot',
         body: 'Advanced AI-Powered Bot',
-        thumbnailUrl:Thumbnail,
+        thumbnailUrl: conf.URL,
         mediaType: 1
       }
     }
