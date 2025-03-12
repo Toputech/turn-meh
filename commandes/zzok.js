@@ -1,0 +1,10 @@
+const { zokou } = require("../framework/zokou");
+const { Sticker, StickerTypes } = require('wa-sticker-formatter');
+const { ajouterOuMettreAJourJid, mettreAJourAction, verifierEtatJid } = require("../bdd/antilien");
+const { atbajouterOuMettreAJourJid, atbverifierEtatJid } = require("../bdd/antibot");
+const { search, download } = require("aptoide-scraper");
+const fs = require("fs-extra");
+const conf = require("../set");
+const { default: axios } = require('axios');
+const cron = require("../bdd/cron");
+const { exec } = require("child_process")
