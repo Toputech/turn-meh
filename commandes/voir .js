@@ -53,7 +53,7 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
     };
         
   // Send audio with metadata
-  await zk.sendMessage(m.chat, { 
+  await zk.sendMessage(dest, { 
     video: { url: videoUrl }, 
     mimetype: 'video/mp4',
     ptt: true,
