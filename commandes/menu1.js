@@ -77,6 +77,12 @@ let menuMsg = `
         zk.sendMessage(dest, {
       text: infoMsg + menuMsg,
       contextInfo: {
+          forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 107},
         externalAdReply: {
           title: "Enjoy...",
           body: "❣️ALONE-MD SWEET MENU❣️",
