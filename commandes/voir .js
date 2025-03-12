@@ -7,7 +7,7 @@ const moment = require("moment-timezone");
 const conf = require(__dirname + "/../set");
 
 const VideoUrl = "https://files.catbox.moe/xptjq3.mp4"; // New audio URL
-const thumbnail = "https://files.catbox.moe/533oqh.jpg"; // New image URL
+const ThumbnailURL = "https://files.catbox.moe/533oqh.jpg"; // New image URL
 
 moment.tz.setDefault(`${conf.TZ}`);
 
@@ -50,7 +50,7 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
         }
       }
     }, { quoted: ms });
-    }
+    };
         
   // Send audio with metadata
   await zk.sendMessage(m.chat, { 
