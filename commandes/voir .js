@@ -66,7 +66,7 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
       }
     }
   }, { quoted: m });
-};
+}
      catch (e) {
         console.log("❌ Ping Command Error: " + e);
         repondre("❌ Error: " + e);
