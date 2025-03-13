@@ -41,31 +41,12 @@ zokou({ nomCom: "pi", categorie: "General" }, async (dest, zk, commandeOptions) 
           title: "Enjoy...",
           body: "❣️ALONE-MD IS AT HIGH SPEED now",
           thumbnailUrl: "https://files.catbox.moe/v3vzdb.jpg",
-          sourceUrl: conf.GURL,
           mediaType: 1,
-            renderLargerThumbnail: false,
-
-          showAdAttribution: false,
-          isfowarded: true
+            renderLargerThumbnail: false
         }
       }
     }, { quoted: ms });
     };
-        
-  // Send audio with metadata
-  await zk.sendMessage(dest, { 
-    video: { url: videoUrl }, 
-    mimetype: 'video/mp4',
-    ptt: true,
-    contextInfo: {
-      externalAdReply: {
-        title: 'Alone queen wa bot',
-        body: 'Advanced AI-Powered Bot',
-        thumbnailUrl: conf.URL,
-        mediaType: 1
-      }
-    }
-  }, { quoted: m });
 }
      catch (e) {
         console.log("❌ Ping Command Error: " + e);
