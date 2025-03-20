@@ -589,6 +589,8 @@ const capitalGame = [{
   'capital': 'Harare'
 }];
 const axios = require('axios');
+const fs = require('fs');
+const { writeFile } = require('fs/promises')
 zokou({
   nomCom: "currencylist",
   aliases: ["currencies", "conversionrates"],
