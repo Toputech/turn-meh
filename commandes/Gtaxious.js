@@ -86,13 +86,19 @@ zokou({
   if (!reference) {
     return repondre("Please specify the book, chapter, and verse you want to read. Example: bible john 3:16", {
       contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
         externalAdReply: {
           title: "Bible Reference Required",
           body: "Please provide a book, chapter, and verse.",
           thumbnailUrl: "https://files.catbox.moe/zt9ie6.jpg", // Replace with a suitable thumbnail URL
           sourceUrl: "https://whatsapp.com/channel/0029VaeRrcnADTOKzivM0S1r",
           mediaType: 1,
-          showAdAttribution: true,
+
         },
       },
     });
@@ -104,13 +110,19 @@ zokou({
     if (!response.data) {
       return repondre("Invalid reference. Example: bible john 3:16", {
         contextInfo: {
+          forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
           externalAdReply: {
             title: "Invalid Bible Reference",
             body: "Please provide a valid book, chapter, and verse.",
             thumbnailUrl: "https://files.catbox.moe/zt9ie6.jpg", // Replace with a suitable thumbnail URL
             sourceUrl: "https://whatsapp.com/channel/0029VaeRrcnADTOKzivM0S1r",
             mediaType: 1,
-            showAdAttribution: true,
+        
           },
         },
       });
@@ -134,14 +146,19 @@ zokou({
     await zk.sendMessage(dest, {
       text: messageText,
       contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
         externalAdReply: {
           title: "ALONE-MD HOLY BIBLE",
           body: `We're reading: ${data.reference}`,
           mediaType: 1,
           thumbnailUrl: "https://files.catbox.moe/zt9ie6.jpg", 
           sourceUrl: "https://whatsapp.com/channel/0029VaeRrcnADTOKzivM0S1r",
-          showAdAttribution: true, 
-        },
+      
       },
     }, { quoted: ms });
     
@@ -149,13 +166,19 @@ zokou({
     console.error("Error fetching Bible passage:", error);
     await repondre("An error occurred while fetching the Bible passage. Please try again later.", {
       contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
         externalAdReply: {
           title: "Error Fetching Bible Passage",
           body: "Please try again later.",
           thumbnailUrl: "https://files.catbox.moe/zt9ie6.jpg", // Replace with a suitable thumbnail URL
           sourceUrl: conf.GURL,
           mediaType: 1,
-          showAdAttribution: true,
+        
         },
       },
     });
@@ -237,12 +260,18 @@ zokou({
       text: factMessage,
       contextInfo: {
         externalAdReply: {
+          forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
           title: "Fun Fact",
           body: "Here's a fun fact to enlighten your day!",
           thumbnailUrl: conf.URL,
           sourceUrl: conf.GURL,
           mediaType: 1,
-          showAdAttribution: true
+          
         }
       }
     }, { quoted: ms });
@@ -277,14 +306,19 @@ zokou({
 
     await zk.sendMessage(dest, {
       text: quoteMessage,
-      contextInfo: {
+      contextInfo: {forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
         externalAdReply: {
           title: "Daily Quote",
           body: "Here's an inspiring quote to motivate you!",
           thumbnailUrl: conf.URL,
           sourceUrl: conf.GURL,
           mediaType: 1,
-          showAdAttribution: true
+        
         }
       }
     }, { quoted: ms });
@@ -512,13 +546,19 @@ zokou({
     await zk.sendMessage(dest, {
       text: `Here is your advice: ${advice} 😊`,
       contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
         externalAdReply: {
           title: "Daily Dose of Advice",
           body: "Here’s a little nugget of wisdom to brighten your day!",
           thumbnailUrl: conf.URL,
           sourceUrl: conf.GURL,
           mediaType: 1,
-          showAdAttribution: true
+    
         }
       }
     }, { quoted: messageQuote });
@@ -569,14 +609,18 @@ zokou({
       await zk.sendMessage(dest, {
         text: `The correct answer is: ${correctAnswer}`,
         contextInfo: {
+          forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
           externalAdReply: {
             title: "Trivia Answer Revealed",
             body: "Did you get it right? Try another trivia question!",
             thumbnailUrl: conf.URL,
             sourceUrl: conf.GURL,
-            mediaType: 1,
-            showAdAttribution: true
-          }
+            mediaType: 1,        }
         }
       }, { quoted: messageQuote });
     }, 10000); // Delay for 10 seconds
@@ -625,13 +669,19 @@ zokou({
       await zk.sendMessage(dest, {
         text: definitionMessage,
         contextInfo: {
+          forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
           externalAdReply: {
             title: "ALONE-MD DICTIONARY",
             body: `Definition of ${term}`,
             mediaType: 1,
             thumbnailUrl: "https://files.catbox.moe/28j7yx.jpg", 
             sourceUrl: conf.GURL,
-            showAdAttribution: true, 
+            
           },
         },
       }, { quoted: ms });
@@ -676,13 +726,19 @@ zokou({
       await zk.sendMessage(dest, {
         text: pairingCode,
         contextInfo: {
+          forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
           externalAdReply: {
             title: "ALONE-MD PAIR CODE",
             body: "Here is your pairing code:",
             mediaType: 1,
             thumbnailUrl: conf.URL, 
             sourceUrl: conf.GURL,
-            showAdAttribution: true, 
+            
           },
         },
       }, { quoted: ms });
@@ -737,13 +793,19 @@ Regards ${conf.BOT} `;
     await zk.sendMessage(dest, {
       text: formattedMessage,
       contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
         externalAdReply: {
           title: "ALONE-MD ELEMENT INFORMATION",
           body: "Here is the information you requested:",
           mediaType: 1,
           thumbnailUrl: thumb,
           sourceUrl: conf.GURL,
-          showAdAttribution: true, 
+          
         },
       },
     }, { quoted: ms });
@@ -796,13 +858,19 @@ zokou({
     await zk.sendMessage(dest, {
       text: githubMessage,
       contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
         externalAdReply: {
           title: "ALONE-MD GITHUB USER INFO",
           body: `Information about ${data.login}`,
           mediaType: 1,
           thumbnailUrl: thumb,
           sourceUrl: conf.GURL,
-          showAdAttribution: true,
+        
         },
       },
     }, { quoted: ms });
@@ -829,13 +897,19 @@ zokou({
 
 You can use this email for temporary purposes. I will notify you if you receive any emails.`,
       contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
         externalAdReply: {
           title: "Temporary Email Service",
           body: "Create temporary emails quickly and easily for privacy and security.",
           thumbnailUrl: conf.URL,
           sourceUrl: conf.GURL,
           mediaType: 1,
-          showAdAttribution: true
+          
         }
       }
     }, { quoted: messageQuote });
@@ -856,13 +930,19 @@ You can use this email for temporary purposes. I will notify you if you receive 
             await zk.sendMessage(dest, {
               text: `You have received a new email!\n\nFrom: ${emailData.from}\nSubject: ${emailData.subject}\n\n${emailData.textBody}\nLinks found:\n${linksText}`,
               contextInfo: {
+                forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
                 externalAdReply: {
                   title: "Temporary Email Notification",
                   body: "You received a new email on your temporary inbox. Check it out now!",
                   thumbnailUrl: conf.URL,
                   sourceUrl: conf.GURL,
                   mediaType: 1,
-                  showAdAttribution: true
+                  
                 }
               }
             }, { quoted: messageQuote });
@@ -882,13 +962,19 @@ You can use this email for temporary purposes. I will notify you if you receive 
       zk.sendMessage(dest, {
         text: "Your temporary email session has ended. Please create a new temporary email if needed.",
         contextInfo: {
+          forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
           externalAdReply: {
             title: "Temporary Email Session Ended",
             body: "Your temporary email session has ended. Need another one? Just ask!",
             thumbnailUrl: conf.URL,
             sourceUrl: conf.GURL,
             mediaType: 1,
-            showAdAttribution: true
+            
           }
         }
       }, { quoted: messageQuote });
