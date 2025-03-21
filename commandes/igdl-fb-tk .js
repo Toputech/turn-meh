@@ -52,14 +52,19 @@ async (dest, zk, commandeOptions) => {
        zk.sendMessage(dest, {
       text: "ALONE MD FB DOWNLOADER",
       contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
         externalAdReply: {
           title: "Enjoy...",
           body: "ALONE MD FACEBOOK DOWNLOADER",
           thumbnailUrl: conf.URL,
           sourceUrl: conf.GURL,
           mediaType: 1,
-          showAdAttribution: true
-        }
+      
       }
     }, { quoted: ms });
       zk.sendMessage(dest, { video: { url: result.hd  }, caption: 'facebook video downloader powered by *ALONE-MD*' }, { quoted: ms });
@@ -176,13 +181,19 @@ async (dest, zk, commandeOptions) => {
         zk.sendMessage(dest, {
       text: "ALONE MD FB DOWNLOADER",
       contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
         externalAdReply: {
           title: "Enjoy...",
           body: "ALONE MD FACEBOOK DOWNLOADER",
           thumbnailUrl: conf.URL,
           sourceUrl: conf.GURL,
           mediaType: 1,
-          showAdAttribution: true
+          
         }
       }
     }, { quoted: ms });
