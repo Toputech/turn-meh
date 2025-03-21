@@ -53,13 +53,18 @@ zokou({
     await zk.sendMessage(dest, {
       text: news,
       contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
         externalAdReply: {
           title: "THIS IS ALONE-MD TECH NEWS",
           body: "keep enjoying", 
           thumbnailUrl: thumbnail, 
           sourceUrl: "https://whatsapp.com/channel/0029VaeRrcnADTOKzivM0S1r", 
-          mediaType: 1,
-          showAdAttribution: true, 
+          mediaType: 1
         },
       },
     }, { quoted: ms });
