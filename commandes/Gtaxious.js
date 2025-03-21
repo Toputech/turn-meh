@@ -259,13 +259,14 @@ zokou({
     await zk.sendMessage(dest, {
       text: factMessage,
       contextInfo: {
-        externalAdReply: {
-          forwardingScore: 999,
+        forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
               newsletterJid: '120363295141350550@newsletter',
               newsletterName: 'ALONE Queen MD V²',
               serverMessageId: 143},
+        externalAdReply: {
+          
           title: "Fun Fact",
           body: "Here's a fun fact to enlighten your day!",
           thumbnailUrl: conf.URL,
@@ -306,7 +307,8 @@ zokou({
 
     await zk.sendMessage(dest, {
       text: quoteMessage,
-      contextInfo: {forwardingScore: 999,
+      contextInfo: {
+        forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
               newsletterJid: '120363295141350550@newsletter',
