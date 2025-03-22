@@ -23,8 +23,8 @@ zokou({ nomCom: "repo", catégorie:"Général", reaction: "✨", nomFichier: __f
       const releaseDate = new Date(data.created_at).toLocaleDateString('en-GB');
       const lastUpdateDate = new Date(data.updated_at).toLocaleDateString('en-GB');
 
-      const gitdata = ` Hello ${nomAuteurMessage}, this is •𝘼𝙇𝙊𝙉𝙀-𝙈𝘿•
-      ᴏᴜʀ ᴍɪssɪᴏɴ ɪs ᴛᴏ ʟᴇᴛ ʏᴏᴜ ᴇɴᴊᴏʏ ʏᴏᴜʀ ᴡʜᴀᴛsᴀᴘᴘ.... ɪ ʟᴏᴠᴇ ʏᴏᴜ 💘'
+      const gitdata = `  •𝘼𝙇𝙊𝙉𝙀-𝙈𝘿•
+      ᴏᴜʀ ᴍɪssɪᴏɴ ɪs ᴛᴏ ʟᴇᴛ ʏᴏᴜ ᴇɴᴊᴏʏ ʏᴏᴜʀ ᴡʜᴀᴛsᴀᴘᴘ.... ʟᴏᴠᴇ ʏᴏᴜ 💘'
       \n support : ,  https://whatsapp.com/channel/0029VaeRrcnADTOKzivM0S1r
 
 ╔═════☬
