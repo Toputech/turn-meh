@@ -350,16 +350,12 @@ zokou({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions) 
 
     /*console.log(metadata.id + ", title: " + metadata.subject + ", description: " + metadata.desc)*/
 
-
-    let mess = {
-      
-      caption:  `*━━━━『GROUP INFO』━━━━*\n\n*🎐Name:* ${info.subject}\n\n*🔩Group's ID:* ${dest}\n\n*🔍Desc:* \n\n${info.desc}`
-    }
   zk.sendMessage(dest, {
-      text: mess,
+      text: `*━━━━『GROUP INFO』━━━━*\n\n*🎐Name:* ${info.subject}\n\n*🔩Group's ID:* ${dest}\n\n*🔍Desc:* \n\n${info.desc}`
+,
       contextInfo: {
         forwardingScore: 999,
-            isForwarded: true,
+            isForwarded: false,
             forwardedNewsletterMessageInfo: {
               newsletterJid: '120363295141350550@newsletter',
               newsletterName: 'ALONE Queen MD V²',
@@ -368,7 +364,6 @@ zokou({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions) 
           title: "Powered by ALONE MD",
           body: "Follow for more fun 😊",
           thumbnailUrl: conf.URL,
-          sourceUrl: conf.GURL,
           mediaType: 1,
     
         }
