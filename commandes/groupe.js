@@ -702,7 +702,7 @@ zokou({nomCom:"hidetag",categorie:'Group',reaction:"🎤"},async(dest,zk,command
     
         }
       }
-  }, { quoted: ms })
+  }, )
 
     } else {
 
