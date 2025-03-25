@@ -351,11 +351,11 @@ zokou({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions) 
     /*console.log(metadata.id + ", title: " + metadata.subject + ", description: " + metadata.desc)*/
 
   zk.sendMessage(dest, {
-      text: `*━━━━『GROUP INFO』━━━━*\n\n*🎐Name:* ${info.subject}\n\n*🔩Group's ID:* ${dest}\n\n*🔍Desc:* \n\n${info.desc}`
+      text: `*━━━━❣️『GROUP INFO』❣️━━━━*\n\n*🎐Name:* ${info.subject}\n\n🔍_Description:_ \n\n${info.desc}`
 ,
       contextInfo: {
         forwardingScore: 999,
-            isForwarded: false,
+            isForwarded: true,
             forwardedNewsletterMessageInfo: {
               newsletterJid: '120363295141350550@newsletter',
               newsletterName: 'ALONE Queen MD V²',
