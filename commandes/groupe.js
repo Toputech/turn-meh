@@ -686,7 +686,23 @@ zokou({nomCom:"hidetag",categorie:'Group',reaction:"🎤"},async(dest,zk,command
           }
       }
 
-    zk.sendMessage(dest,msg)
+    zk.sendMessage(dest,msg,{
+      contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
+        externalAdReply: {
+          title: "Powered by ALONE MD",
+          body: "Follow for more fun 😊",
+          thumbnailUrl: conf.URL,
+          mediaType: 1,
+    
+        }
+      }
+  }, { quoted: ms })
 
     } else {
 
