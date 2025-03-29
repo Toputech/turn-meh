@@ -2,9 +2,9 @@
 {
     "bot-name": "ALONE QUEEN MD V²",
     "description": "Whiskey Sockets Baileys Whatsapp bot By Mr Frank",
-    "logo": "https://i.ibb.co/WNzz5RJV/lordcasey.jpg",
+    "logo": "https://files.catbox.moe/522t4u.jpg",
     "keywords": ["bot"],
-    "documentation-link": "https://pairs-rzev.onrender.com/",
+    "documentation-link": "https://alone-md-nkds.onrender.com/",
     "owner-verification": "aloonfire@gmail.com",
   
   "env": {
@@ -78,16 +78,7 @@
       "description": "Set 'yes' to make your bot public or 'no' to keep it private",
       "value": "yes",
       "required": false
-    },
-    "HEROKU_API_KEY": {
-      "description": "Insert your Heroku API key (required)",
-      "value": "",
-      "required": true
-    },
-    "HEROKU_APP_NAME": {
-      "description": "Insert your Heroku app name (required)",
-      "value": "",
-      "required": true
+   
     },
     "SESSION_ID": {
       "description": "Enter your session ID, the code you receive after scanning the QR code",
