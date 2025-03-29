@@ -1,4 +1,12 @@
 
+{
+    "bot-name": "ALONE QUEEN MD V²",
+    "description": "Whiskey Sockets Baileys Whatsapp bot By Mr Frank",
+    "logo": "https://i.ibb.co/WNzz5RJV/lordcasey.jpg",
+    "keywords": ["bot"],
+    "documentation-link": "https://pairs-rzev.onrender.com/",
+    "owner-verification": "aloonfire@gmail.com",
+  
   "env": {
     "PREFIX": {
       "description": "Choose your bot's prefix",
@@ -132,4 +140,4 @@
       "value": "no",
       "required": false
     }
-  }
+  }}
