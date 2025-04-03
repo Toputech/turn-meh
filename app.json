@@ -86,12 +86,12 @@
     "HEROKU_API_KEY": {
       "description": "Insert your Heroku API key (required)",
       "value": "",
-      "required": true
+      "required": false 
     },
     "HEROKU_APP_NAME": {
       "description": "Insert your Heroku app name (required)",
       "value": "",
-      "required": true
+      "required": false
     },
     "SESSION_ID": {
       "description": "Enter your session ID, the code you receive after scanning the QR code",
