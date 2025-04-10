@@ -149,12 +149,12 @@
   "formation": {
     "worker": {
       "quantity": 1,
-      "size": "standard-2x"
+      "size": "basic"
     }
   },
   "addons": [
     {
-      "plan": "heroku-postgresql:essential-0"
+      "plan": "heroku-nodejs"
     }
   ]
 }
