@@ -152,9 +152,9 @@
       "size": "basic"
     }
   },
-  "addons": [
+   "buildpacks": [
     {
-      "plan": "heroku-nodejs"
+      "url": "heroku/nodejs"
     }
-  ]
+   ]
 }
