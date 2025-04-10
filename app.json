@@ -10,7 +10,7 @@
   "logo": "https://files.catbox.moe/522t4u.jpg",
   "repository": "https://github.com/Toputech/turn-meh",
   "succes_url": "/",
-  "stack": "heroku-24",
+  "stack": "container",
   "env": {
     "PREFIX": {
       "description": "Choose your bot's prefix",
@@ -145,16 +145,17 @@
       "required": false
     }
   },
-
-  "formation": {
+"formation": {
     "worker": {
       "quantity": 1,
-      "size": "basic"
+      "size": "standard-2x"
     }
   },
-   "buildpacks": [
+  "addons": [
     {
-      "url": "heroku/nodejs"
+      "plan": "heroku-postgresql:essential-0"
     }
-   ]
+  ]
 }
+
+
