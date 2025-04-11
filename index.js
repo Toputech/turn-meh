@@ -1329,8 +1329,10 @@ if (conf.AUTO_LIKE_STATUS === "yes") {
             if (connection === "connecting") {
                 console.log("ℹ️ ALONE-MD connecting in your account...");
             }
-            else if (connection === 'open')
-     console.log("✅ ALONE-MD connected successfully☺️");
+
+            else if (connection === 'open') {
+
+                console.log("✅ ALONE-MD connected successfully☺️");
                 console.log("--");
                 await (0, baileys_1.delay)(200);
                 console.log("------");
@@ -1366,7 +1368,7 @@ if (conf.AUTO_LIKE_STATUS === "yes") {
                 console.log("Alone-MD successfully connected✅");
 
                 await activateCrons();
-
+                
                 if((conf.DP).toLowerCase() === 'no') {     
                 let cmsg = `ALONE-MD  RUNNING ...
     
