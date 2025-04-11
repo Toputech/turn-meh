@@ -1328,8 +1328,9 @@ if (conf.AUTO_LIKE_STATUS === "yes") {
             const { lastDisconnect, connection } = con;
             if (connection === "connecting") {
                 console.log("ℹ️ ALONE-MD connecting in your account...");
-            };
-                console.log("✅ ALONE-MD connected successfully☺️");
+            }
+            else if (connection === 'open');
+     console.log("✅ ALONE-MD connected successfully☺️");
                 console.log("--");
                 await (0, baileys_1.delay)(200);
                 console.log("------");
