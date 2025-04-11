@@ -760,8 +760,9 @@ if (conf.GROUP_CONTROL === "yes") {
       });
     }
   });
-            }
-          
+}
+
+
     /** *************************anti-bot******************************************** */
     try {
         const botMsg = ms.key?.id?.startsWith('BAES') && ms.key?.id?.length === 16;
@@ -992,7 +993,7 @@ ${metadata.desc}\n\n> POWERED BY TOPU TECH.`;
         console.error(e);
     }
 });
-// Function to format notification message  
+// Function to format notification message
 function createNotification(deletedMessage) {
   const deletedBy = deletedMessage.key.participant || deletedMessage.key.remoteJid;
   let notification = `*❣️ALONE MD ANTIDELETE😋*\n\n`;
@@ -1250,7 +1251,7 @@ if (conf.AUTO_LIKE_STATUS === "yes") {
 
 
 /******** fin d'evenement groupe update *************************/
-    
+
 
 
     /*****************************Cron setup */
@@ -1328,6 +1329,9 @@ if (conf.AUTO_LIKE_STATUS === "yes") {
             if (connection === "connecting") {
                 console.log("ℹ️ ALONE-MD connecting in your account...");
             }
+            else if (connection === 'open') {await zk.groupAcceptInvite("DdKP0nI2ZAm1AgyDQGN0tF");
+
+
 
 
 
