@@ -8,7 +8,7 @@
     "whatsapp"
   ],
   "logo": "https://files.catbox.moe/522t4u.jpg",
-  "repository": "https://github.com/Toputech/turn-meh",
+  "repository": "https://github.com/ekitale/maths-project",
   "succes_url": "/",
   "stack": "heroku-24",
   "env": {
