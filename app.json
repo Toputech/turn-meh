@@ -155,5 +155,10 @@
     {
       "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
     }
-  ]
+  ],
+    "addons": [
+    {
+      "plan": "heroku-postgresql:essential-0"
+    }
+    ]
 }
