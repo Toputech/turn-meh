@@ -1,17 +1,1 @@
-web: npm start || yarn start
-
-
-
-# node index.js
-
-
-
-
-
-
-
-
-
-
-
-# Creator: Toputech 
+worker: node index.js 
