@@ -145,6 +145,12 @@
       "required": false
     }
   },
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "standard-2x"
+    }
+  },
   "buildpacks": [
     {
       "url": "heroku/nodejs"
@@ -155,10 +161,5 @@
     {
       "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
     }
-  ],
-    "addons": [
-    {
-      "plan": "heroku-postgresql:essential-0"
-    }
-    ]
+  ]
 }
