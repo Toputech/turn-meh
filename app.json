@@ -10,7 +10,7 @@
   "logo": "https://files.catbox.moe/522t4u.jpg",
   "repository": "https://github.com/ekitale/maths-project",
   "succes_url": "/",
-  "stack": "heroku-24",
+  "stack": "container",
   "env": {
     "PREFIX": {
       "description": "Choose your bot's prefix",
@@ -151,15 +151,9 @@
       "size": "standard-2x"
     }
   },
-  "buildpacks": [
+  "addons": [
     {
-      "url": "heroku/nodejs"
-    },
-    {
-      "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
-    },
-    {
-      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+      "plan": "heroku-postgresql:essential-0"
     }
   ]
 }
