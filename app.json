@@ -9,7 +9,7 @@
   ],
     "repository": "https://github.com/Toputech/turn-meh",
   "succes_url": "/",
-  "stack": "heroku-24",
+  "stack": "container",
   "env": {
     "PREFIX": {
       "description": "Choose your bot's prefix",
