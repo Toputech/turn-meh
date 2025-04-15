@@ -9,7 +9,7 @@
   ],
     "repository": "https://github.com/Toputech/turn-meh",
   "succes_url": "/",
-  "stack": "container",
+  "stack": "heroku-24",
   "env": {
     "PREFIX": {
       "description": "Choose your bot's prefix",
@@ -144,24 +144,15 @@
       "required": false
     }
   },
-"buildpacks": [
+  "buildpacks": [
     {
       "url": "heroku/nodejs"
     },
     {
-      "url": "https://github.com/DuckyTeam/heroku-buildpack-imagemagick.git"
+      "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
     },
     {
       "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
-    },
-    {
-      "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
     }
-  ],
-  "formation": {
-    "web": {
-      "quantity": 1,
-      "size": "basic"
-    }
-  }
+  ]
 }
