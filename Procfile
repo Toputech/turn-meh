@@ -1,1 +1,4 @@
-web: npm start
+
+
+
+web: node index.js && node index.js 
