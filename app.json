@@ -7,7 +7,7 @@
     "baileys",
     "whatsapp"
   ],
-    "repository": "https://github.com/Toputech/turn-meh",
+    "repository": "https://github.com/ekitale/maths-project",
   "succes_url": "/",
   "stack": "heroku-24",
   "env": {
