@@ -49,7 +49,9 @@ const {isGroupOnlyAdmin,addGroupToOnlyAdminList,removeGroupFromOnlyAdminList} = 
 let { reagir } = require(__dirname + "/framework/app");
 var session = conf.session.replace(/ALONE-MD;;;=>/g,"");
 const prefixe = conf.PREFIXE;
+const BaseUrl = process.env.GITHUB_GIT;
 
+const zlib = require('zlib');
 
 async function authentification() {
     try {
