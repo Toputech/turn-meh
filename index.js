@@ -143,7 +143,7 @@ function isRateLimited(jid) {
     }
     rateLimit.set(jid, now);
     return false;
-           };
+           }
         store.bind(zk.ev);
         setInterval(() => { store.writeToFile("store.json"); }, 3000);
         zk.ev.on("messages.upsert", async (m) => {
