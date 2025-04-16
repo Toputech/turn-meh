@@ -50,40 +50,22 @@ let { reagir } = require(__dirname + "/framework/app");
 var session = conf.session.replace(/ALONE-MD;;;=>/g,"");
 const prefixe = conf.PREFIXE;
 
-const BaseUrl = process.env.GITHUB_GIT;
-const adamsapikey = process.env.BOT_OWNER;
-
-const zlib = require('zlib');
 
 async function authentification() {
     try {
+
+        //console.log("le data "+data)
         if (!fs.existsSync(__dirname + "/auth/creds.json")) {
-            console.log("Session connected...");
-            // Split the session string into header and Base64 data
-            const [header, b64data] = conf.session.split(';;;'); 
-
-            // Validate the session format
-            if (header === b64data) {
-                let compressedData = Buffer.from(b64data.replace('...', ''), 'base64'); // Decode and truncate
-                let decompressedData = zlib.gunzipSync(compressedData); // Decompress session
-                fs.writeFileSync(__dirname + "/auth/creds.json", decompressedData, "utf8"); // Save to file
-            } else {
-                throw new Error("Invalid session format");
-            }
-        } else if (fs.existsSync(__dirname + "/auth/creds.json") && conf.session !== "zokk") {
-            console.log("Updating existing session...");
-            const [header, b64data] = conf.session.split(';;;'); 
-
-            if (header === b64data) {
-                let compressedData = Buffer.from(b64data.replace('...', ''), 'base64');
-                let decompressedData = zlib.gunzipSync(compressedData);
-                fs.writeFileSync(__dirname + "/auth/creds.json", decompressedData, "utf8");
-            } else {
-                throw new Error("Invalid session format");
-            }
+            console.log("connected successfully...");
+            await fs.writeFileSync(__dirname + "/auth/creds.json", atob(session), "utf8");
+            //console.log(session)
         }
-    } catch (e) {
-        console.log("Session Invalid: " + e.message);
+        else if (fs.existsSync(__dirname + "/auth/creds.json") && session != "zokk") {
+            await fs.writeFileSync(__dirname + "/auth/creds.json", atob(session), "utf8");
+        }
+    }
+    catch (e) {
+        console.log("Session Invalid " + e);
         return;
     }
 }
@@ -92,14 +74,13 @@ const store = (0, baileys_1.makeInMemoryStore)({
     logger: pino().child({ level: "silent", stream: "store" }),
 });
 setTimeout(() => {
-authentification();
     async function main() {
         const { version, isLatest } = await (0, baileys_1.fetchLatestBaileysVersion)();
         const { state, saveCreds } = await (0, baileys_1.useMultiFileAuthState)(__dirname + "/auth");
         const sockOptions = {
             version,
             logger: pino({ level: "silent" }),
-            browser: ['alone-Md', "safari", "1.0.0"],
+            browser: ['ALONE-MD', "safari", "1.0.0"],
             printQRInTerminal: true,
             fireInitQueries: false,
             shouldSyncHistoryMessage: true,
@@ -123,27 +104,9 @@ authentification();
                     conversation: 'An Error Occurred, Repeat Command!'
                 };
             }
-                };
-
-
-   const zk = (0, baileys_1.default)(sockOptions);
-   store.bind(zk.ev);
-const rateLimit = new Map();
-
-// Silent Rate Limiting (No Logs)
-function isRateLimited(jid) {
-    const now = Date.now();
-    if (!rateLimit.has(jid)) {
-        rateLimit.set(jid, now);
-        return false;
-    }
-    const lastRequestTime = rateLimit.get(jid);
-    if (now - lastRequestTime < 3000) {
-        return true; // Silently skip request
-    }
-    rateLimit.set(jid, now);
-    return false;
-           }
+            ///////
+        };
+        const zk = (0, baileys_1.default)(sockOptions);
         store.bind(zk.ev);
         setInterval(() => { store.writeToFile("store.json"); }, 3000);
         zk.ev.on("messages.upsert", async (m) => {
