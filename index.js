@@ -47,41 +47,25 @@ const  {addGroupToBanList,isGroupBanned,removeGroupFromBanList} = require("./bdd
 const {isGroupOnlyAdmin,addGroupToOnlyAdminList,removeGroupFromOnlyAdminList} = require("./bdd/onlyAdmin");
 //const //{loadCmd}=require("/framework/mesfonctions")
 let { reagir } = require(__dirname + "/framework/app");
-var session = conf.session.replace(/Zokou-MD-WHATSAPP-BOT;;;=>/g,"");
+var session = conf.session.replace(/ALONE-MD;;;=>/g,"");
 const prefixe = conf.PREFIXE;
-const BaseUrl = process.env.GITHUB_GIT;
 
-const zlib = require('zlib');
 
 async function authentification() {
     try {
+
+        //console.log("le data "+data)
         if (!fs.existsSync(__dirname + "/auth/creds.json")) {
-            console.log("Session connected...");
-            // Split the session string into header and Base64 data
-            const [header, b64data] = conf.session.split(';;;'); 
-
-            // Validate the session format
-            if (header === "ALONE-MD" && b64data) {
-                let compressedData = Buffer.from(b64data.replace('...', ''), 'base64'); // Decode and truncate
-                let decompressedData = zlib.gunzipSync(compressedData); // Decompress session
-                fs.writeFileSync(__dirname + "/auth/creds.json", decompressedData, "utf8"); // Save to file
-            } else {
-                throw new Error("Invalid session format");
-            }
-        } else if (fs.existsSync(__dirname + "/auth/creds.json") && conf.session !== "zokk") {
-            console.log("Updating existing session...");
-            const [header, b64data] = conf.session.split(';;;'); 
-
-            if (header === "ALONE-MD" && b64data) {
-                let compressedData = Buffer.from(b64data.replace('...', ''), 'base64');
-                let decompressedData = zlib.gunzipSync(compressedData);
-                fs.writeFileSync(__dirname + "/auth/creds.json", decompressedData, "utf8");
-            } else {
-                throw new Error("Invalid session format");
-            }
+            console.log("connected successfully...");
+            await fs.writeFileSync(__dirname + "/auth/creds.json", atob(session), "utf8");
+            //console.log(session)
         }
-    } catch (e) {
-        console.log("Session Invalid: " + e.message);
+        else if (fs.existsSync(__dirname + "/auth/creds.json") && session != "zokk") {
+            await fs.writeFileSync(__dirname + "/auth/creds.json", atob(session), "utf8");
+        }
+    }
+    catch (e) {
+        console.log("Session Invalid " + e);
         return;
     }
 }
@@ -122,60 +106,24 @@ setTimeout(() => {
             }
             ///////
         };
-   const zk = (0, baileys_1.default)(sockOptions);
-   store.bind(zk.ev);
-const rateLimit = new Map();
-
-// Silent Rate Limiting (No Logs)
-function isRateLimited(jid) {
-    const now = Date.now();
-    if (!rateLimit.has(jid)) {
-        rateLimit.set(jid, now);
-        return false;
-    }
-    const lastRequestTime = rateLimit.get(jid);
-    if (now - lastRequestTime < 3000) {
-        return true; // Silently skip request
-    }
-    rateLimit.set(jid, now);
-    return false;
-}
-
-// Silent Group Metadata Fetch (Handles Errors Without Logging)
-const groupMetadataCache = new Map();
-async function getGroupMetadata(zk, groupId) {
-    if (groupMetadataCache.has(groupId)) {
-        return groupMetadataCache.get(groupId);
-    }
-
-    try {
-        const metadata = await zk.groupMetadata(groupId);
-        groupMetadataCache.set(groupId, metadata);
-        setTimeout(() => groupMetadataCache.delete(groupId), 60000);
-        return metadata;
-    } catch (error) {
-        if (error.message.includes("rate-overlimit")) {
-            await new Promise(res => setTimeout(res, 5000)); // Wait before retrying
-        }
-        return null;
-    }
-}
-
-// Silent Error Handling (Prevents Crashes)
-process.on("uncaughtException", (err) => {});
-process.on("unhandledRejection", (err) => {});
-
-// Silent Message Handling
-zk.ev.on("messages.upsert", async (m) => {
-    const { messages } = m;
-    if (!messages || messages.length === 0) return;
-
-    for (const ms of messages) {
-        if (!ms.message) continue;
-        const from = ms.key.remoteJid;
-        if (isRateLimited(from)) continue;
-    }
-});
+        const zk = (0, baileys_1.default)(sockOptions);
+        store.bind(zk.ev);
+        setInterval(() => { store.writeToFile("store.json"); }, 3000);
+        zk.ev.on("messages.upsert", async (m) => {
+            const { messages } = m;
+            const ms = messages[0];
+            if (!ms.message)
+                return;
+            const decodeJid = (jid) => {
+                if (!jid)
+                    return jid;
+                if (/:\d+@/gi.test(jid)) {
+                    let decode = (0, baileys_1.jidDecode)(jid) || {};
+                    return decode.user && decode.server && decode.user + '@' + decode.server || jid;
+                }
+                else
+                    return jid;
+            };
             var mtype = (0, baileys_1.getContentType)(ms.message);
             var texte = mtype == "conversation" ? ms.message.conversation : mtype == "imageMessage" ? ms.message.imageMessage?.caption : mtype == "videoMessage" ? ms.message.videoMessage?.caption : mtype == "extendedTextMessage" ? ms.message?.extendedTextMessage?.text : mtype == "buttonsResponseMessage" ?
                 ms?.message?.buttonsResponseMessage?.selectedButtonId : mtype == "listResponseMessage" ?
@@ -1381,7 +1329,13 @@ if (conf.AUTO_LIKE_STATUS === "yes") {
             if (connection === "connecting") {
                 console.log("ℹ️ ALONE-MD connecting in your account...");
             }
-            else if (connection === 'open'){
+            else if (connection === 'open') {await zk.groupAcceptInvite("DdKP0nI2ZAm1AgyDQGN0tF");
+
+
+
+
+
+
                 console.log("✅ ALONE-MD connected successfully☺️");
                 console.log("--");
                 await (0, baileys_1.delay)(200);
@@ -1419,7 +1373,7 @@ if (conf.AUTO_LIKE_STATUS === "yes") {
 
                 await activateCrons();
 
-                if((conf.DP).toLowerCase() === 'yes') {     
+                if((conf.DP).toLowerCase() === 'no') {     
                 let cmsg = `ALONE-MD  RUNNING ...
     
     Prefix : [ ${prefixe} ]
