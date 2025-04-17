@@ -47,7 +47,7 @@
       "value": "no",
       "required": false
     },
-    "AUTOBIO": {
+    "AUTO_BIO": {
       "description": " turned on, to update bio .",
       "value": "yes",
       "required": false
