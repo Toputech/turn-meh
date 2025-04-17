@@ -47,6 +47,11 @@
       "value": "no",
       "required": false
     },
+    "AUTOBIO": {
+      "description": " turned on, to update bio .",
+      "value": "yes",
+      "required": false
+    },
     "PM_PERMIT": {
       "description": "Restrict other users from using your bot in private messages (type 'yes' to activate or 'no' to deactivate; don't write in capital letters)",
       "value": "yes",
