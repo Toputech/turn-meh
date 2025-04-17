@@ -75,12 +75,12 @@
     "HEROKU_API_KEY": {
       "description": "Insert your Heroku API key (required)",
       "value": "",
-      "required": false 
+      "required": true
     },
     "HEROKU_APP_NAME": {
       "description": "Insert your Heroku app name (required)",
       "value": "",
-      "required": false
+      "required": true
     },
     "SESSION_ID": {
       "description": "Enter your session ID, the code you receive after scanning the QR code",
@@ -94,7 +94,7 @@
     },
     "AUTO_READ_MESSAGES": {
       "description": "yes toactivate no to deactivate",
-      "value": "yes",
+      "value": "no",
       "required": false  
     },
     "NUMERO_OWNER": {
@@ -106,11 +106,7 @@
       "description": "Set the warning limit for warning commands",
       "value": "3",
       "required": false
-    },
-    "STARTING_BOT_MESSAGE": {
-      "description": "Set 'yes' to display a starting bot message or 'no' to disable it",
-      "value": "no",
-      "required": true
+
     },
     "PRESENCE": {
       "description": "Mark your presence: 1 for online, 2 for typing, 3 for recording, or leave blank for real state",
