@@ -500,91 +500,189 @@ if (ms.message?.imageMessage || ms.message?.audioMessage || ms.message?.videoMes
     }
   }
                 }
+            
+const googleTTS = require('google-tts-api');
+const ai = require('unlimited-ai');
 
-// Load the reply messages from the JSON file
-const loadReplyMessages = () => {
-  try {
-    const filePath = path.join(__dirname, 'media', 'chatbot.json');
-    const data = fs.readFileSync(filePath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    console.error('Error loading chatbot responses:', error.message);
-    return {}; // Return an empty object if there is an error
-  }
-};
+zk.ev.on("messages.upsert", async (m) => {
+  const { messages } = m;
+  const ms = messages[0];
 
-// Track the time of the last response to enforce rate-limiting
-let lastReplyTime = 0;
+  if (!ms.message) return; // Skip messages without content
 
-// Define the minimum delay (in milliseconds) between replies (e.g., 5 seconds)
-const MIN_REPLY_DELAY = 5000;
+  const messageType = Object.keys(ms.message)[0];
+  const remoteJid = ms.key.remoteJid;
+  const messageContent = ms.message.conversation || ms.message.extendedTextMessage?.text;
 
-// Function to find a matching text reply based on the message
-const getReplyMessage = (messageText, replyMessages) => {
-  // Convert the message to lowercase and split it into words
-  const words = messageText.toLowerCase().split(/\s+/);
+  // Skip bot's own messages and bot-owner messages
+  if (ms.key.fromMe || remoteJid === conf.NUMERO_OWNER + "@s.whatsapp.net") return;
 
-  // Check if any of the words match a keyword in the replyMessages object
-  for (const word of words) {
-    if (replyMessages[word]) {
-      return replyMessages[word]; // Return the matching reply
-    }
-  }
+  // Check if chatbot feature is enabled
+  if (conf.CHAT_BOT1 !== "yes") return; // Exit if CHATBOT is not enabled
 
-  return null; // Return null if no match is found
-};
+  if (messageType === "conversation" || messageType === "extendedTextMessage") {
+    const alpha = messageContent.trim();
 
-// Listen for incoming messages when CHAT_BOT is enabled
-if (conf.CHAT_BOT === 'yes') {
-  console.log('CHAT_BOT is enabled. Listening for messages...');
+    if (!alpha) return;
 
-  zk.ev.on('messages.upsert', async (event) => {
+    let conversationData = [];
+
+    // Read previous conversation data
     try {
-      const { messages } = event;
-
-      // Load the replies from the JSON file
-      const replyMessages = loadReplyMessages();
-
-      // Iterate over incoming messages
-      for (const message of messages) {
-        if (!message.key || !message.key.remoteJid) {
-          continue; // Skip if there's no remoteJid
+      const rawData = fs.readFileSync('store.json', 'utf8');
+      if (rawData) {
+        conversationData = JSON.parse(rawData);
+        if (!Array.isArray(conversationData)) {
+          conversationData = [];
         }
-
-        const messageText = message.message?.conversation || message.message?.extendedTextMessage?.text || '';
-        const replyMessage = getReplyMessage(messageText, replyMessages);
-
-        // Ensure we don't send replies too frequently
-        const currentTime = Date.now();
-        if (currentTime - lastReplyTime < MIN_REPLY_DELAY) {
-          console.log('Rate limit applied. Skipping reply.');
-          continue; // Skip this reply if the delay hasn't passed
-        }
-
-        if (replyMessage) {
-          try {
-            // Send the corresponding text reply
-            await zk.sendMessage(message.key.remoteJid, {
-              text: replyMessage
-            });
-            console.log(`Text reply sent: ${replyMessage}`);
-
-            // Update the last reply time
-            lastReplyTime = currentTime;
-          } catch (error) {
-            console.error(`Error sending text reply: ${error.message}`);
-          }
-        } else {
-          console.log('No matching keyword detected. Skipping message.');
-        }
-
-        // Wait for a brief moment before processing the next message (3 seconds delay)
-        await new Promise((resolve) => setTimeout(resolve, 3000));
       }
-    } catch (error) {
-      console.error('Error in message processing:', error.message);
+    } catch (err) {
+      console.log('No previous conversation found, starting new one.');
     }
-  });
+
+    const model = 'gpt-4-turbo-2024-04-09';
+    const userMessage = { role: 'user', content: alpha };  
+    const systemMessage = { role: 'system', content: 'Your name is Alone md. Developed by Topu tech. You respond to user commands. Only mention developer name if someone asks.' };
+
+    // Add user message and system message to the conversation
+    conversationData.push(userMessage);
+    conversationData.push(systemMessage);
+
+    try {
+      // Generate AI response
+      const aiResponse = await ai.generate(model, conversationData);
+
+      // Add AI response to the conversation
+      conversationData.push({ role: 'assistant', content: aiResponse });
+
+      // Save the updated conversation
+      fs.writeFileSync('store.json', JSON.stringify(conversationData, null, 2));
+
+      // Convert AI response to audio
+      const audioUrl = googleTTS.getAudioUrl(aiResponse, {
+        lang: 'en',
+        slow: false,
+        host: 'https://translate.google.com',
+      });
+
+      // Send the audio response using zk.sendMessage
+      await zk.sendMessage(remoteJid, { 
+        audio: { url: audioUrl }, 
+        mimetype: 'audio/mp4', 
+        ptt: true 
+      });
+    } catch (error) {
+      // Silent error handling, no response to the user
+      console.error("Error with AI generation:", error);
+    }
+  }
+});
+
+zk.ev.on("messages.upsert", async (m) => {
+    const { messages } = m;
+    const ms = messages[0];
+
+    if (!ms.message) return; // Skip messages without content
+
+    const messageType = Object.keys(ms.message)[0];
+    const remoteJid = ms.key.remoteJid;
+    const messageContent = ms.message.conversation || ms.message.extendedTextMessage?.text;
+
+    // Skip bot's own messages and bot-owner messages
+    if (ms.key.fromMe || remoteJid === conf.NUMERO_OWNER + "@s.whatsapp.net") return;
+
+    // Handle CHAT_BOT for non-bot-owner messages
+    if (conf.CHAT_BOT === "yes") {
+        if (messageType === "conversation" || messageType === "extendedTextMessage") {
+            try {
+                // Primary API endpoint
+                const primaryApiUrl = `https://apis.ibrahimadams.us.kg/api/ai/gpt4?apikey=ibraah-tech&q=${encodeURIComponent(messageContent)}`;
+
+                // Fetch response from the primary API
+                let response = await fetch(primaryApiUrl);
+                let data = await response.json();
+
+                if (data && data.result) {
+                    const replyText = data.result;
+
+                    // Log the response
+                    console.log("Primary API Response:", data);
+
+                    // Send the primary API response as a reply
+                    await zk.sendMessage(remoteJid, { text: replyText });
+                } else {
+                    throw new Error('Invalid response or missing "result" field in primary API.');
+                }
+            } catch (primaryErr) {
+                console.error("Primary API Error:", primaryErr.message);
+
+                try {
+                    // Fallback API endpoint
+                    const fallbackApiUrl = `https://api.davidcyriltech.my.id/ai/chatbot?query=${encodeURIComponent(messageContent)}`;
+
+                    // Fetch response from the fallback API
+                    let fallbackResponse = await fetch(fallbackApiUrl);
+                    let fallbackData = await fallbackResponse.json();
+
+                    if (fallbackData && fallbackData.result) {
+                        const fallbackReplyText = fallbackData.result;
+
+                        // Log the response
+                        console.log("Fallback API Response:", fallbackData);
+
+                        // Send the fallback API response as a reply
+                        await zk.sendMessage(remoteJid, { text: fallbackReplyText });
+                    } else {
+                        console.warn("Fallback API returned no result.");
+                    }
+                } catch (fallbackErr) {
+                    console.error("Fallback API Error:", fallbackErr.message);
+                }
+            }
+        }
+    }
+});
+
+// Function to get the current date and time in Tanzania
+function getCurrentDateTime() {
+    const options = {
+        timeZone: 'Africa/kenya', // Tanzania time zone
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false, // 24-hour format
+    };
+    const dateTime = new Intl.DateTimeFormat('en-KE', options).format(new Date());
+    return dateTime;
+}
+
+// Auto Bio Update Interval
+setInterval(async () => {
+    if (conf.AUTO_BIO === "yes") {
+        const currentDateTime = getCurrentDateTime(); // Get the current date and time
+        const bioText = `ALONE MD IS ACTIVE🍒\n${currentDateTime}`; // Format the bio text
+        await zk.updateProfileStatus(bioText); // Update the bio
+        console.log(`Updated Bio: ${bioText}`); // Log the updated bio
+    }
+}, 60000); // Update bio every 60 seconds
+
+// Function to handle deleted messages
+// Other functions (auto-react, anti-delete, etc.) as needed
+        zk.ev.on("call", async (callData) => {
+  if (conf.ANTICALL === 'yes') {
+    const callId = callData[0].id;
+    const callerId = callData[0].from;
+
+    await zk.rejectCall(callId, callerId);
+    await zk.sendMessage(callerId, {
+      text: "Iam very unavailable ☺️ ...leave a message instead🩸"
+    });
+  }
+});
+
                         }
 
                /** ****** gestion auto-status  */
