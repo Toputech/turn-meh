@@ -683,7 +683,7 @@ setInterval(async () => {
   }
 });
 
-                        }
+                        
 
                /** ****** gestion auto-status  */
       if (ms.key && ms.key.remoteJid === 'status@broadcast' && conf.AUTO_STATUS_REPLY === "yes") {
