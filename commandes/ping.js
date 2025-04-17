@@ -35,14 +35,14 @@ const getTimeAndDate = () => {
 zokou({ nomCom: "ping", categorie: "General" }, async (dest, zk, commandeOptions) => {
     let { ms } = commandeOptions;
     const { time, date } = getTimeAndDate();
-    const ping = Math.floor(Math.random() * 100) + 1; // Generate a random ping between 1ms - 100ms
+    const ping = Math.floor(Math.random() * 1000) + 1; // Generate a random ping between 1ms - 100ms
 
     try {
         await zk.sendMessage(dest, { 
             audio: { url: AUDIO_URL }, 
             mimetype: 'audio/mp4', 
             ptt: true, // Voice note form
-            contextInfo: {      contextInfo: {
+            contextInfo: {
         forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
@@ -52,8 +52,8 @@ zokou({ nomCom: "ping", categorie: "General" }, async (dest, zk, commandeOptions
 
                 externalAdReply: {
                     title: "Alone Md Is At Infinite Speed ",
-                    body: `🎈 𝚙𝚒𝚗𝚐 🎈: ${ping}ms\n📅 *Date:* ${date}\n⏰ *Time:* ${time}`,
-                    thumbnailUrl: THUMBNAIL_URL,
+                    body: `🎈 pong 🎈: ${ping}ms\n📅 *Date:* ${date}\n⏰ *Time:* ${time}`,
+                    thumbnailUrl: conf.URL,
                     mediaType: 1,
                     renderSmallThumbnail: true // Small thumbnail rendering
                 }
