@@ -37,6 +37,11 @@
       "value": "no",
       "required": false
     },
+    "CHAT_BOT1": {
+      "description": "If turned on, the chatbot will automatically chat in your private messages or groups.",
+      "value": "no",
+      "required": false
+    },
     "AUTO_DOWNLOAD_STATUS": {
       "description": "Your contact status will be downloaded automatically and sent to you (type 'yes' to activate or 'no' to deactivate; don't write in capital letters)",
       "value": "no",
