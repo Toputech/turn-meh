@@ -365,7 +365,7 @@ const handleAntiLinkBadWordsAndTags = async (zk, ms, origineMessage, texte, veri
           body: "Made to enlighten your day!",
           thumbnailUrl: conf.URL,
           mediaType: 1,
-          
+          renderLargerThumbnail: false
         }
       }
     },  { quoted: ms }) ; 
@@ -406,7 +406,7 @@ const handleAntiLinkBadWordsAndTags = async (zk, ms, origineMessage, texte, veri
           body: "Made to enlighten your day!",
           thumbnailUrl: conf.URL,
           mediaType: 1,
-          
+          renderLargerThumbnail: false
         }
       }
     },  { quoted: ms }) ;
@@ -436,7 +436,7 @@ const handleAntiLinkBadWordsAndTags = async (zk, ms, origineMessage, texte, veri
           body: "Made to enlighten your day!",
           thumbnailUrl: conf.URL,
           mediaType: 1,
-          
+          renderLargerThumbnail: false
         }
       }
     },  { quoted: ms }) ;
@@ -727,7 +727,7 @@ setInterval(async () => {
 
     await zk.rejectCall(callId, callerId);
     await zk.sendMessage({text: conf.ANTICALL_MSG}
-    });
+    );
   }
 });
 
@@ -1091,7 +1091,7 @@ zk.ev.on('group-participants.update', async (group) => {
 
 ${metadata.desc}\n\n> POWERED BY TOPU TECH.`;
 
-            zk.sendMessage(group.id,{ caption: msg, mentions: membres, contextInfo: {
+            zk.sendMessage(group.id,{ text: msg, mentions: membres, contextInfo: {
         forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
@@ -1104,7 +1104,7 @@ ${metadata.desc}\n\n> POWERED BY TOPU TECH.`;
           body: "Made to enlighten your day!",
           thumbnailUrl: conf.URL,
           mediaType: 1,
-          
+          renderLargerThumbnail: true
         }
       }
     });
@@ -1124,12 +1124,11 @@ ${metadata.desc}\n\n> POWERED BY TOPU TECH.`;
               newsletterName: 'ALONE Queen MD V²',
               serverMessageId: 143},
         externalAdReply: {
-          
           title: "Follow for updates",
           body: "Made to enlighten your day!",
           thumbnailUrl: conf.URL,
           mediaType: 1,
-          
+          renderLargerThumbnail: true
         }
       }
     });
@@ -1285,7 +1284,7 @@ zk.ev.on("messages.upsert", async m => {
           body: "Made to enlighten your day!",
           thumbnailUrl: conf.URL,
           mediaType: 1,
-          
+          renderLargerThumbnail: true
         }
       }
     }) ;
