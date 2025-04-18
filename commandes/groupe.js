@@ -123,8 +123,26 @@ zokou({ nomCom: "remove", categorie: 'Group', reaction: "👨🏿‍💼" }, asy
               zk.sendMessage(dest, { text: txt, mentions: [auteurMsgRepondu] });
               zk.sendMessage(dest, { sticker: fs.readFileSync("st.webp") }, { quoted: msgRepondu });
             } else {
-              repondre("This member cannot be removed because he is an administrator of the group.");
-            }
+               zk.sendMessage(dest, {
+      text: "This member cannot be removed because he is an administrator of the group",
+      contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
+        externalAdReply: {
+          
+          title: "Follow for updates",
+          body: "Enjoy..!",
+          thumbnailUrl: conf.URL,
+          sourceUrl: conf.GURL,
+          mediaType: 1,
+          
+        }
+      }
+    }, { quoted: ms });          }
           } else {
             return repondre("This user is not part of the group.");
           }
