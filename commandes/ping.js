@@ -17,12 +17,12 @@ const axios = require('axios');
 const { zokou } = require(__dirname + "/../framework/zokou");
 const os = require("os");
 const moment = require("moment-timezone");
-const set = require(__dirname + "/../set");
+const conf = require(__dirname + "/../set");
 
 const AUDIO_URL = "https://files.catbox.moe/z2roat.m4v"; // New audio URL
 const THUMBNAIL_URL = "https://files.catbox.moe/yedfbr.jpg"; // New image URL
 
-moment.tz.setDefault(`${set.TZ}`);
+moment.tz.setDefault(`${conf.TZ}`);
 
 const getTimeAndDate = () => {
     return {
