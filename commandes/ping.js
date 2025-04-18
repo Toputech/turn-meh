@@ -63,7 +63,13 @@ zokou({ nomCom: "ping", categorie: "General" }, async (dest, zk, commandeOptions
       }
     }, { quoted: ms });
 
-    } catch (e) {
+    } 
+    try {
+    await zk.sendMessage(dest, {
+        audio: { url: AUDIO_URL }, 
+            mimetype: 'audio/mp4', 
+            ptt: true}, { quoted: ms });// Voice note form
+    }catch (e) {
         console.log("❌ Ping Command Error: " + e);
         repondre("❌ Error: " + e);
     }
