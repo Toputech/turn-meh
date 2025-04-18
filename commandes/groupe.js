@@ -123,7 +123,7 @@ zokou({ nomCom: "remove", categorie: 'Group', reaction: "🦶" }, async (dest, z
               zk.sendMessage(dest, { text: txt, mentions: [auteurMsgRepondu] });
               zk.sendMessage(dest, { sticker: fs.readFileSync("st.webp") }, { quoted: msgRepondu });
             } else {
-               zk.sendMessage(dest, {
+               await zk.sendMessage(dest, {
         contextInfo: {
           text: "This member cannot be removed because he is an administrator of the group",
         forwardingScore: 999,
