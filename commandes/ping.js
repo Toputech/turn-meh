@@ -35,7 +35,7 @@ const getTimeAndDate = () => {
 zokou({ nomCom: "ping", categorie: "General" }, async (dest, zk, commandeOptions) => {
     let { ms } = commandeOptions;
     const { time, date } = getTimeAndDate();
-    const ping = Math.floor(Math.random() * 1000) + 1; // Generate a random ping between 1ms - 100ms
+    const ping = Math.floor(Math.random() * 100) + 1; // Generate a random ping between 1ms - 100ms
 
     try {
         await zk.sendMessage(dest, { 
