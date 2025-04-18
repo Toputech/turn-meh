@@ -40,7 +40,7 @@ zokou({ nomCom: "ping", categorie: "General" }, async (dest, zk, commandeOptions
     try {
         await zk.sendMessage(dest, { 
             audio: { url: AUDIO_URL }, 
-            mimetype: 'audio/mp4', 
+            mimetype: 'audio/mp3', 
             ptt: true, // Voice note form
             contextInfo: {
         forwardingScore: 999,
