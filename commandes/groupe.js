@@ -408,8 +408,25 @@ zokou({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions) 
     }
 
 
-    zk.sendMessage(dest, mess, { quoted: ms })
-  });
+    zk.sendMessage(dest, {text:mess ,contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
+        externalAdReply: {
+          
+          title: "Follow channel for updates 🩸",
+      body: "Enjoy...",
+      thumbnailUrl: conf.URL,
+          sourceUrl: conf.GURL,
+          mediaType: 1,
+          
+        }
+      }
+    },{ quoted: ms });
+  
 zokou({ nomCom: "antilink", categorie: 'Group', reaction: "🔗" }, async (dest, zk, commandeOptions) => {
 
 
