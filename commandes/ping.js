@@ -42,8 +42,9 @@ zokou({ nomCom: "ping", categorie: "General" }, async (dest, zk, commandeOptions
         audio: { url: AUDIO_URL }, 
             mimetype: 'audio/mp4', 
             ptt: true, // Voice note form
-      text: `Pong...: ${ping}ms\n🍒🍓`,
+      
       contextInfo: {
+          text: `Pong...: ${ping}ms\n🍒🍓`,
         forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
