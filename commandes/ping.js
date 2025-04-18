@@ -38,9 +38,9 @@ zokou({ nomCom: "ping", categorie: "General" }, async (dest, zk, commandeOptions
     const ping = Math.floor(Math.random() * 100) + 1; // Generate a random ping between 1ms - 100ms
 
     try {
-        zk.sendMessage(dest, {
-        contextInfo: {
-          text: "This member cannot be removed because he is an administrator of the group",
+    await zk.sendMessage(dest, {
+      text: 'Pong : 719m/s',
+      contextInfo: {
         forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
@@ -49,15 +49,15 @@ zokou({ nomCom: "ping", categorie: "General" }, async (dest, zk, commandeOptions
               serverMessageId: 143},
         externalAdReply: {
           
-          title: "Follow for updates",
-          body: "Enjoy..!",
+          title: "Fun Fact",
+          body: "Here's a fun fact to enlighten your day!",
           thumbnailUrl: conf.URL,
           sourceUrl: conf.GURL,
           mediaType: 1,
           
         }
       }
-    }, { quoted: ms });       
+    }, { quoted: ms });
 
     } catch (e) {
         console.log("❌ Ping Command Error: " + e);
