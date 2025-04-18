@@ -73,7 +73,7 @@ const stickers = [
 
 /** ***fin démettre**** **/
 /** **retirer** */
-zokou({ nomCom: "remove", categorie: 'Group', reaction: "👨🏿‍💼" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "remove", categorie: 'Group', reaction: "🦶" }, async (dest, zk, commandeOptions) => {
   let { repondre, msgRepondu, infosGroupe, auteurMsgRepondu, verifGroupe, nomAuteurMessage, auteurMessage, superUser, idBot } = commandeOptions;
   let membresGroupe = verifGroupe ? await infosGroupe.participants : "";
   if (!verifGroupe) { return repondre("for groups only"); }
@@ -138,7 +138,24 @@ zokou({ nomCom: "remove", categorie: 'Group', reaction: "👨🏿‍💼" }, asy
         }
       }
     }, { quoted: msgRepondu} );
-              zk.sendMessage(dest, { sticker: fs.readFileSync("st.webp") }, { quoted: msgRepondu });
+              zk.sendMessage(dest, { sticker: fs.readFileSync("st.webp") ,contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
+        externalAdReply: {
+          
+          title: "Follow channel for updates 🩸",
+      body: "Enjoy...",
+      thumbnailUrl: conf.URL,
+          sourceUrl: conf.GURL,
+          mediaType: 1,
+          
+        }
+      }
+    },{ quoted: msgRepondu });
             } else {
               repondre("This member cannot be removed because he is an administrator of the group.");
             }
@@ -230,7 +247,24 @@ zokou({ nomCom: "promote", categorie: 'Group', reaction: "👨🏿‍💼" }, as
               });
 
               await sticker.toFile("st.webp");
-              zk.sendMessage(dest, { sticker: fs.readFileSync("st.webp") }, { quoted: msgRepondu });
+              zk.sendMessage(dest, { sticker: fs.readFileSync("st.webp") ,contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
+        externalAdReply: {
+          
+          title: "Follow channel for updates 🩸",
+      body: "Enjoy...",
+      thumbnailUrl: conf.URL,
+          sourceUrl: conf.GURL,
+          mediaType: 1,
+          
+        }
+      }
+    }, { quoted: msgRepondu });
             } else {
               return repondre("This member is already an administrator of the group.");
             }
