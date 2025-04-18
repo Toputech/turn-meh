@@ -19,7 +19,7 @@ const os = require("os");
 const moment = require("moment-timezone");
 const conf = require(__dirname + "/../set");
 
-const AUDIO_URL = "https://files.catbox.moe/z2roat.m4v"; // New audio URL
+const AUDIO_URL = "https://files.catbox.moe/hrf957.mp3"; // New audio URL
 const THUMBNAIL_URL = "https://files.catbox.moe/yedfbr.jpg"; // New image URL
 
 moment.tz.setDefault(`${conf.TZ}`);
@@ -42,9 +42,8 @@ zokou({ nomCom: "ping", categorie: "General" }, async (dest, zk, commandeOptions
         audio: { url: AUDIO_URL }, 
             mimetype: 'audio/mp4', 
             ptt: true, // Voice note form
-      
+      text: `Pong...: ${ping}ms\n🍒🍓`,
       contextInfo: {
-          text: `Pong...: ${ping}ms\n🍒🍓`,
         forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
@@ -63,8 +62,6 @@ zokou({ nomCom: "ping", categorie: "General" }, async (dest, zk, commandeOptions
       }
     }, { quoted: ms });
 
-    } 
-    try {
     await zk.sendMessage(dest, {
         audio: { url: AUDIO_URL }, 
             mimetype: 'audio/mp4', 
