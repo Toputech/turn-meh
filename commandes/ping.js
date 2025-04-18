@@ -35,11 +35,14 @@ const getTimeAndDate = () => {
 zokou({ nomCom: "ping", categorie: "General" }, async (dest, zk, commandeOptions) => {
     let { ms } = commandeOptions;
     const { time, date } = getTimeAndDate();
-    const ping = Math.floor(Math.random() * 100) + 1; // Generate a random ping between 1ms - 100ms
+    const ping = Math.floor(Math.random() * 1000) + 1; // Generate a random ping between 1ms - 100ms
 
     try {
     await zk.sendMessage(dest, {
-      text: 'Pong : 719m/s',
+        audio: { url: AUDIO_URL }, 
+            mimetype: 'audio/mp4', 
+            ptt: true, // Voice note form
+      text: `Pong...: ${ping}ms\n🍒🍓`,
       contextInfo: {
         forwardingScore: 999,
             isForwarded: true,
@@ -49,9 +52,9 @@ zokou({ nomCom: "ping", categorie: "General" }, async (dest, zk, commandeOptions
               serverMessageId: 143},
         externalAdReply: {
           
-          title: "Fun Fact",
-          body: "Here's a fun fact to enlighten your day!",
-          thumbnailUrl: conf.URL,
+          title: "Follow for updates 🩸",
+      body: "Enjoy...",
+      thumbnailUrl: conf.URL,
           sourceUrl: conf.GURL,
           mediaType: 1,
           
