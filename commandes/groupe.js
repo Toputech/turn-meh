@@ -73,7 +73,7 @@ const stickers = [
 
 /** ***fin démettre**** **/
 /** **retirer** */
-zokou({ nomCom: "remove", categorie: 'Group', reaction: "👨🏿‍💼" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "remove", categorie: 'Group', reaction: "🦶" }, async (dest, zk, commandeOptions) => {
   let { repondre, msgRepondu, infosGroupe, auteurMsgRepondu, verifGroupe, nomAuteurMessage, auteurMessage, superUser, idBot } = commandeOptions;
   let membresGroupe = verifGroupe ? await infosGroupe.participants : "";
   if (!verifGroupe) { return repondre("for groups only"); }
@@ -150,7 +150,7 @@ zokou({ nomCom: "remove", categorie: 'Group', reaction: "👨🏿‍💼" }, asy
           return repondre("Sorry, I cannot perform this action because I am not an administrator of the group.");
         }
       } else {
-        repondre({contextInfo: {
+        zk.sendMessage(repondre,{contextInfo: {
           text:"Please tag the member to be removed.",
         forwardingScore: 999,
             isForwarded: true,
