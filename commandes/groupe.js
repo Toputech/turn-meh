@@ -150,7 +150,7 @@ zokou({ nomCom: "remove", categorie: 'Group', reaction: "🦶" }, async (dest, z
           return repondre("Sorry, I cannot perform this action because I am not an administrator of the group.");
         }
       } else {
-        zk.sendMessage(repondre,{contextInfo: {
+      return  zk.sendMessage(dest,{contextInfo: {
           text:"Please tag the member to be removed.",
         forwardingScore: 999,
             isForwarded: true,
