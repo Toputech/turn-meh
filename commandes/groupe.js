@@ -73,7 +73,7 @@ const stickers = [
 
 /** ***fin démettre**** **/
 /** **retirer** */
-zokou({ nomCom: "remove", categorie: 'Group', reaction: "🦶" }, async (dest, zk, commandeOptions) => {
+zokou({ nomCom: "remove", categorie: 'Group', reaction: "👨🏿‍💼" }, async (dest, zk, commandeOptions) => {
   let { repondre, msgRepondu, infosGroupe, auteurMsgRepondu, verifGroupe, nomAuteurMessage, auteurMessage, superUser, idBot } = commandeOptions;
   let membresGroupe = verifGroupe ? await infosGroupe.participants : "";
   if (!verifGroupe) { return repondre("for groups only"); }
@@ -120,42 +120,8 @@ zokou({ nomCom: "remove", categorie: 'Group', reaction: "🦶" }, async (dest, z
               await sticker.toFile("st.webp");
               const txt = `@${auteurMsgRepondu.split("@")[0]} was removed from the group.\n`;
               await zk.groupParticipantsUpdate(dest, [auteurMsgRepondu], "remove");
-              zk.sendMessage(dest, { text: txt, mentions: [auteurMsgRepondu],contextInfo: {
-        forwardingScore: 999,
-            isForwarded: true,
-            forwardedNewsletterMessageInfo: {
-              newsletterJid: '120363295141350550@newsletter',
-              newsletterName: 'ALONE Queen MD V²',
-              serverMessageId: 143},
-        externalAdReply: {
-          
-          title: "Follow channel for updates 🩸",
-      body: "Enjoy...",
-      thumbnailUrl: conf.URL,
-          sourceUrl: conf.GURL,
-          mediaType: 1,
-          
-        }
-      }
-    }, { quoted: msgRepondu} );
-              zk.sendMessage(dest, { sticker: fs.readFileSync("st.webp") ,contextInfo: {
-        forwardingScore: 999,
-            isForwarded: true,
-            forwardedNewsletterMessageInfo: {
-              newsletterJid: '120363295141350550@newsletter',
-              newsletterName: 'ALONE Queen MD V²',
-              serverMessageId: 143},
-        externalAdReply: {
-          
-          title: "Follow channel for updates 🩸",
-      body: "Enjoy...",
-      thumbnailUrl: conf.URL,
-          sourceUrl: conf.GURL,
-          mediaType: 1,
-          
-        }
-      }
-    },{ quoted: msgRepondu });
+              zk.sendMessage(dest, { text: txt, mentions: [auteurMsgRepondu] });
+              zk.sendMessage(dest, { sticker: fs.readFileSync("st.webp") }, { quoted: msgRepondu });
             } else {
               repondre("This member cannot be removed because he is an administrator of the group.");
             }
@@ -247,24 +213,7 @@ zokou({ nomCom: "promote", categorie: 'Group', reaction: "👨🏿‍💼" }, as
               });
 
               await sticker.toFile("st.webp");
-              zk.sendMessage(dest, { sticker: fs.readFileSync("st.webp") ,contextInfo: {
-        forwardingScore: 999,
-            isForwarded: true,
-            forwardedNewsletterMessageInfo: {
-              newsletterJid: '120363295141350550@newsletter',
-              newsletterName: 'ALONE Queen MD V²',
-              serverMessageId: 143},
-        externalAdReply: {
-          
-          title: "Follow channel for updates 🩸",
-      body: "Enjoy...",
-      thumbnailUrl: conf.URL,
-          sourceUrl: conf.GURL,
-          mediaType: 1,
-          
-        }
-      }
-    }, { quoted: msgRepondu });
+              zk.sendMessage(dest, { sticker: fs.readFileSync("st.webp") }, { quoted: msgRepondu });
             } else {
               return repondre("This member is already an administrator of the group.");
             }
@@ -403,29 +352,13 @@ zokou({ nomCom: "info", categorie: 'Group' }, async (dest, zk, commandeOptions) 
 
 
     let mess = {
+      image: { url: ppgroup },
       caption:  `*━━━━『GROUP INFO』━━━━*\n\n*🎐Name:* ${info.subject}\n\n*🔩Group's ID:* ${dest}\n\n*🔍Desc:* \n\n${info.desc}`
     }
 
 
-    zk.sendMessage(dest, {text:mess ,contextInfo: {
-        forwardingScore: 999,
-            isForwarded: true,
-            forwardedNewsletterMessageInfo: {
-              newsletterJid: '120363295141350550@newsletter',
-              newsletterName: 'ALONE Queen MD V²',
-              serverMessageId: 143},
-        externalAdReply: {
-          
-          title: "Follow channel for updates 🩸",
-      body: "Enjoy...",
-      thumbnailUrl: conf.URL,
-          sourceUrl: conf.GURL,
-          mediaType: 1,
-          
-        }
-      }
-    },{ quoted: ms });
-  
+    zk.sendMessage(dest, mess, { quoted: ms })
+  });
 zokou({ nomCom: "antilink", categorie: 'Group', reaction: "🔗" }, async (dest, zk, commandeOptions) => {
 
 
