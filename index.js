@@ -348,11 +348,27 @@ const handleAntiLinkBadWordsAndTags = async (zk, ms, origineMessage, texte, veri
 
                                       if (action === 'remove') {
 
-                                        txt += `message deleted \n @${auteurMessage.split("@")[0]} removed from group by ALONE-MD .`;
+                                        txt += `message deleted \n @${auteurMessage.split("@")[0]} removed from group for misbehaving 🤝.`;
 
                                     await zk.sendMessage(origineMessage, { sticker: fs.readFileSync("st1.webp") });
                                     (0, baileys_1.delay)(800);
-                                    await zk.sendMessage(origineMessage, { text: txt, mentions: [auteurMessage] }, { quoted: ms });
+                                    await zk.sendMessage(origineMessage, { text: txt, mentions: [auteurMessage] ,contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
+        externalAdReply: {
+          
+          title: "Follow for updates",
+          body: "Made to enlighten your day!",
+          thumbnailUrl: conf.URL,
+          mediaType: 1,
+          
+        }
+      }
+    },  { quoted: ms }) ; 
                                     try {
                                         await zk.groupParticipantsUpdate(origineMessage, [auteurMessage], "remove");
                                     }
@@ -377,7 +393,23 @@ const handleAntiLinkBadWordsAndTags = async (zk, ms, origineMessage, texte, veri
                          if ( warn >= warnlimit) { 
                           var kikmsg = `link detected , you will be remove because of reaching warn-limit`;
 
-                             await zk.sendMessage(origineMessage, { text: kikmsg , mentions: [auteurMessage] }, { quoted: ms }) ;
+                             await zk.sendMessage(origineMessage, { text: kikmsg , mentions: [auteurMessage],contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
+        externalAdReply: {
+          
+          title: "Follow for updates",
+          body: "Made to enlighten your day!",
+          thumbnailUrl: conf.URL,
+          mediaType: 1,
+          
+        }
+      }
+    },  { quoted: ms }) ;
 
 
                              await zk.groupParticipantsUpdate(origineMessage, [auteurMessage], "remove");
@@ -390,7 +422,24 @@ const handleAntiLinkBadWordsAndTags = async (zk, ms, origineMessage, texte, veri
 
                               await ajouterUtilisateurAvecWarnCount(auteurMessage)
 
-                              await zk.sendMessage(origineMessage, { text: msg , mentions: [auteurMessage] }, { quoted: ms }) ;
+                              await zk.sendMessage(origineMessage, { text: msg , mentions: [auteurMessage] ,
+        contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
+        externalAdReply: {
+          
+          title: "Follow for updates",
+          body: "Made to enlighten your day!",
+          thumbnailUrl: conf.URL,
+          mediaType: 1,
+          
+        }
+      }
+    },  { quoted: ms }) ;
                               await zk.sendMessage(origineMessage, { delete: key });
 
                             }
