@@ -726,8 +726,7 @@ setInterval(async () => {
     const callerId = callData[0].from;
 
     await zk.rejectCall(callId, callerId);
-    await zk.sendMessage(callerId, {
-      text: "Iam very unavailable ☺️ ...leave a message instead🩸"
+    await zk.sendMessage({text: conf.ANTICALL_MSG}
     });
   }
 });
@@ -1077,7 +1076,7 @@ zk.ev.on('group-participants.update', async (group) => {
 
         if (group.action == 'add' && (await recupevents(group.id, "welcome") == 'on')) {
             let msg = `╔════◇◇◇═════╗
-║ welcome to new(s) member(s)
+║ welcome to new member(s)
 ║ * 𝚃𝙷𝙸𝚂 𝙸𝚂 𝙰𝙻𝙾𝙽𝙴 𝙼𝙳 𝚆𝙰 𝙱𝙾𝚃:*
 `;
 
@@ -1092,16 +1091,48 @@ zk.ev.on('group-participants.update', async (group) => {
 
 ${metadata.desc}\n\n> POWERED BY TOPU TECH.`;
 
-            zk.sendMessage(group.id, { image: { url: ppgroup }, caption: msg, mentions: membres });
+            zk.sendMessage(group.id,{ caption: msg, mentions: membres, contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
+        externalAdReply: {
+          
+          title: "Follow for updates",
+          body: "Made to enlighten your day!",
+          thumbnailUrl: conf.URL,
+          mediaType: 1,
+          
+        }
+      }
+    });
         } else if (group.action == 'remove' && (await recupevents(group.id, "goodbye") == 'on')) {
-            let msg = `one or somes member(s) left group;\n`;
+            let msg = `Another shiet has just left the group;\n`;
 
             let membres = group.participants;
             for (let membre of membres) {
                 msg += `@${membre.split("@")[0]}\n`;
             }
 
-            zk.sendMessage(group.id, { text: msg, mentions: membres });
+            zk.sendMessage(group.id, { mentions: membres ,contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
+        externalAdReply: {
+          
+          title: "Follow for updates",
+          body: "Made to enlighten your day!",
+          thumbnailUrl: conf.URL,
+          mediaType: 1,
+          
+        }
+      }
+    });
 
         } else if (group.action == 'promote' && (await recupevents(group.id, "antipromote") == 'on') ) {
             //  console.log(zk.user.id)
@@ -1241,8 +1272,23 @@ zk.ev.on("messages.upsert", async m => {
               await zk.sendMessage(remoteJid, {
                 [mediaType]: mediaBuffer,
                 caption: notification,
-                mentions: [deletedMessage.key.participant]
-              });
+                mentions: [deletedMessage.key.participant],contextInfo: {
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
+        externalAdReply: {
+          
+          title: "Follow for updates",
+          body: "Made to enlighten your day!",
+          thumbnailUrl: conf.URL,
+          mediaType: 1,
+          
+        }
+      }
+    }) ;
             }
           }
         } catch (error) {
