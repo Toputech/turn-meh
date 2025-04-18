@@ -124,8 +124,8 @@ zokou({ nomCom: "remove", categorie: 'Group', reaction: "👨🏿‍💼" }, asy
               zk.sendMessage(dest, { sticker: fs.readFileSync("st.webp") }, { quoted: msgRepondu });
             } else {
                zk.sendMessage(dest, {
-      text: "This member cannot be removed because he is an administrator of the group",
-      contextInfo: {
+        contextInfo: {
+          text: "This member cannot be removed because he is an administrator of the group",
         forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
@@ -150,7 +150,24 @@ zokou({ nomCom: "remove", categorie: 'Group', reaction: "👨🏿‍💼" }, asy
           return repondre("Sorry, I cannot perform this action because I am not an administrator of the group.");
         }
       } else {
-        repondre("Please tag the member to be removed.");
+        repondre({contextInfo: {
+          text:"Please tag the member to be removed.",
+        forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+              newsletterJid: '120363295141350550@newsletter',
+              newsletterName: 'ALONE Queen MD V²',
+              serverMessageId: 143},
+        externalAdReply: {
+          
+          title: "Follow for updates",
+          body: "Enjoy..!",
+          thumbnailUrl: conf.URL,
+          sourceUrl: conf.GURL,
+          mediaType: 1,
+          
+        }
+        }});
       }
     } else {
       return repondre("Sorry I cannot perform this action because you are not an administrator of the group.");
