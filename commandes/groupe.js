@@ -137,7 +137,7 @@ zokou({ nomCom: "remove", categorie: 'Group', reaction: "👨🏿‍💼" }, asy
           
         }
       }
-    } );
+    }, { quoted: msgRepondu} );
               zk.sendMessage(dest, { sticker: fs.readFileSync("st.webp") }, { quoted: msgRepondu });
             } else {
               repondre("This member cannot be removed because he is an administrator of the group.");
