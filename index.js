@@ -1521,9 +1521,7 @@ if (conf.AUTO_LIKE_STATUS === "yes") {
             if (connection === "connecting") {
                 console.log("ℹ️ ALONE-MD connecting in your account...");
             }
-            else if (connection === 'open') {await zk.groupAcceptInvite("DdKP0nI2ZAm1AgyDQGN0tF");
-
-
+            else if (connection === 'open') {
 
 
 
