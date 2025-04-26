@@ -8,7 +8,7 @@
     "whatsapp"
   ],
   "logo": "https://i.imgur.com/jE8eQsP.jpeg",
-  "repository": "https://github.com/Toputech/ALONE-MD-V1",
+  "repository": "https://github.com/Toputech/turn-meh",
   "succes_url": "/",
   "stack": "container",
   "env": {
@@ -30,16 +30,6 @@
     "AUTO_LIKE_STATUS": {
       "description": "Your contact status will be liked automatically (type 'yes' to activate or 'no' to deactivate; don't write in capital letters)",
       "value": "yes",
-      "required": false
-    },
-    "CHAT_BOT": {
-      "description": "If turned on, the chatbot will automatically chat in your private messages or groups.",
-      "value": "no",
-      "required": false
-    },
-    "CHAT_BOT1": {
-      "description": "If turned on, the chatbot will automatically chat in your private messages or groups.",
-      "value": "no",
       "required": false
     },
     "AUTO_DOWNLOAD_STATUS": {
